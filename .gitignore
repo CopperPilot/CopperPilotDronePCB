@@ -22,6 +22,7 @@ fp-info-cache
 
 # Fabrication & Gerber Release Bundles
 pcb/build/
+case/build/
 fab/
 *.gbrjob
 *.zip
@@ -106,3 +107,10 @@ Thumbs.db
 *.log
 *.op.raw
 *.cir.out
+
+# ------------------------------------------------------------------------------
+# Other
+# ------------------------------------------------------------------------------
+.copperpilot/
+.vscode/
+pcb/.history/

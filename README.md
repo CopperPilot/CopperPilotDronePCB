@@ -96,23 +96,39 @@ An ultra-compact, high-performance, single-board Quad-X micro drone flight contr
         ├── test_ahrs.c             # Complementary filter angle convergence tests
         ├── test_motor_mixer.c      # Quad-X mixing and anti-clip saturation tests
         └── test_battery_failsafe.c # Battery ADC scaling and cutoff threshold tests
+    └── case/                           # Parametric 3D squircle enclosure & collision verification
+        ├── README.md                   # Mechanical specs, clearance maps, snap-fit assembly guide
+        ├── Makefile                    # Targets: generate, test, collision, fmt, lint, clean
+        ├── pcb_parser.py               # KiCad PCB geometry & snap-off tab constraint extractor
+        ├── generator.py                # CadQuery parametric squircle lofts, snap hooks & branding
+        ├── generate_case.py            # CLI generator synthesizing STL, STEP, and explosion GIF
+        ├── collision.py                # Trimesh & KiCad 3D STL collision and clearance verifier
+        └── tests/                      # Automated 18-point pytest enclosure verification suite
+            ├── conftest.py             # Enclosure mesh fixtures & test configuration
+            └── test_enclosure.py       # Manifoldness, volume, snap mechanics, cutout alignments
 ```
 
 ---
 
 ## Quickstart & Commands
 
-This project includes a unified top-level `Makefile` providing standardized verification targets across hardware design and embedded firmware:
+This project includes a unified top-level `Makefile` providing standardized verification targets across hardware design, embedded firmware, and 3D mechanical enclosure:
 
 ```bash
 # Run automated code and schematic formatting checks
 make fmt
 
-# Run static analysis and linting across firmware and hardware
+# Run static analysis and linting across firmware, PCB hardware, and 3D enclosure
 make lint
 
-# Run all test suites: native firmware unit tests + PCB automated pytest suite
+# Run all test suites: native firmware unit tests + PCB hardware suite + 3D enclosure suite
 make test
+
+# Run 3D collision detection and clearance queries against KiCad board STL
+make collision
+
+# Synthesize parametric 3D enclosure CAD models (case_top.stl, case_bottom.stl)
+make build-case
 
 # Generate code coverage reports (gcov/lcov for firmware, pytest-cov for PCB)
 make coverage

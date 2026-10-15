@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>CopperPilot Drone Controller</title>
+<style>
+  :root {
+    --bg-color: #0f111a;
+    --card-bg: #1a1d2e;
+    --accent: #00d2ff;
+    --accent-glow: rgba(0, 210, 255, 0.4);
+    --danger: #ff3366;
+    --success: #00e676;
+    --warning: #ffb300;
+    --text: #e0e6ed;
+    --text-dim: #79869c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-user-select: none; }
+  body {
+    background: var(--bg-color);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  header {
+    background: var(--card-bg);
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .title-group h1 { font-size: 16px; font-weight: 700; color: var(--accent); letter-spacing: 0.5px; }
+  .title-group p { font-size: 11px; color: var(--text-dim); }
+  .status-badges { display: flex; gap: 8px; align-items: center; }
+  .badge {
+    font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 12px;
+    background: rgba(255,255,255,0.06); text-transform: uppercase;
+  }
+  .badge.connected { background: rgba(0, 230, 118, 0.15); color: var(--success); }
+  .badge.disconnected { background: rgba(255, 51, 102, 0.15); color: var(--danger); }
+  .badge.armed { background: var(--success); color: #000; animation: pulse 1.5s infinite; }
+  .badge.disarmed { background: rgba(255,255,255,0.1); color: var(--text-dim); }
+  @keyframes pulse { 0% { opacity: 0.8; } 50% { opacity: 1; } 100% { opacity: 0.8; } }
+
+  .dashboard {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 8px;
+    padding: 8px;
+  }
+  .card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .card-title { font-size: 11px; font-weight: 600; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; }
+
+  /* Telemetry Grid */
+  .telemetry-row { display: flex; justify-content: space-around; align-items: center; height: 100%; }
+  .telem-val { text-align: center; }
+  .telem-num { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .telem-label { font-size: 10px; color: var(--text-dim); }
+
+  /* Artificial Horizon */
+  #horizonCanvas { width: 100%; height: 80px; border-radius: 4px; background: #0a0b10; }
+
+  /* Motor Bars */
+  .motor-bars { display: flex; justify-content: space-around; align-items: flex-end; height: 70px; gap: 6px; padding: 0 10px; }
+  .motor-col { display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; justify-content: flex-end; }
+  .motor-track { width: 14px; height: 50px; background: rgba(255,255,255,0.08); border-radius: 3px; position: relative; overflow: hidden; }
+  .motor-fill { position: absolute; bottom: 0; width: 100%; background: var(--accent); transition: height 0.05s ease; }
+  .motor-label { font-size: 9px; color: var(--text-dim); margin-top: 4px; }
+
+  /* Joysticks Area */
+  .joystick-zone {
+    grid-column: span 2;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+  }
+  .joystick-container {
+    width: 140px; height: 140px;
+    background: rgba(255,255,255,0.03);
+    border: 2px dashed rgba(255,255,255,0.1);
+    border-radius: 50%;
+    position: relative;
+    touch-action: none;
+  }
+  .joystick-thumb {
+    width: 50px; height: 50px;
+    background: radial-gradient(circle at 35% 35%, #00d2ff, #0066cc);
+    border-radius: 50%;
+    position: absolute;
+    top: 45px; left: 45px;
+    box-shadow: 0 4px 12px var(--accent-glow);
+    cursor: grab;
+  }
+
+  /* Actions Toolbar */
+  footer {
+    background: var(--card-bg);
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .btn {
+    flex: 1; padding: 12px; font-size: 14px; font-weight: 700; border: none; border-radius: 8px;
+    cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.1s ease;
+  }
+  .btn-arm { background: rgba(0, 230, 118, 0.2); color: var(--success); border: 1px solid var(--success); }
+  .btn-arm.armed { background: var(--success); color: #000; }
+  .btn-kill { background: var(--danger); color: #fff; box-shadow: 0 4px 14px rgba(255,51,102,0.4); }
+  .btn:active { transform: scale(0.97); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="title-group">
+    <h1>CopperPilot Drone</h1>
+    <p>ESP32-S3 SoftAP 500Hz Avionics</p>
+  </div>
+  <div class="status-badges">
+    <div id="badgeConn" class="badge disconnected">Disconnected</div>
+    <div id="badgeArm" class="badge disarmed">Disarmed</div>
+  </div>
+</header>
+
+<div class="dashboard">
+  <!-- Attitude Indicator -->
+  <div class="card">
+    <div class="card-title">Artificial Horizon (AHRS)</div>
+    <canvas id="horizonCanvas" width="200" height="80"></canvas>
+  </div>
+
+  <!-- Battery & Power -->
+  <div class="card">
+    <div class="card-title">1S LiPo Battery</div>
+    <div class="telemetry-row">
+      <div class="telem-val">
+        <div id="txtVolts" class="telem-num" style="color: var(--success);">4.18V</div>
+        <div class="telem-label">Voltage</div>
+      </div>
+      <div class="telem-val">
+        <div id="txtPct" class="telem-num">95%</div>
+        <div class="telem-label">Remaining</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Motor PWM Duties -->
+  <div class="card" style="grid-column: span 2;">
+    <div class="card-title">Quad-X 20kHz Ultrasonic PWM Actuation</div>
+    <div class="motor-bars">
+      <div class="motor-col">
+        <div class="motor-track"><div id="barM1" class="motor-fill" style="height: 0%;"></div></div>
+        <div class="motor-label">M1 (RL)</div>
+      </div>
+      <div class="motor-col">
+        <div class="motor-track"><div id="barM2" class="motor-fill" style="height: 0%;"></div></div>
+        <div class="motor-label">M2 (FL)</div>
+      </div>
+      <div class="motor-col">
+        <div class="motor-track"><div id="barM3" class="motor-fill" style="height: 0%;"></div></div>
+        <div class="motor-label">M3 (FR)</div>
+      </div>
+      <div class="motor-col">
+        <div class="motor-track"><div id="barM4" class="motor-fill" style="height: 0%;"></div></div>
+        <div class="motor-label">M4 (RR)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dual Virtual Joysticks -->
+  <div class="joystick-zone">
+    <!-- Left Joystick: Throttle & Yaw -->
+    <div id="joyLeft" class="joystick-container">
+      <div id="thumbLeft" class="joystick-thumb"></div>
+    </div>
+    <!-- Right Joystick: Pitch & Roll -->
+    <div id="joyRight" class="joystick-container">
+      <div id="thumbRight" class="joystick-thumb"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <button id="btnArm" class="btn btn-arm">Arm Drone</button>
+  <button id="btnKill" class="btn btn-kill">Emergency Stop</button>
+</footer>
+
+<script>
+  let ws = null;
+  let isArmed = false;
+  let throttle = 0.0;
+  let yaw = 0.0;
+  let pitch = 0.0;
+  let roll = 0.0;
+
+  const badgeConn = document.getElementById('badgeConn');
+  const badgeArm = document.getElementById('badgeArm');
+  const btnArm = document.getElementById('btnArm');
+  const btnKill = document.getElementById('btnKill');
+  const txtVolts = document.getElementById('txtVolts');
+  const txtPct = document.getElementById('txtPct');
+  const barM1 = document.getElementById('barM1');
+  const barM2 = document.getElementById('barM2');
+  const barM3 = document.getElementById('barM3');
+  const barM4 = document.getElementById('barM4');
+  const canvas = document.getElementById('horizonCanvas');
+  const ctx = canvas.getContext('2d');
+
+  function initWebSocket() {
+    const wsUri = "ws://" + (window.location.hostname || "192.168.4.1") + "/ws";
+    ws = new WebSocket(wsUri);
+    ws.onopen = () => {
+      badgeConn.textContent = "Connected";
+      badgeConn.className = "badge connected";
+    };
+    ws.onclose = () => {
+      badgeConn.textContent = "Disconnected";
+      badgeConn.className = "badge disconnected";
+      setTimeout(initWebSocket, 1000);
+    };
+    ws.onmessage = (evt) => {
+      try {
+        const d = JSON.parse(evt.data);
+        if (d.vbatt) {
+          const v = (d.vbatt / 1000.0).toFixed(2);
+          txtVolts.textContent = v + "V";
+          txtVolts.style.color = d.vbatt > 3700 ? "var(--success)" : (d.vbatt > 3400 ? "var(--warning)" : "var(--danger)");
+          const pct = Math.max(0, Math.min(100, Math.round((d.vbatt - 3300) / 9.0)));
+          txtPct.textContent = pct + "%";
+        }
+        if (d.m1 !== undefined) barM1.style.height = (d.m1 / 10.0) + "%";
+        if (d.m2 !== undefined) barM2.style.height = (d.m2 / 10.0) + "%";
+        if (d.m3 !== undefined) barM3.style.height = (d.m3 / 10.0) + "%";
+        if (d.m4 !== undefined) barM4.style.height = (d.m4 / 10.0) + "%";
+        if (d.armed !== undefined) {
+          isArmed = d.armed;
+          badgeArm.textContent = isArmed ? "Armed" : "Disarmed";
+          badgeArm.className = isArmed ? "badge armed" : "badge disarmed";
+          btnArm.textContent = isArmed ? "Disarm" : "Arm Drone";
+          btnArm.className = isArmed ? "btn btn-arm armed" : "btn btn-arm";
+        }
+        drawHorizon(d.roll || 0, d.pitch || 0);
+      } catch (e) {}
+    };
+  }
+
+  function drawHorizon(rollDeg, pitchDeg) {
+    const w = canvas.width;
+    const h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+    ctx.save();
+    ctx.translate(w / 2, h / 2);
+    ctx.rotate(rollDeg * Math.PI / 180.0);
+    const pitchOffset = Math.max(-35, Math.min(35, pitchDeg * 1.5));
+    // Sky
+    ctx.fillStyle = "#1e3c72";
+    ctx.fillRect(-w, -h - pitchOffset, w * 2, h + pitchOffset);
+    // Ground
+    ctx.fillStyle = "#5c3d2e";
+    ctx.fillRect(-w, -pitchOffset, w * 2, h);
+    // Horizon line
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(-w, -pitchOffset);
+    ctx.lineTo(w, -pitchOffset);
+    ctx.stroke();
+    ctx.restore();
+    // Center reticle
+    ctx.strokeStyle = "var(--accent)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(w/2 - 20, h/2); ctx.lineTo(w/2 - 6, h/2);
+    ctx.moveTo(w/2 + 6, h/2); ctx.lineTo(w/2 + 20, h/2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(w/2, h/2, 3, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  /* Virtual Joystick Handlers */
+  function setupJoystick(containerId, thumbId, isSpringlessY, onMove) {
+    const container = document.getElementById(containerId);
+    const thumb = document.getElementById(thumbId);
+    const radius = 45;
+    let active = false;
+
+    function handleStart(e) {
+      active = true;
+      handleMove(e);
+    }
+    function handleMove(e) {
+      if (!active) return;
+      const rect = container.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      let dx = clientX - (rect.left + rect.width / 2);
+      let dy = clientY - (rect.top + rect.height / 2);
+      const dist = Math.hypot(dx, dy);
+      if (dist > radius) {
+        dx = (dx / dist) * radius;
+        dy = (dy / dist) * radius;
+      }
+      thumb.style.transform = `translate(${dx}px, ${dy}px)`;
+      const normX = dx / radius;
+      const normY = -dy / radius;
+      onMove(normX, normY);
+    }
+    function handleEnd() {
+      if (!active) return;
+      active = false;
+      if (!isSpringlessY) {
+        thumb.style.transform = `translate(0px, 0px)`;
+        onMove(0, 0);
+      } else {
+        // Left stick auto-centers yaw (X), but preserves throttle (Y)
+        const currentTransform = thumb.style.transform;
+        const match = currentTransform.match(/translate\(([^p]+)px,\s*([^p]+)px\)/);
+        const curY = match ? parseFloat(match[2]) : 0;
+        thumb.style.transform = `translate(0px, ${curY}px)`;
+        onMove(0, -curY / radius);
+      }
+    }
+
+    container.addEventListener('pointerdown', handleStart);
+    window.addEventListener('pointermove', handleMove);
+    window.addEventListener('pointerup', handleEnd);
+  }
+
+  setupJoystick('joyLeft', 'thumbLeft', true, (x, y) => {
+    yaw = x * 180.0; /* Yaw rate: -180 to +180 deg/s */
+    throttle = Math.max(0.0, Math.min(1.0, (y + 1.0) / 2.0)); /* Throttle: 0.0 to 1.0 */
+  });
+
+  setupJoystick('joyRight', 'thumbRight', false, (x, y) => {
+    roll = x * 30.0;  /* Roll: -30 to +30 deg */
+    pitch = y * 30.0; /* Pitch: -30 to +30 deg */
+  });
+
+  /* Button Actions */
+  btnArm.addEventListener('click', () => {
+    if (!ws || ws.readyState !== WebSocket.OPEN) return;
+    isArmed = !isArmed;
+    sendCommand();
+  });
+
+  btnKill.addEventListener('click', () => {
+    isArmed = false;
+    throttle = 0.0;
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify({ emergency: true, arm: false }));
+    }
+  });
+
+  function sendCommand() {
+    if (!ws || ws.readyState !== WebSocket.OPEN) return;
+    ws.send(JSON.stringify({
+      t: throttle,
+      r: roll,
+      p: pitch,
+      y: yaw,
+      arm: isArmed
+    }));
+  }
+
+  // 50 Hz control loop
+  setInterval(sendCommand, 20);
+  initWebSocket();
+  drawHorizon(0, 0);
+</script>
+</body>
+</html>

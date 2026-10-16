@@ -7062,12 +7062,6 @@
 		(uuid "680299d5-13d6-44f1-827a-dc485b8b6311")
 	)
 	(junction
-		(at 168.91 250.19)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "825d0dad-49df-445c-8397-5dca1b326502")
-	)
-	(junction
 		(at 219.71 250.19)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7140,22 +7134,10 @@
 		(uuid "b41614f0-3cf4-4aa4-968a-9470978b0ff4")
 	)
 	(junction
-		(at 213.36 250.19)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c698a94d-d851-4b8c-841a-73942f920df4")
-	)
-	(junction
 		(at 107.95 48.26)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c99007d9-8ddb-49d4-b2b6-131d8171ef5b")
-	)
-	(junction
-		(at 124.46 250.19)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ca10f9f1-6a20-429b-9d1f-871e6aa1f182")
 	)
 	(junction
 		(at 156.21 124.46)
@@ -7204,12 +7186,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e6b87a31-d527-4783-b4fd-207d13152db2")
-	)
-	(junction
-		(at 78.74 248.92)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "eb44cedc-6c66-44b0-8cb3-0455c7897a2c")
 	)
 	(junction
 		(at 228.6 80.01)
@@ -7352,10 +7328,6 @@
 	(no_connect
 		(at 342.9 128.27)
 		(uuid "bacadd6b-948e-4375-85a2-108a08887ebd")
-	)
-	(no_connect
-		(at 332.74 128.27)
-		(uuid "c9b3c7f8-d488-4d4e-90d7-872f7e3edf0c")
 	)
 	(no_connect
 		(at 163.83 175.26)
@@ -7855,16 +7827,6 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 248.92) (xy 213.36 250.19)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3f0d0bd0-5322-41f8-800e-e938c4b4db87")
-	)
-	(wire
-		(pts
 			(xy 78.74 260.35) (xy 77.47 260.35)
 		)
 		(stroke
@@ -8142,16 +8104,6 @@
 			(type default)
 		)
 		(uuid "59fe1242-248b-480b-b181-f7baa5ef4ec3")
-	)
-	(wire
-		(pts
-			(xy 124.46 248.92) (xy 124.46 250.19)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5a05e7c8-4200-4b2a-8ee2-34c48ba9d870")
 	)
 	(wire
 		(pts
@@ -8505,16 +8457,6 @@
 	)
 	(wire
 		(pts
-			(xy 78.74 248.92) (xy 74.93 248.92)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8e2bc0b7-330a-4cc2-bb69-03b7ae8b2fc3")
-	)
-	(wire
-		(pts
 			(xy 219.71 250.19) (xy 213.36 250.19)
 		)
 		(stroke
@@ -8632,16 +8574,6 @@
 			(type default)
 		)
 		(uuid "981f2957-390b-440b-bba3-adb4042268b9")
-	)
-	(wire
-		(pts
-			(xy 86.36 248.92) (xy 78.74 248.92)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "986f6c73-883f-4fce-920d-1077cdb77b46")
 	)
 	(wire
 		(pts
@@ -9312,16 +9244,6 @@
 			(type default)
 		)
 		(uuid "e7e73632-cf81-498a-bd4f-7503ba189f00")
-	)
-	(wire
-		(pts
-			(xy 168.91 248.92) (xy 168.91 250.19)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e8ed7807-d06b-4eda-b523-ca87ecc2f702")
 	)
 	(wire
 		(pts
@@ -14305,7 +14227,7 @@
 				)
 			)
 		)
-		(property "Value" "ME6211C33M5G-N"
+		(property "Value" "AP2112K-3.3TRG1"
 			(at 117.475 44.069 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14326,7 +14248,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "http://ww1.microchip.com/downloads/en/DeviceDoc/MIC5219-500mA-Peak-Output-LDO-Regulator-DS20006021A.pdf"
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/AP2112.pdf"
 			(at 115.57 50.8 0)
 			(hide yes)
 			(show_name no)
@@ -14337,7 +14259,17 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Manufacturer" "Diodes Incorporated"
+			(at 115.57 50.8 0)
+			(hide yes)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "MPN" "AP2112K-3.3TRG1"
+			(at 115.57 50.8 0)
+			(hide yes)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Description" "600mA low dropout linear regulator, with enable pin, 3.8V-6V input voltage range, 3.3V fixed positive output, SOT-23-5"
 			(at 115.57 50.8 0)
 			(hide yes)
 			(show_name no)
@@ -14348,7 +14280,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82942"
+		(property "LCSC" "C51118"
 			(at 37.338 10.414 0)
 			(hide yes)
 			(show_name no)
@@ -16033,7 +15965,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 213.36 245.11 0)
+		(at 212.09 245.11 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -16076,7 +16008,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 213.36 245.11 0)
+			(at 212.09 245.11 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16087,7 +16019,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 213.36 245.11 0)
+			(at 212.09 245.11 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22354,6 +22286,505 @@
 			(project "CopperPilotDrone"
 				(path "/9b268491-66b3-4ff0-b49d-fa392eb2b245"
 					(reference "LED2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 332.74 128.27 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c693681e-076f-4e03-8a15-1931d4ded324")
+		(property "Reference" "#PWR0912"
+			(at 332.74 121.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 0.8 0.8)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 332.74 124.46 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 0.8 0.8)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 332.74 128.27 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 0.8 0.8)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 332.74 128.27 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 0.8 0.8)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 332.74 128.27 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e89d86d7-fa5b-4a60-bb69-84daaadc8d01")
+		)
+		(instances
+			(project "CopperPilotDrone"
+				(path "/9b268491-66b3-4ff0-b49d-fa392eb2b245"
+					(reference "#PWR0912")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 74.93 248.92) (xy 74.93 250.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "40c965d4-0242-48af-a9d6-7e70e52c73e6")
+	)
+	(wire
+		(pts
+			(xy 74.93 250.19) (xy 86.36 250.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6c67cefa-155f-46f9-8f65-b255ef367e5a")
+	)
+	(junction
+		(at 86.36 250.19)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "09698b79-b243-460e-bb23-990061cdfbc8")
+	)
+	(wire
+		(pts
+			(xy 132.08 248.92) (xy 132.08 250.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "569d4b24-fe06-4e1d-9ee8-58ad9dd6da45")
+	)
+	(wire
+		(pts
+			(xy 176.53 248.92) (xy 176.53 250.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ec9b998c-48c9-4d72-b325-4017b9d5a9ec")
+	)
+	(wire
+		(pts
+			(xy 219.71 248.92) (xy 219.71 250.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b84f175e-8323-4e14-8243-3984b683dec8")
+	)
+	(junction
+		(at 212.09 241.3)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4cb29678-9d4b-40f2-807c-d99c38396fba")
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 82.55 248.92 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "1a59f2c4-1455-428f-876c-eadd364c07f3")
+		(property "Reference" "R29"
+			(at 82.55 246.38 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "22R"
+			(at 82.55 251.45999999999998 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 82.55 248.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 82.55 248.92 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "22R 1% 0603 Resistor"
+			(at 82.55 248.92 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C23345"
+			(at 82.55 248.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c2dc3fe3-6ab3-4094-a0e7-a59bdd5beb05")
+		)
+		(pin "2"
+			(uuid "0d7b48ae-c164-4705-9d57-c90e5dec0103")
+		)
+		(instances
+			(project "CopperPilotDrone"
+				(path "/9b268491-66b3-4ff0-b49d-fa392eb2b245"
+					(reference "R29")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 128.27 248.92 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "40574354-237a-4b18-9ac5-e961543a76ab")
+		(property "Reference" "R30"
+			(at 128.27 246.38 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "22R"
+			(at 128.27 251.45999999999998 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 128.27 248.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 128.27 248.92 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "22R 1% 0603 Resistor"
+			(at 128.27 248.92 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C23345"
+			(at 128.27 248.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "088309e3-55b1-41c8-8f6e-1c58e64a4dbe")
+		)
+		(pin "2"
+			(uuid "cd4b6955-ecd0-4de9-adc4-5f50359794c3")
+		)
+		(instances
+			(project "CopperPilotDrone"
+				(path "/9b268491-66b3-4ff0-b49d-fa392eb2b245"
+					(reference "R30")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 172.72 248.92 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "e5ad4e8b-c17e-4871-aa5e-da2b20524217")
+		(property "Reference" "R31"
+			(at 172.72 246.38 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "22R"
+			(at 172.72 251.45999999999998 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 172.72 248.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 172.72 248.92 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "22R 1% 0603 Resistor"
+			(at 172.72 248.92 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C23345"
+			(at 172.72 248.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "451211ae-bbd8-4655-a8e1-9538d69d2bb4")
+		)
+		(pin "2"
+			(uuid "eef6b567-5b8c-4c9a-a2ed-12df7dfe6a53")
+		)
+		(instances
+			(project "CopperPilotDrone"
+				(path "/9b268491-66b3-4ff0-b49d-fa392eb2b245"
+					(reference "R31")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 215.9 248.92 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "d7af9ae9-635c-446c-a2f1-419c72a62c6c")
+		(property "Reference" "R32"
+			(at 215.9 246.38 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "22R"
+			(at 215.9 251.45999999999998 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 215.9 248.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 215.9 248.92 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "22R 1% 0603 Resistor"
+			(at 215.9 248.92 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C23345"
+			(at 215.9 248.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e4acb95a-6ddb-49f3-8132-51e9631285c9")
+		)
+		(pin "2"
+			(uuid "0ec969f7-3a6b-4207-abf6-bb47c157f76e")
+		)
+		(instances
+			(project "CopperPilotDrone"
+				(path "/9b268491-66b3-4ff0-b49d-fa392eb2b245"
+					(reference "R32")
 					(unit 1)
 				)
 			)

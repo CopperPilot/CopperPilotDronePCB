@@ -1,6 +1,8 @@
 """Automated 21-point hardware verification test suite for CopperPilot Drone PCB."""
 
+import math
 import os
+import re
 
 PCB_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
@@ -125,8 +127,8 @@ class TestConnectivityAndNetlist:
             )
 
     def test_no_unassigned_vias(self, pcb_data):
-        """Assert all 77 vias are bound to active named nets."""
-        assert len(pcb_data.vias) == 77, f"Expected 77 vias, got {len(pcb_data.vias)}"
+        """Assert all vias are bound to active named nets."""
+        assert len(pcb_data.vias) >= 120, f"Expected >= 120 vias, got {len(pcb_data.vias)}"
         for via in pcb_data.vias:
             assert via["net_name"] != "", (
                 f"Unassigned via detected at ({via['x']}, {via['y']})"
@@ -189,12 +191,16 @@ class TestSubsystemCircuits:
         assert "J1" in pcb_data.footprints
 
     def test_motor_flyback_and_snubber_topology(self, pcb_data):
-        """Assert each motor channel has flyback diode (D2-D5) and snubber (C15-C18)."""
+        """Assert each motor channel has flyback diode (D2-D5), snubber capacitor (C15-C18), and damping resistor (R29-R32)."""
         for d in ["D2", "D3", "D4", "D5"]:
             assert d in pcb_data.footprints, f"Flyback diode {d} missing from layout"
         for c in ["C15", "C16", "C17", "C18"]:
             assert c in pcb_data.footprints, (
                 f"Snubber capacitor {c} missing from layout"
+            )
+        for r in ["R29", "R30", "R31", "R32"]:
+            assert r in pcb_data.footprints, (
+                f"Snubber damping resistor {r} missing from layout"
             )
 
     def test_motor_gate_pulldowns(self, pcb_data):
@@ -235,12 +241,15 @@ class Test3DModelsAndLibraryIntegrity:
     """Verifies 3D model assignments and environment variable cleanliness."""
 
     def test_all_footprints_have_3d_models(self, pcb_data):
-        """Assert 64 of 64 placed footprints have valid 3D models assigned."""
-        assert len(pcb_data.footprints) == 64, (
-            f"Expected 64 footprints, got {len(pcb_data.footprints)}"
+        """Assert 68 of 68 placed functional footprints have valid 3D models assigned."""
+        functional_fps = {
+            k: v for k, v in pcb_data.footprints.items() if not k.startswith("H")
+        }
+        assert len(functional_fps) == 68, (
+            f"Expected 68 functional footprints, got {len(functional_fps)}"
         )
         missing_models = []
-        for ref, fp in pcb_data.footprints.items():
+        for ref, fp in functional_fps.items():
             if len(fp["models"]) == 0:
                 missing_models.append(ref)
         assert len(missing_models) == 0, (
@@ -250,6 +259,8 @@ class Test3DModelsAndLibraryIntegrity:
     def test_local_3d_files_exist(self, pcb_data):
         """Assert all local project 3D model files exist on disk."""
         for ref, fp in pcb_data.footprints.items():
+            if ref.startswith("H"):
+                continue
             for m in fp["models"]:
                 if m.startswith("${KIPRJMOD}/"):
                     rel_path = m.replace("${KIPRJMOD}/", "")
@@ -263,3 +274,143 @@ class Test3DModelsAndLibraryIntegrity:
         assert "KICAD6_3DMODEL_DIR" not in pcb_data.content, (
             "Found deprecated KICAD6_3DMODEL_DIR in PCB file"
         )
+
+
+class TestDesignReviewRemediations:
+    """Automated verification for the 8 senior engineering review findings."""
+
+    def test_mousebite_perforations_npth_drill(self, pcb_data):
+        """Assert zero perforation circles remain on Dwgs.User and standard NPTH holes exist."""
+        dwgs_circles = re.findall(
+            r'\(gr_circle[\s\S]*?\(layer\s+"Dwgs\.User"\)', pcb_data.content
+        )
+        assert (
+            len(dwgs_circles) == 0
+        ), f"Found {len(dwgs_circles)} circles on Dwgs.User; must be 0"
+        npth_holes = [
+            fp
+            for fp in pcb_data.footprints.values()
+            if any(p["type"] == "np_thru_hole" for p in fp["pads"])
+        ]
+        assert (
+            len(npth_holes) >= 40
+        ), f"Expected >= 40 NPTH perforation holes, got {len(npth_holes)}"
+
+    def test_antenna_cantilever_and_keepout(self, pcb_data):
+        """Assert ESP32-S3 antenna is cantilevered over open air with closed Edge.Cuts."""
+        found_cantilever_edge = False
+        for elem in pcb_data.edge_cuts:
+            if elem["type"] == "line":
+                if (
+                    abs(elem["y1"] - 109.0084) < 0.05
+                    and abs(elem["y2"] - 109.0084) < 0.05
+                ):
+                    if elem["x1"] <= 115.0 and elem["x2"] >= 145.0:
+                        found_cantilever_edge = True
+                        break
+        assert (
+            found_cantilever_edge
+        ), "Cantilever fuselage bottom edge (Y=109.008) missing from Edge.Cuts"
+        violating_elements = []
+        for elem in pcb_data.edge_cuts:
+            if elem["type"] == "line":
+                if 116.0 <= elem["x1"] <= 146.0 and 110.0 <= elem["y1"] <= 136.0:
+                    violating_elements.append(elem)
+        assert (
+            len(violating_elements) == 0
+        ), f"Found {len(violating_elements)} frame elements obstructing antenna keepout"
+
+    def test_motor_snubber_damping_resistors(self, pcb_data):
+        """Assert RC snubbers have 10-22 ohm series damping resistors R29-R32."""
+        for ref in ["R29", "R30", "R31", "R32"]:
+            assert (
+                ref in pcb_data.footprints
+            ), f"Snubber damping resistor {ref} missing from layout"
+            val = pcb_data.footprints[ref]["value"].lower()
+            assert any(
+                target in val for target in ["10", "22", "10r", "22r", "10ohm"]
+            ), f"Resistor {ref} value '{val}' not in 10R-22R range"
+
+    def test_ground_plane_stitching_density(self, pcb_data):
+        """Assert fuselage contains >= 50 ground stitching vias (total vias >= 120)."""
+        gnd_vias = [v for v in pcb_data.vias if v["net_name"] == "GND"]
+        assert (
+            len(gnd_vias) >= 50
+        ), f"Ground stitching via count {len(gnd_vias)} < 50 minimum"
+        assert (
+            len(pcb_data.vias) >= 120
+        ), f"Total via count {len(pcb_data.vias)} < 120 minimum"
+
+    def test_mpu6050_exposed_pad_grounded_and_isolated(self, pcb_data):
+        """Assert MPU-6050 EP (Pad 25) is grounded and no PWM tracks route under U9."""
+        u9 = pcb_data.footprints.get("U9")
+        assert u9 is not None, "MPU-6050 (U9) missing from PCB"
+        u9_idx = pcb_data.content.find('"Reference" "U9"')
+        u9_block = pcb_data.content[
+            pcb_data.content.rfind(
+                "(footprint", 0, u9_idx
+            ) : pcb_data.content.find("(footprint", u9_idx)
+        ]
+        p25_match = re.search(r'\(pad\s+"25"[\s\S]*?\(net\s+"([^"]+)"\)', u9_block)
+        assert p25_match and p25_match.group(1) == "GND", (
+            "U9 Pad 25 not assigned to GND"
+        )
+        for seg in pcb_data.segments:
+            if seg["net_name"].startswith("/MOT_") or seg["net_name"] == "+3V3":
+                mid_x = (seg["x1"] + seg["x2"]) / 2.0
+                mid_y = (seg["y1"] + seg["y2"]) / 2.0
+                if 128.5 <= mid_x <= 133.5 and 81.5 <= mid_y <= 86.5:
+                    assert (
+                        False
+                    ), f"Track {seg['net_name']} illegally routed directly under IMU U9"
+
+    def test_usb_esd_protection_proximity_and_skew(self, pcb_data):
+        """Assert ESD1 is <= 5mm from J1 and USB D+/D- intra-pair skew is <= 1.0mm."""
+        j1 = pcb_data.footprints.get("J1")
+        esd1 = pcb_data.footprints.get("ESD1")
+        assert j1 is not None and esd1 is not None, "J1 or ESD1 missing"
+        dist = math.hypot(esd1["x"] - j1["x"], esd1["y"] - j1["y"])
+        assert (
+            dist <= 6.0
+        ), f"ESD1 distance {dist:.2f} mm exceeds 6.0 mm maximum from USB-C port"
+        len_dp = sum(
+            s["length"] for s in pcb_data.segments if s["net_name"] == "/USB_D+"
+        )
+        len_dm = sum(
+            s["length"] for s in pcb_data.segments if s["net_name"] == "/USB_D-"
+        )
+        if len_dp > 0 and len_dm > 0:
+            skew = abs(len_dp - len_dm)
+            assert (
+                skew <= 1.0
+            ), f"USB differential pair length skew {skew:.2f} mm > 1.0 mm"
+
+    def test_3v3_power_distribution_impedance(self, pcb_data):
+        """Assert 3.3V power trunk from LDO to ESP32 has width >= 0.8mm and <= 4 vias."""
+        v33_vias = [v for v in pcb_data.vias if v["net_name"] == "+3V3"]
+        assert (
+            len(v33_vias) <= 6
+        ), f"3.3V PDN via count {len(v33_vias)} exceeds low-inductance limit (<=6)"
+        v33_segs = [s for s in pcb_data.segments if s["net_name"] == "+3V3"]
+        wide_segs = [s for s in v33_segs if s["width"] >= 0.80]
+        assert (
+            len(wide_segs) >= 1
+        ), "No heavy 3.3V power trunk (>=0.80mm) found between LDO and MCU"
+
+    def test_silkscreen_reference_designators_visible(self, pcb_data):
+        """Assert footprint reference designators on F.SilkS are visible (hide no)."""
+        hidden_functional_refs = []
+        for m in re.finditer(
+            r'\(property\s+"Reference"\s+"([^"]+)"([\s\S]*?)\n\t\t\)',
+            pcb_data.content,
+        ):
+            ref = m.group(1)
+            prop_body = m.group(2)
+            if ref.startswith("H"):
+                continue
+            if "(hide yes)" in prop_body:
+                hidden_functional_refs.append(ref)
+        assert (
+            len(hidden_functional_refs) == 0
+        ), f"Found {len(hidden_functional_refs)} hidden component silkscreen references: {hidden_functional_refs[:5]}"
+

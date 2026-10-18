@@ -1,0 +1,8 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "SI2302DS-T1")(type "KiCad")(uri "${KIPRJMOD}/libs/symbols/SI2302DS-T1.kicad_sym")(options "")(descr "SI2302DS MOSFET symbol library"))
+  (lib (name "TP4056-42-ESOP8")(type "KiCad")(uri "${KIPRJMOD}/libs/symbols/TP4056-42-ESOP8.kicad_sym")(options "")(descr "TP4056 battery charger symbol library"))
+  (lib (name "MPU-6050")(type "KiCad")(uri "${KIPRJMOD}/libs/symbols/MPU-6050.kicad_sym")(options "")(descr "MPU-6050 IMU sensor symbol library"))
+  (lib (name "downloader-rescue")(type "KiCad")(uri "${KIPRJMOD}/libs/symbols/downloader-rescue.kicad_sym")(options "")(descr "Downloader rescue connector symbol library"))
+  (lib (name "ESP32_TouchDown_lib")(type "KiCad")(uri "${KIPRJMOD}/libs/symbols/ESP32_TouchDown_lib.kicad_sym")(options "")(descr "Slide switch symbol library"))
+)

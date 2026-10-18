@@ -1,0 +1,1355 @@
+** Drc report for CopperPilotDrone.kicad_pcb **
+** Created on 2026-10-17T00:13:44 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 304 DRC violations **
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(111.8000 mm, 96.0700 mm): Reference field of R29
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(111.8000 mm, 98.9300 mm): Value field of R29 (22R)
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(111.8000 mm, 97.5000 mm): Footprint text of R29 (R29)
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(131.5707 mm, 69.1000 mm): Reference field of ESD1
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(131.5707 mm, 73.9000 mm): Value field of ESD1 (USBLC6-2SC6)
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(121.7281 mm, 89.1414 mm): Segment of U8 on F.Silkscreen
+    @(121.7143 mm, 88.6663 mm): Reference field of R11
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(121.7281 mm, 89.1414 mm): Segment of U8 on F.Silkscreen
+    @(121.7143 mm, 88.6663 mm): Reference field of R11
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(143.4605 mm, 107.3125 mm): Reference field of C9
+    @(142.5616 mm, 106.3498 mm): Reference field of C10
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(143.4605 mm, 107.3125 mm): Reference field of C9
+    @(142.5778 mm, 107.5423 mm): Reference field of R10
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(142.8151 mm, 106.6348 mm): Segment of R10 on F.Silkscreen
+    @(143.4605 mm, 107.3125 mm): Reference field of C9
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(142.8151 mm, 106.6348 mm): Segment of R10 on F.Silkscreen
+    @(142.5616 mm, 106.3498 mm): Reference field of C10
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(142.4210 mm, 107.2698 mm): Segment of C10 on F.Silkscreen
+    @(142.5778 mm, 107.5423 mm): Reference field of R10
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(117.6874 mm, 74.1632 mm): Reference field of C16
+    @(115.5000 mm, 75.0700 mm): Reference field of R30
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(112.2500 mm, 80.4000 mm): Segment of SW2 on F.Silkscreen
+    @(111.2063 mm, 79.8169 mm): Reference field of R19
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(109.8695 mm, 75.5429 mm): Segment of T2 on F.Silkscreen
+    @(111.3295 mm, 75.5929 mm): Reference field of T2
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(112.7895 mm, 75.6429 mm): Segment of T2 on F.Silkscreen
+    @(111.3295 mm, 75.5929 mm): Reference field of T2
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(146.1365 mm, 101.2953 mm): Reference field of J4
+    @(145.3624 mm, 100.9699 mm): Segment of D5 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(147.8445 mm, 90.3999 mm): Reference field of R21
+    @(149.6250 mm, 90.5818 mm): Reference field of J3
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(148.2650 mm, 83.5409 mm): Segment of J3 on F.Silkscreen
+    @(148.3500 mm, 81.8300 mm): Reference field of R31
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(148.2650 mm, 81.5409 mm): Segment of J3 on F.Silkscreen
+    @(148.3500 mm, 81.8300 mm): Reference field of R31
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(150.1111 mm, 74.9440 mm): Reference field of D4
+    @(151.1694 mm, 75.2246 mm): Reference field of T3
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(150.1111 mm, 74.9440 mm): Reference field of D4
+    @(149.6694 mm, 76.9246 mm): Segment of T3 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(150.1111 mm, 74.9440 mm): Reference field of D4
+    @(149.7094 mm, 75.2746 mm): Segment of T3 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(150.1111 mm, 74.9440 mm): Reference field of D4
+    @(149.7094 mm, 75.1746 mm): Segment of T3 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(150.1111 mm, 74.9440 mm): Reference field of D4
+    @(152.6294 mm, 75.2746 mm): Segment of T3 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(149.7094 mm, 75.1746 mm): Segment of T3 on F.Silkscreen
+    @(151.1694 mm, 75.2246 mm): Reference field of T3
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(152.6294 mm, 75.2746 mm): Segment of T3 on F.Silkscreen
+    @(151.1694 mm, 75.2246 mm): Reference field of T3
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(149.2677 mm, 94.8466 mm): Segment of T4 on F.Silkscreen
+    @(147.8077 mm, 94.7966 mm): Reference field of T4
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(147.0292 mm, 96.4159 mm): Reference field of C18
+    @(147.8077 mm, 94.7966 mm): Reference field of T4
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(146.3477 mm, 94.7466 mm): Segment of T4 on F.Silkscreen
+    @(147.8077 mm, 94.7966 mm): Reference field of T4
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(108.9513 mm, 97.7222 mm): Segment of T1 on F.Silkscreen
+    @(110.4113 mm, 97.7722 mm): Reference field of T1
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(110.4113 mm, 97.7722 mm): Reference field of T1
+    @(111.8713 mm, 97.8222 mm): Segment of T1 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(113.3284 mm, 101.5949 mm): Reference field of D2
+    @(113.4437 mm, 102.0987 mm): Segment of J2 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(113.3284 mm, 101.5949 mm): Reference field of D2
+    @(112.1709 mm, 100.8259 mm): Segment of J2 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(117.1362 mm, 73.4132 mm): Segment of C16 on F.Silkscreen
+    @(116.7968 mm, 73.1634 mm): Reference field of D3
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(116.7968 mm, 73.1634 mm): Reference field of D3
+    @(116.4150 mm, 72.6920 mm): Segment of C16 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(135.7403 mm, 84.5739 mm): Segment of R12 on F.Silkscreen
+    @(135.9776 mm, 85.2043 mm): Reference field of R14
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(135.7403 mm, 85.6189 mm): Segment of R12 on F.Silkscreen
+    @(135.9776 mm, 85.2043 mm): Reference field of R14
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(124.4791 mm, 75.4278 mm): Reference field of C6
+    @(123.8662 mm, 75.5761 mm): Segment of C7 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(143.8730 mm, 83.3786 mm): Segment of R27 on F.Silkscreen
+    @(143.6357 mm, 82.9463 mm): Reference field of R28
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(143.3984 mm, 83.8538 mm): Segment of R28 on F.Silkscreen
+    @(143.6357 mm, 84.2861 mm): Reference field of R27
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(143.8730 mm, 82.3336 mm): Segment of R27 on F.Silkscreen
+    @(143.6357 mm, 82.9463 mm): Reference field of R28
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(139.2822 mm, 77.3620 mm): Reference field of Rprog1
+    @(137.3340 mm, 78.5520 mm): Reference field of C1
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(124.4791 mm, 75.4278 mm): Reference field of C6
+    @(124.8862 mm, 75.5761 mm): Segment of C7 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(126.7291 mm, 64.9681 mm): Reference field of SW1
+    @(126.8707 mm, 66.1241 mm): Segment of J1 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(139.2822 mm, 77.3620 mm): Reference field of Rprog1
+    @(138.8504 mm, 77.2054 mm): Segment of U3 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(139.2822 mm, 77.3620 mm): Reference field of Rprog1
+    @(138.8504 mm, 77.2054 mm): Segment of U3 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(145.2245 mm, 71.4607 mm): Reference field of U2
+    @(145.9828 mm, 71.5605 mm): Reference field of J6
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(140.0322 mm, 65.7787 mm): Segment of LED3 on F.Silkscreen
+    @(138.5367 mm, 66.3283 mm): Reference field of LED2
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(138.5367 mm, 66.3283 mm): Reference field of LED2
+    @(140.0322 mm, 67.2487 mm): Segment of LED3 on F.Silkscreen
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(141.3855 mm, 65.4182 mm): Segment of R3 on F.Silkscreen
+    @(141.6304 mm, 65.0812 mm): Reference field of R4
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(143.4605 mm, 107.3125 mm): Reference field of C9
+    @(143.4028 mm, 106.1123 mm): Pad 1 [/EN] of R10 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(142.5616 mm, 106.3498 mm): Reference field of C10
+    @(141.7528 mm, 106.1123 mm): Pad 2 [+3V3] of R10 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(142.5616 mm, 106.3498 mm): Reference field of C10
+    @(143.4028 mm, 106.1123 mm): Pad 1 [/EN] of R10 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(143.4605 mm, 107.3125 mm): Reference field of C9
+    @(143.3366 mm, 107.7798 mm): Pad 2 [GND] of C10 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(142.5778 mm, 107.5423 mm): Reference field of R10
+    @(143.3366 mm, 107.7798 mm): Pad 2 [GND] of C10 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(142.5778 mm, 107.5423 mm): Reference field of R10
+    @(141.7866 mm, 107.7798 mm): Pad 1 [+3V3] of C10 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(140.1281 mm, 114.9914 mm): Segment of U8 on F.Silkscreen
+    @(140.1524 mm, 109.2086 mm): NPTH pad of H39
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(121.7281 mm, 114.9914 mm): Segment of U8 on F.Silkscreen
+    @(121.6495 mm, 109.2086 mm): NPTH pad of H33
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(146.1365 mm, 101.2953 mm): Reference field of J4
+    @(146.2816 mm, 101.2528 mm): Pad 1 [+BATT] of D5 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(135.9776 mm, 83.6664 mm): Reference field of R12
+    @(137.2481 mm, 82.9196 mm): Pad 1 [/POW_LED] of R1 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(148.3500 mm, 81.8300 mm): Reference field of R31
+    @(150.7850 mm, 82.1909 mm): Pad 4 [<no net>] of J3 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(150.1111 mm, 74.9440 mm): Reference field of D4
+    @(150.2194 mm, 76.2746 mm): Pad 1 [/MOT_3] of T3 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(151.1694 mm, 75.2246 mm): Reference field of T3
+    @(151.1694 mm, 74.1746 mm): Pad 3 [/MOT_DRV3] of T3 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(151.1694 mm, 75.2246 mm): Reference field of T3
+    @(150.2194 mm, 76.2746 mm): Pad 1 [/MOT_3] of T3 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(151.1694 mm, 75.2246 mm): Reference field of T3
+    @(152.1194 mm, 76.2746 mm): Pad 2 [GND] of T3 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(147.0863 mm, 76.7360 mm): Reference field of C17
+    @(146.3119 mm, 76.6331 mm): Pad 1 [+BATT] of C5 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(147.0863 mm, 76.7360 mm): Reference field of C17
+    @(148.2611 mm, 75.9940 mm): Pad 2 [/MOT_DRV3] of D4 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(145.7160 mm, 99.2022 mm): Reference field of D5
+    @(146.2542 mm, 97.8459 mm): Pad 1 [+BATT] of C18 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(147.8077 mm, 94.7966 mm): Reference field of T4
+    @(147.8077 mm, 95.8466 mm): Pad 3 [/MOT_DRV4] of T4 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(147.8077 mm, 94.7966 mm): Reference field of T4
+    @(146.8577 mm, 93.7466 mm): Pad 2 [GND] of T4 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(147.8077 mm, 94.7966 mm): Reference field of T4
+    @(148.7577 mm, 93.7466 mm): Pad 1 [/MOT_4] of T4 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(147.0292 mm, 96.4159 mm): Reference field of C18
+    @(147.8077 mm, 95.8466 mm): Pad 3 [/MOT_DRV4] of T4 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(110.4113 mm, 97.7722 mm): Reference field of T1
+    @(110.4113 mm, 98.8222 mm): Pad 3 [/MOT_DRV1] of T1 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(110.4113 mm, 97.7722 mm): Reference field of T1
+    @(111.3613 mm, 96.7222 mm): Pad 1 [/MOT_1] of T1 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(110.4113 mm, 97.7722 mm): Reference field of T1
+    @(109.4613 mm, 96.7222 mm): Pad 2 [GND] of T1 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(115.8302 mm, 101.3881 mm): Reference field of J2
+    @(115.3790 mm, 101.0293 mm): Pad 1 [+BATT] of D2 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(113.3284 mm, 101.5949 mm): Reference field of D2
+    @(113.9387 mm, 102.3957 mm): Pad 1 [/MOT_DRV1] of J2 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(115.8150 mm, 71.6202 mm): Reference field of J5
+    @(116.2312 mm, 71.1128 mm): Pad 1 [+BATT] of D3 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(116.7968 mm, 73.1634 mm): Reference field of D3
+    @(116.1282 mm, 73.7000 mm): Pad 2 [Net-(C16-Pad2)] of C16 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(111.3295 mm, 75.5929 mm): Reference field of T2
+    @(110.3795 mm, 76.6429 mm): Pad 1 [/MOT_2] of T2 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(111.3295 mm, 75.5929 mm): Reference field of T2
+    @(112.2795 mm, 76.6429 mm): Pad 2 [GND] of T2 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(111.3295 mm, 75.5929 mm): Reference field of T2
+    @(111.3295 mm, 74.5429 mm): Pad 3 [/MOT_DRV2] of T2 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(116.7968 mm, 73.1634 mm): Reference field of D3
+    @(117.2242 mm, 72.6040 mm): Pad 1 [+BATT] of C16 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(132.4889 mm, 81.0717 mm): Reference field of R13
+    @(132.2109 mm, 81.9604 mm): Pad 7 [unconnected-(U9-AUX_CL-Pad7)] of U9 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(129.4422 mm, 81.0654 mm): Reference field of C12
+    @(129.7109 mm, 81.9604 mm): Pad 12 [/MPU_INT] of U9 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(129.4422 mm, 81.0654 mm): Reference field of C12
+    @(130.2109 mm, 81.9604 mm): Pad 11 [GND] of U9 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(129.4422 mm, 81.0654 mm): Reference field of C12
+    @(130.7109 mm, 81.9604 mm): Pad 10 [Net-(U9-REGOUT)] of U9 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(130.9609 mm, 83.9354 mm): Reference field of U9
+    @(130.9609 mm, 83.9354 mm): Pad 25 [GND] of U9 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(132.4889 mm, 81.0717 mm): Reference field of R13
+    @(131.2109 mm, 81.9604 mm): Pad 9 [/MPU_AD0] of U9 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(132.4889 mm, 81.0717 mm): Reference field of R13
+    @(131.7109 mm, 81.9604 mm): Pad 8 [+3V3] of U9 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(135.9776 mm, 85.2043 mm): Reference field of R14
+    @(135.1526 mm, 85.0964 mm): Pad 1 [/SDA] of R12 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(135.9776 mm, 85.2043 mm): Reference field of R14
+    @(136.8026 mm, 85.0964 mm): Pad 2 [+3V3] of R12 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(124.4791 mm, 75.4278 mm): Reference field of C6
+    @(124.3762 mm, 74.6605 mm): Pad 2 [GND] of C7 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(142.6654 mm, 78.1342 mm): Reference field of C3
+    @(141.6847 mm, 77.8002 mm): Pad 1 [+3V3] of C4 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(142.6654 mm, 78.1342 mm): Reference field of C3
+    @(143.2347 mm, 77.8002 mm): Pad 2 [GND] of C4 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(143.6357 mm, 82.9463 mm): Reference field of R28
+    @(142.8107 mm, 82.8561 mm): Pad 2 [/ADC_BAT] of R27 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(143.6357 mm, 84.2861 mm): Reference field of R27
+    @(142.8107 mm, 84.3763 mm): Pad 1 [/ADC_BAT] of R28 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(143.6357 mm, 82.9463 mm): Reference field of R28
+    @(144.4607 mm, 82.8561 mm): Pad 1 [+BATT] of R27 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(143.6357 mm, 84.2861 mm): Reference field of R27
+    @(144.4607 mm, 84.3763 mm): Pad 2 [GND] of R28 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(137.3340 mm, 78.5520 mm): Reference field of C1
+    @(137.7129 mm, 78.7654 mm): Pad 2 [GND] of U3 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(137.3340 mm, 78.5520 mm): Reference field of C1
+    @(137.7129 mm, 77.8154 mm): Pad 1 [VBUS] of U3 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(124.4791 mm, 75.4278 mm): Reference field of C6
+    @(124.3762 mm, 76.2105 mm): Pad 1 [VBUS] of C7 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(138.5472 mm, 67.9437 mm): Reference field of LED3
+    @(139.7267 mm, 68.6633 mm): Pad 7 [/CHRG_STAT] of IC1 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(142.6312 mm, 70.5675 mm): Reference field of R26
+    @(142.2667 mm, 68.6633 mm): Pad 5 [+BATT] of IC1 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(140.3617 mm, 71.3753 mm): Reference field of IC1
+    @(140.3617 mm, 71.3753 mm): Pad 9 [GND] of IC1 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(145.5369 mm, 78.0631 mm): Reference field of C5
+    @(146.3113 mm, 78.1660 mm): Pad 1 [+BATT] of C17 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(138.8504 mm, 76.3654 mm): Reference field of U3
+    @(138.4572 mm, 75.9320 mm): Pad 2 [GND] of Rprog1 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(138.8504 mm, 76.3654 mm): Reference field of U3
+    @(140.1072 mm, 75.9320 mm): Pad 1 [/TP_PROG] of Rprog1 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(142.6312 mm, 70.5675 mm): Reference field of R26
+    @(140.3617 mm, 71.3753 mm): Pad 9 [GND] of IC1 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(145.2245 mm, 71.4607 mm): Reference field of U2
+    @(144.0612 mm, 71.3925 mm): Pad 1 [+5V] of R26 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(139.2822 mm, 77.3620 mm): Reference field of Rprog1
+    @(139.9879 mm, 77.8154 mm): Pad 5 [+3V3] of U3 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(139.2822 mm, 77.3620 mm): Reference field of Rprog1
+    @(141.6847 mm, 77.8002 mm): Pad 1 [+3V3] of C4 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(139.2822 mm, 77.3620 mm): Reference field of Rprog1
+    @(137.7129 mm, 77.8154 mm): Pad 1 [VBUS] of U3 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(138.5472 mm, 67.9437 mm): Reference field of LED3
+    @(138.4567 mm, 68.6633 mm): Pad 8 [+5V] of IC1 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(138.5367 mm, 66.3283 mm): Reference field of LED2
+    @(139.3347 mm, 66.5137 mm): Pad 1 [Net-(LED3-K)] of LED3 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(141.6304 mm, 65.0812 mm): Reference field of R4
+    @(140.7978 mm, 64.8957 mm): Pad 1 [Net-(LED2-K)] of R3 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(141.6304 mm, 65.0812 mm): Reference field of R4
+    @(142.4478 mm, 64.8957 mm): Pad 2 [/CHRG_STAT] of R3 on F.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(138.5367 mm, 66.3283 mm): Reference field of LED2
+    @(137.7597 mm, 66.5137 mm): Pad 2 [+5V] of LED3 on F.Cu
+[lib_footprint_issues]: Footprint 'MountingHole_1.0mm' not found in library 'MountingHole'
+    Local override; warning
+    @(118.3975 mm, 129.7427 mm): Footprint H27
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(108.2474 mm, 73.6084 mm): Footprint H13
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(99.1258 mm, 97.9084 mm): Footprint H6
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(115.5000 mm, 76.5000 mm): Footprint R30
+[lib_footprint_mismatch]: Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'
+    Local override; warning
+    @(124.3762 mm, 75.4355 mm): Footprint C7
+[lib_footprint_issues]: Footprint 'MountingHole_1.0mm' not found in library 'MountingHole'
+    Local override; warning
+    @(143.3975 mm, 119.7427 mm): Footprint H46
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(108.2474 mm, 72.2084 mm): Footprint H11
+[lib_footprint_issues]: Footprint 'MountingHole_1.0mm' not found in library 'MountingHole'
+    Local override; warning
+    @(118.3975 mm, 121.7427 mm): Footprint H23
+[lib_footprint_mismatch]: Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'
+    Local override; warning
+    @(144.8905 mm, 107.3125 mm): Footprint C9
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(139.2822 mm, 75.9320 mm): Footprint Rprog1
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(162.6692 mm, 99.4085 mm): Footprint H70
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(135.9776 mm, 85.0964 mm): Footprint R12
+[lib_footprint_mismatch]: Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'
+    Local override; warning
+    @(126.5796 mm, 85.8774 mm): Footprint C13
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(120.9495 mm, 113.0084 mm): Footprint H32
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(142.5778 mm, 106.1123 mm): Footprint R10
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(153.5476 mm, 98.6084 mm): Footprint H59
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(141.3500 mm, 89.8000 mm): Footprint R23
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(132.4889 mm, 79.6417 mm): Footprint R13
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(153.5476 mm, 100.0084 mm): Footprint H61
+[lib_footprint_mismatch]: Footprint 'USB_C_Receptacle_HRO_TYPE-C-31-M-12' does not match copy in library 'Connector_USB'
+    Local override; warning
+    @(131.5707 mm, 68.1241 mm): Footprint J1
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(121.7143 mm, 87.2363 mm): Footprint R11
+[lib_footprint_issues]: Footprint 'MountingHole_1.0mm' not found in library 'MountingHole'
+    Local override; warning
+    @(118.3975 mm, 125.7427 mm): Footprint H25
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(140.8524 mm, 113.0084 mm): Footprint H42
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(99.1258 mm, 74.4085 mm): Footprint H4
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(99.1258 mm, 73.0085 mm): Footprint H2
+[lib_footprint_mismatch]: Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'
+    Local override; warning
+    @(142.6654 mm, 79.5642 mm): Footprint C3
+[lib_footprint_mismatch]: Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'
+    Local override; warning
+    @(142.4597 mm, 77.8002 mm): Footprint C4
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(99.1258 mm, 73.7085 mm): Footprint H3
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(162.6692 mm, 100.1085 mm): Footprint H71
+[lib_footprint_issues]: Footprint 'MountingHole_1.0mm' not found in library 'MountingHole'
+    Local override; warning
+    @(143.3975 mm, 127.7427 mm): Footprint H50
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(141.5524 mm, 109.2086 mm): Footprint H43
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(121.6495 mm, 109.2086 mm): Footprint H33
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(139.4523 mm, 109.2086 mm): Footprint H37
+[lib_footprint_mismatch]: Footprint 'ESP32-S3-WROOM-1' does not match copy in library 'RF_Module'
+    Local override; warning
+    @(130.9281 mm, 102.0914 mm): Footprint U8
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(153.5476 mm, 99.3084 mm): Footprint H60
+[lib_footprint_mismatch]: Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'
+    Local override; warning
+    @(145.5369 mm, 76.6331 mm): Footprint C5
+[lib_footprint_mismatch]: Footprint 'slide switch spdt' does not match copy in library 'ESP32_TouchDown_lib'
+    Local override; warning
+    @(121.1491 mm, 66.1481 mm): Footprint SW1
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(162.6692 mm, 73.6084 mm): Footprint H65
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(153.5476 mm, 74.3085 mm): Footprint H56
+[lib_footprint_mismatch]: Footprint 'D_SOD-323' does not match copy in library 'Diode_SMD'
+    Local override; warning
+    @(147.0241 mm, 100.5103 mm): Footprint D5
+[lib_footprint_issues]: Footprint 'MountingHole_1.0mm' not found in library 'MountingHole'
+    Local override; warning
+    @(143.3975 mm, 125.7427 mm): Footprint H49
+[lib_footprint_mismatch]: Footprint 'CONN-SMD_B2B-PH-SM4-TB-LF-SN' does not match copy in library 'easyeda2kicad'
+    Local override; warning
+    @(149.6250 mm, 85.5409 mm): Footprint J3
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(99.1258 mm, 99.3084 mm): Footprint H8
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(141.4700 mm, 93.3000 mm): Footprint R22
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(139.4523 mm, 113.0084 mm): Footprint H38
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(120.2494 mm, 109.2086 mm): Footprint H29
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(99.1258 mm, 75.1086 mm): Footprint H5
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(140.1524 mm, 109.2086 mm): Footprint H39
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(111.2063 mm, 78.3869 mm): Footprint R19
+[lib_footprint_mismatch]: Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'
+    Local override; warning
+    @(116.6762 mm, 73.1520 mm): Footprint C16
+[lib_footprint_issues]: Footprint 'MountingHole_1.0mm' not found in library 'MountingHole'
+    Local override; warning
+    @(118.3975 mm, 123.7427 mm): Footprint H24
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(143.6357 mm, 84.3763 mm): Footprint R28
+[lib_footprint_issues]: Footprint 'MountingHole_1.0mm' not found in library 'MountingHole'
+    Local override; warning
+    @(118.3975 mm, 119.7427 mm): Footprint H22
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(108.2474 mm, 100.7085 mm): Footprint H20
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(135.9776 mm, 86.6343 mm): Footprint R14
+[lib_footprint_mismatch]: Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'
+    Local override; warning
+    @(125.9091 mm, 75.4278 mm): Footprint C6
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(141.6304 mm, 66.5112 mm): Footprint R4
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(120.2494 mm, 113.0084 mm): Footprint H30
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(108.2474 mm, 75.0085 mm): Footprint H15
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(162.6692 mm, 75.0085 mm): Footprint H67
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(147.8445 mm, 91.8299 mm): Footprint R21
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(110.3452 mm, 94.8881 mm): Footprint R18
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(141.5524 mm, 113.0084 mm): Footprint H44
+[lib_footprint_mismatch]: Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'
+    Local override; warning
+    @(147.0863 mm, 78.1660 mm): Footprint C17
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(153.5476 mm, 72.2084 mm): Footprint H53
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(148.3500 mm, 80.4000 mm): Footprint R31
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(153.5476 mm, 97.9084 mm): Footprint H58
+[lib_footprint_mismatch]: Footprint 'JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal' does not match copy in library 'Connector_JST'
+    Local override; warning
+    @(113.0573 mm, 68.8625 mm): Footprint J5
+[lib_footprint_issues]: Footprint 'MountingHole_1.0mm' not found in library 'MountingHole'
+    Local override; warning
+    @(143.3975 mm, 123.7427 mm): Footprint H48
+[lib_footprint_issues]: Footprint 'MountingHole_1.0mm' not found in library 'MountingHole'
+    Local override; warning
+    @(143.3975 mm, 131.7427 mm): Footprint H52
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(143.6357 mm, 82.8561 mm): Footprint R27
+[lib_footprint_mismatch]: Footprint 'D_SOD-323' does not match copy in library 'Diode_SMD'
+    Local override; warning
+    @(115.4887 mm, 71.8553 mm): Footprint D3
+[lib_footprint_mismatch]: Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'
+    Local override; warning
+    @(142.5616 mm, 107.7798 mm): Footprint C10
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(162.6692 mm, 100.8085 mm): Footprint H72
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(153.5476 mm, 72.9084 mm): Footprint H54
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(140.1524 mm, 113.0084 mm): Footprint H40
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(162.6692 mm, 72.2084 mm): Footprint H63
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(99.1258 mm, 100.0084 mm): Footprint H9
+[lib_footprint_mismatch]: Footprint 'JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal' does not match copy in library 'Connector_JST'
+    Local override; warning
+    @(148.8942 mm, 104.0530 mm): Footprint J4
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(129.0000 mm, 73.7000 mm): Footprint R25
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(133.5000 mm, 73.7000 mm): Footprint R24
+[lib_footprint_mismatch]: Footprint 'D_SOD-323' does not match copy in library 'Diode_SMD'
+    Local override; warning
+    @(148.2611 mm, 74.9440 mm): Footprint D4
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(108.2474 mm, 98.6084 mm): Footprint H17
+[lib_footprint_issues]: Footprint 'MountingHole_1.0mm' not found in library 'MountingHole'
+    Local override; warning
+    @(118.3975 mm, 131.7427 mm): Footprint H28
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(138.0731 mm, 82.9196 mm): Footprint R1
+[lib_footprint_issues]: Footprint 'MountingHole_1.0mm' not found in library 'MountingHole'
+    Local override; warning
+    @(118.3975 mm, 117.7427 mm): Footprint H21
+[lib_footprint_issues]: Footprint 'MountingHole_1.0mm' not found in library 'MountingHole'
+    Local override; warning
+    @(143.3975 mm, 117.7427 mm): Footprint H45
+[lib_footprint_issues]: Footprint 'MountingHole_1.0mm' not found in library 'MountingHole'
+    Local override; warning
+    @(118.3975 mm, 127.7427 mm): Footprint H26
+[lib_footprint_issues]: Footprint 'MountingHole_1.0mm' not found in library 'MountingHole'
+    Local override; warning
+    @(143.3975 mm, 129.7427 mm): Footprint H51
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(140.8524 mm, 109.2086 mm): Footprint H41
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(99.1258 mm, 100.7085 mm): Footprint H10
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(108.2474 mm, 100.0084 mm): Footprint H19
+[lib_footprint_mismatch]: Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'
+    Local override; warning
+    @(147.0292 mm, 97.8459 mm): Footprint C18
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(153.5476 mm, 73.6084 mm): Footprint H55
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(99.1258 mm, 98.6084 mm): Footprint H7
+[lib_footprint_mismatch]: Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'
+    Local override; warning
+    @(142.5626 mm, 104.5807 mm): Footprint C11
+[lib_footprint_mismatch]: Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'
+    Local override; warning
+    @(126.5326 mm, 81.8883 mm): Footprint C14
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(144.0612 mm, 70.5675 mm): Footprint R26
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(141.6228 mm, 64.8957 mm): Footprint R3
+[lib_footprint_mismatch]: Footprint 'SOT-23-5' does not match copy in library 'Package_TO_SOT_SMD'
+    Local override; warning
+    @(138.8504 mm, 78.7654 mm): Footprint U3
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(121.6495 mm, 113.0084 mm): Footprint H34
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(120.9495 mm, 109.2086 mm): Footprint H31
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(119.7420 mm, 69.3649 mm): Footprint R2
+[lib_footprint_mismatch]: Footprint 'D_SMA' does not match copy in library 'Diode_SMD'
+    Local override; warning
+    @(131.1224 mm, 76.0565 mm): Footprint D1
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(162.6692 mm, 72.9084 mm): Footprint H64
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(122.3495 mm, 113.0084 mm): Footprint H36
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(108.2474 mm, 99.3084 mm): Footprint H18
+[lib_footprint_mismatch]: Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'
+    Local override; warning
+    @(129.4422 mm, 79.6354 mm): Footprint C12
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(151.0843 mm, 78.0478 mm): Footprint R20
+[lib_footprint_mismatch]: Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'
+    Local override; warning
+    @(135.9040 mm, 78.5520 mm): Footprint C1
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(108.2474 mm, 74.3085 mm): Footprint H14
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(108.2474 mm, 72.9084 mm): Footprint H12
+[lib_footprint_mismatch]: Footprint 'JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal' does not match copy in library 'Connector_JST'
+    Local override; warning
+    @(148.7405 mm, 68.8028 mm): Footprint J6
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(150.0000 mm, 97.8459 mm): Footprint R32
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(153.5476 mm, 75.0085 mm): Footprint H57
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(99.1258 mm, 72.3085 mm): Footprint H1
+[lib_footprint_mismatch]: Footprint 'SOT-23' does not match copy in library 'Package_TO_SOT_SMD'
+    Local override; warning
+    @(145.2245 mm, 73.8607 mm): Footprint U2
+[lib_footprint_issues]: Footprint 'MountingHole_1.0mm' not found in library 'MountingHole'
+    Local override; warning
+    @(143.3975 mm, 121.7427 mm): Footprint H47
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(122.3495 mm, 109.2086 mm): Footprint H35
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(162.6692 mm, 98.0084 mm): Footprint H68
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(108.2474 mm, 97.9084 mm): Footprint H16
+[lib_footprint_mismatch]: Footprint 'JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal' does not match copy in library 'Connector_JST'
+    Local override; warning
+    @(113.0725 mm, 104.1458 mm): Footprint J2
+[lib_footprint_mismatch]: Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'
+    Local override; warning
+    @(114.0511 mm, 96.9416 mm): Footprint C15
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(162.6692 mm, 74.3085 mm): Footprint H66
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(153.5476 mm, 100.7085 mm): Footprint H62
+[lib_footprint_issues]: Footprint 'MountingHole_0.5mm' not found in library 'MountingHole'
+    Local override; warning
+    @(162.6692 mm, 98.7085 mm): Footprint H69
+[lib_footprint_mismatch]: Footprint 'D_SOD-323' does not match copy in library 'Diode_SMD'
+    Local override; warning
+    @(114.6365 mm, 100.2868 mm): Footprint D2
+[lib_footprint_mismatch]: Footprint 'R_0603_1608Metric' does not match copy in library 'Resistor_SMD'
+    Local override; warning
+    @(111.8000 mm, 97.5000 mm): Footprint R29
+[lib_footprint_mismatch]: Footprint 'SOT-23-6' does not match copy in library 'Package_TO_SOT_SMD'
+    Local override; warning
+    @(131.5707 mm, 71.5000 mm): Footprint ESD1
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.0800 mm)
+    Rule: board setup constraints; warning
+    @(133.5000 mm, 78.0000 mm): Via [GND] on F.Cu - B.Cu
+    @(133.8936 mm, 77.8269 mm): Via [GND] on F.Cu - B.Cu
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.0852 mm)
+    Rule: board setup constraints; warning
+    @(133.8281 mm, 98.9314 mm): PTH pad 41 [GND] of U8
+    @(133.5000 mm, 99.0000 mm): Via [GND] on F.Cu - B.Cu
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(115.5000 mm, 91.5000 mm): Via [GND] on F.Cu - B.Cu
+    @(115.0000 mm, 91.5000 mm): Via [GND] on F.Cu - B.Cu
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(108.2474 mm, 72.9084 mm): NPTH pad of H12
+    @(108.2474 mm, 73.6084 mm): NPTH pad of H13
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2001 mm)
+    Rule: board setup constraints; warning
+    @(108.2474 mm, 74.3085 mm): NPTH pad of H14
+    @(108.2474 mm, 73.6084 mm): NPTH pad of H13
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(99.1258 mm, 98.6084 mm): NPTH pad of H7
+    @(99.1258 mm, 97.9084 mm): NPTH pad of H6
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(108.2474 mm, 72.9084 mm): NPTH pad of H12
+    @(108.2474 mm, 72.2084 mm): NPTH pad of H11
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(162.6692 mm, 99.4085 mm): NPTH pad of H70
+    @(162.6692 mm, 100.1085 mm): NPTH pad of H71
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(162.6692 mm, 98.7085 mm): NPTH pad of H69
+    @(162.6692 mm, 99.4085 mm): NPTH pad of H70
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2001 mm)
+    Rule: board setup constraints; warning
+    @(120.2494 mm, 113.0084 mm): NPTH pad of H30
+    @(120.9495 mm, 113.0084 mm): NPTH pad of H32
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(120.9495 mm, 113.0084 mm): NPTH pad of H32
+    @(121.6495 mm, 113.0084 mm): NPTH pad of H34
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(153.5476 mm, 98.6084 mm): NPTH pad of H59
+    @(153.5476 mm, 99.3084 mm): NPTH pad of H60
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(153.5476 mm, 98.6084 mm): NPTH pad of H59
+    @(153.5476 mm, 97.9084 mm): NPTH pad of H58
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(153.5476 mm, 100.0084 mm): NPTH pad of H61
+    @(153.5476 mm, 99.3084 mm): NPTH pad of H60
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2001 mm)
+    Rule: board setup constraints; warning
+    @(153.5476 mm, 100.0084 mm): NPTH pad of H61
+    @(153.5476 mm, 100.7085 mm): NPTH pad of H62
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(141.5524 mm, 113.0084 mm): NPTH pad of H44
+    @(140.8524 mm, 113.0084 mm): NPTH pad of H42
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(140.1524 mm, 113.0084 mm): NPTH pad of H40
+    @(140.8524 mm, 113.0084 mm): NPTH pad of H42
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(99.1258 mm, 73.7085 mm): NPTH pad of H3
+    @(99.1258 mm, 74.4085 mm): NPTH pad of H4
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2001 mm)
+    Rule: board setup constraints; warning
+    @(99.1258 mm, 75.1086 mm): NPTH pad of H5
+    @(99.1258 mm, 74.4085 mm): NPTH pad of H4
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(99.1258 mm, 72.3085 mm): NPTH pad of H1
+    @(99.1258 mm, 73.0085 mm): NPTH pad of H2
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(99.1258 mm, 73.7085 mm): NPTH pad of H3
+    @(99.1258 mm, 73.0085 mm): NPTH pad of H2
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(162.6692 mm, 100.8085 mm): NPTH pad of H72
+    @(162.6692 mm, 100.1085 mm): NPTH pad of H71
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(140.8524 mm, 109.2086 mm): NPTH pad of H41
+    @(141.5524 mm, 109.2086 mm): NPTH pad of H43
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(120.9495 mm, 109.2086 mm): NPTH pad of H31
+    @(121.6495 mm, 109.2086 mm): NPTH pad of H33
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(121.6495 mm, 109.2086 mm): NPTH pad of H33
+    @(122.3495 mm, 109.2086 mm): NPTH pad of H35
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2001 mm)
+    Rule: board setup constraints; warning
+    @(140.1524 mm, 109.2086 mm): NPTH pad of H39
+    @(139.4523 mm, 109.2086 mm): NPTH pad of H37
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.0852 mm)
+    Rule: board setup constraints; warning
+    @(133.8281 mm, 98.9314 mm): PTH pad 41 [GND] of U8
+    @(133.5000 mm, 99.0000 mm): Via [GND] on F.Cu - B.Cu
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2001 mm)
+    Rule: board setup constraints; warning
+    @(162.6692 mm, 74.3085 mm): NPTH pad of H66
+    @(162.6692 mm, 73.6084 mm): NPTH pad of H65
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(162.6692 mm, 72.9084 mm): NPTH pad of H64
+    @(162.6692 mm, 73.6084 mm): NPTH pad of H65
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2001 mm)
+    Rule: board setup constraints; warning
+    @(153.5476 mm, 74.3085 mm): NPTH pad of H56
+    @(153.5476 mm, 73.6084 mm): NPTH pad of H55
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(153.5476 mm, 74.3085 mm): NPTH pad of H56
+    @(153.5476 mm, 75.0085 mm): NPTH pad of H57
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(99.1258 mm, 98.6084 mm): NPTH pad of H7
+    @(99.1258 mm, 99.3084 mm): NPTH pad of H8
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(99.1258 mm, 100.0084 mm): NPTH pad of H9
+    @(99.1258 mm, 99.3084 mm): NPTH pad of H8
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2001 mm)
+    Rule: board setup constraints; warning
+    @(139.4523 mm, 113.0084 mm): NPTH pad of H38
+    @(140.1524 mm, 113.0084 mm): NPTH pad of H40
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2001 mm)
+    Rule: board setup constraints; warning
+    @(120.2494 mm, 109.2086 mm): NPTH pad of H29
+    @(120.9495 mm, 109.2086 mm): NPTH pad of H31
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(140.8524 mm, 109.2086 mm): NPTH pad of H41
+    @(140.1524 mm, 109.2086 mm): NPTH pad of H39
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2001 mm)
+    Rule: board setup constraints; warning
+    @(108.2474 mm, 100.7085 mm): NPTH pad of H20
+    @(108.2474 mm, 100.0084 mm): NPTH pad of H19
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(108.2474 mm, 75.0085 mm): NPTH pad of H15
+    @(108.2474 mm, 74.3085 mm): NPTH pad of H14
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(162.6692 mm, 74.3085 mm): NPTH pad of H66
+    @(162.6692 mm, 75.0085 mm): NPTH pad of H67
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(153.5476 mm, 72.2084 mm): NPTH pad of H53
+    @(153.5476 mm, 72.9084 mm): NPTH pad of H54
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(153.5476 mm, 72.9084 mm): NPTH pad of H54
+    @(153.5476 mm, 73.6084 mm): NPTH pad of H55
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(162.6692 mm, 72.9084 mm): NPTH pad of H64
+    @(162.6692 mm, 72.2084 mm): NPTH pad of H63
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2001 mm)
+    Rule: board setup constraints; warning
+    @(99.1258 mm, 100.0084 mm): NPTH pad of H9
+    @(99.1258 mm, 100.7085 mm): NPTH pad of H10
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(108.2474 mm, 98.6084 mm): NPTH pad of H17
+    @(108.2474 mm, 97.9084 mm): NPTH pad of H16
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(108.2474 mm, 98.6084 mm): NPTH pad of H17
+    @(108.2474 mm, 99.3084 mm): NPTH pad of H18
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(108.2474 mm, 100.0084 mm): NPTH pad of H19
+    @(108.2474 mm, 99.3084 mm): NPTH pad of H18
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2000 mm)
+    Rule: board setup constraints; warning
+    @(122.3495 mm, 113.0084 mm): NPTH pad of H36
+    @(121.6495 mm, 113.0084 mm): NPTH pad of H34
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.2001 mm)
+    Rule: board setup constraints; warning
+    @(162.6692 mm, 98.0084 mm): NPTH pad of H68
+    @(162.6692 mm, 98.7085 mm): NPTH pad of H69
+[silk_edge_clearance]: Silkscreen clipped by board edge
+    Rule: board setup constraints silk; warning
+    @(114.6371 mm, 109.0084 mm): Segment on Edge.Cuts
+    @(121.7281 mm, 114.9914 mm): Segment of U8 on F.Silkscreen
+[silk_edge_clearance]: Silkscreen clipped by board edge
+    Rule: board setup constraints silk; warning
+    @(114.6371 mm, 109.0084 mm): Segment on Edge.Cuts
+    @(140.1281 mm, 114.9914 mm): Segment of U8 on F.Silkscreen
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(110.9750 mm, 98.8222 mm): Track [/MOT_DRV1] on F.Cu, length 0.4863 mm
+[via_dangling]: Via is not connected or connected on only one layer
+    Local override; warning
+    @(114.0000 mm, 76.5000 mm): Via [/MOT_DRV2] on F.Cu - B.Cu
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(116.3250 mm, 76.5000 mm): Track [Net-(C16-Pad2)] on F.Cu, length 3.9010 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(120.8893 mm, 87.2363 mm): Track [+3V3] on F.Cu, length 0.7637 mm
+[via_dangling]: Via is not connected or connected on only one layer
+    Local override; warning
+    @(140.0000 mm, 82.0000 mm): Via [+5V] on F.Cu - B.Cu
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(148.2611 mm, 75.9940 mm): Track [/MOT_DRV3] on F.Cu, length 0.8867 mm
+
+** Found 0 unconnected pads **
+
+** Found 87 Footprint errors **
+[footprint_symbol_field_mismatch]: Field 'Description' differs (PCB: '', Schematic: '22R 1% 0603 Resistor')
+    Local override; warning
+    @(111.8000 mm, 97.5000 mm): Footprint R29
+[net_conflict]: Pad net (/MOT_DRV1) doesn't match net given by schematic (Net-(C15-Pad2))
+    Local override; warning
+    @(110.9750 mm, 97.5000 mm): Pad 1 [/MOT_DRV1] of R29 on B.Cu
+[net_conflict]: Pad net (Net-(C15-Pad2)) doesn't match net given by schematic (/MOT_DRV1)
+    Local override; warning
+    @(112.6250 mm, 97.5000 mm): Pad 2 [Net-(C15-Pad2)] of R29 on B.Cu
+[footprint_symbol_field_mismatch]: Field 'Description' differs (PCB: '', Schematic: '22R 1% 0603 Resistor')
+    Local override; warning
+    @(115.5000 mm, 76.5000 mm): Footprint R30
+[net_conflict]: Pad net (/MOT_DRV2) doesn't match net given by schematic (Net-(C16-Pad2))
+    Local override; warning
+    @(114.6750 mm, 76.5000 mm): Pad 1 [/MOT_DRV2] of R30 on F.Cu
+[net_conflict]: Pad net (Net-(C16-Pad2)) doesn't match net given by schematic (/MOT_DRV2)
+    Local override; warning
+    @(116.3250 mm, 76.5000 mm): Pad 2 [Net-(C16-Pad2)] of R30 on F.Cu
+[footprint_symbol_field_mismatch]: Field 'Description' differs (PCB: '', Schematic: '22R 1% 0603 Resistor')
+    Local override; warning
+    @(148.3500 mm, 80.4000 mm): Footprint R31
+[net_conflict]: Pad net (/MOT_DRV3) doesn't match net given by schematic (Net-(C17-Pad2))
+    Local override; warning
+    @(149.1750 mm, 80.4000 mm): Pad 1 [/MOT_DRV3] of R31 on F.Cu
+[net_conflict]: Pad net (Net-(C17-Pad2)) doesn't match net given by schematic (/MOT_DRV3)
+    Local override; warning
+    @(147.5250 mm, 80.4000 mm): Pad 2 [Net-(C17-Pad2)] of R31 on F.Cu
+[footprint_symbol_field_mismatch]: Field 'Description' differs (PCB: '', Schematic: '22R 1% 0603 Resistor')
+    Local override; warning
+    @(150.0000 mm, 97.8459 mm): Footprint R32
+[net_conflict]: Pad net (/MOT_DRV4) doesn't match net given by schematic (Net-(C18-Pad2))
+    Local override; warning
+    @(150.8250 mm, 97.8459 mm): Pad 1 [/MOT_DRV4] of R32 on F.Cu
+[net_conflict]: Pad net (Net-(C18-Pad2)) doesn't match net given by schematic (/MOT_DRV4)
+    Local override; warning
+    @(149.1750 mm, 97.8459 mm): Pad 2 [Net-(C18-Pad2)] of R32 on F.Cu
+[footprint_symbol_mismatch]: Value (T1) doesn't match symbol value (AP2112K-3.3TRG1)
+    Local override; warning
+    @(110.4113 mm, 97.7722 mm): Footprint T1
+[footprint_symbol_field_mismatch]: Field 'LCSC' differs (PCB: 'C51118', Schematic: 'C351401')
+    Local override; warning
+    @(110.4113 mm, 97.7722 mm): Footprint T1
+[footprint_symbol_field_mismatch]: Missing symbol field 'Manufacturer' in footprint
+    Local override; warning
+    @(138.8504 mm, 78.7654 mm): Footprint U3
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(118.3975 mm, 129.7427 mm): Footprint H27
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(108.2474 mm, 73.6084 mm): Footprint H13
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(99.1258 mm, 97.9084 mm): Footprint H6
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(143.3975 mm, 119.7427 mm): Footprint H46
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(108.2474 mm, 72.2084 mm): Footprint H11
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(118.3975 mm, 121.7427 mm): Footprint H23
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(162.6692 mm, 99.4085 mm): Footprint H70
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(120.9495 mm, 113.0084 mm): Footprint H32
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(153.5476 mm, 98.6084 mm): Footprint H59
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(153.5476 mm, 100.0084 mm): Footprint H61
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(118.3975 mm, 125.7427 mm): Footprint H25
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(140.8524 mm, 113.0084 mm): Footprint H42
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(99.1258 mm, 74.4085 mm): Footprint H4
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(99.1258 mm, 73.0085 mm): Footprint H2
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(99.1258 mm, 73.7085 mm): Footprint H3
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(162.6692 mm, 100.1085 mm): Footprint H71
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(143.3975 mm, 127.7427 mm): Footprint H50
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(141.5524 mm, 109.2086 mm): Footprint H43
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(121.6495 mm, 109.2086 mm): Footprint H33
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(139.4523 mm, 109.2086 mm): Footprint H37
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(153.5476 mm, 99.3084 mm): Footprint H60
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(162.6692 mm, 73.6084 mm): Footprint H65
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(153.5476 mm, 74.3085 mm): Footprint H56
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(143.3975 mm, 125.7427 mm): Footprint H49
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(99.1258 mm, 99.3084 mm): Footprint H8
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(139.4523 mm, 113.0084 mm): Footprint H38
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(120.2494 mm, 109.2086 mm): Footprint H29
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(99.1258 mm, 75.1086 mm): Footprint H5
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(140.1524 mm, 109.2086 mm): Footprint H39
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(118.3975 mm, 123.7427 mm): Footprint H24
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(118.3975 mm, 119.7427 mm): Footprint H22
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(108.2474 mm, 100.7085 mm): Footprint H20
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(120.2494 mm, 113.0084 mm): Footprint H30
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(108.2474 mm, 75.0085 mm): Footprint H15
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(162.6692 mm, 75.0085 mm): Footprint H67
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(141.5524 mm, 113.0084 mm): Footprint H44
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(153.5476 mm, 72.2084 mm): Footprint H53
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(153.5476 mm, 97.9084 mm): Footprint H58
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(143.3975 mm, 123.7427 mm): Footprint H48
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(143.3975 mm, 131.7427 mm): Footprint H52
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(162.6692 mm, 100.8085 mm): Footprint H72
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(153.5476 mm, 72.9084 mm): Footprint H54
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(140.1524 mm, 113.0084 mm): Footprint H40
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(162.6692 mm, 72.2084 mm): Footprint H63
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(99.1258 mm, 100.0084 mm): Footprint H9
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(108.2474 mm, 98.6084 mm): Footprint H17
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(118.3975 mm, 131.7427 mm): Footprint H28
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(118.3975 mm, 117.7427 mm): Footprint H21
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(143.3975 mm, 117.7427 mm): Footprint H45
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(118.3975 mm, 127.7427 mm): Footprint H26
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(143.3975 mm, 129.7427 mm): Footprint H51
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(140.8524 mm, 109.2086 mm): Footprint H41
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(99.1258 mm, 100.7085 mm): Footprint H10
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(108.2474 mm, 100.0084 mm): Footprint H19
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(153.5476 mm, 73.6084 mm): Footprint H55
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(99.1258 mm, 98.6084 mm): Footprint H7
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(121.6495 mm, 113.0084 mm): Footprint H34
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(120.9495 mm, 109.2086 mm): Footprint H31
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(162.6692 mm, 72.9084 mm): Footprint H64
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(122.3495 mm, 113.0084 mm): Footprint H36
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(108.2474 mm, 99.3084 mm): Footprint H18
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(108.2474 mm, 74.3085 mm): Footprint H14
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(108.2474 mm, 72.9084 mm): Footprint H12
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(153.5476 mm, 75.0085 mm): Footprint H57
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(99.1258 mm, 72.3085 mm): Footprint H1
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(143.3975 mm, 121.7427 mm): Footprint H47
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(122.3495 mm, 109.2086 mm): Footprint H35
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(162.6692 mm, 98.0084 mm): Footprint H68
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(108.2474 mm, 97.9084 mm): Footprint H16
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(162.6692 mm, 74.3085 mm): Footprint H66
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(153.5476 mm, 100.7085 mm): Footprint H62
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(162.6692 mm, 98.7085 mm): Footprint H69
+
+** Ignored checks **
+    - Footprint has no courtyard defined
+    - Track endpoint not centered on via
+    - Tuning profile track geometries
+    - Footprint doesn't match symbol's footprint filters
+    - Footprint component type doesn't match footprint pads
+
+** End of Report **

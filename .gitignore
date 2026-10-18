@@ -1,0 +1,108 @@
+# ==============================================================================
+# CopperPilot Drone PCB & Firmware - Git Ignore Specification
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# KiCad EDA & Hardware Artifacts
+# ------------------------------------------------------------------------------
+*.kicad_prl
+*.bak
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*-backups/
+_autosave-*
+~*.lck
+fp-info-cache
+*.net
+*.dsn
+*.ses
+*.cad
+*.xml
+*.svg
+
+# Fabrication & Gerber Release Bundles
+pcb/build/
+case/build/
+fab/
+manufacturing/
+*.gbrjob
+*.zip
+
+# ------------------------------------------------------------------------------
+# ESP-IDF & Target Firmware Compilation
+# ------------------------------------------------------------------------------
+firmware/build/
+build/
+sdkconfig
+sdkconfig.old
+sdkconfig.ci
+dependencies.lock
+managed_components/
+
+# Native Desktop Host Test Artifacts
+firmware/tests/build/
+build_native/
+*.o
+*.obj
+*.so
+*.dylib
+*.a
+*.elf
+*.bin
+*.hex
+*.map
+*.dSYM/
+
+# ------------------------------------------------------------------------------
+# Code Coverage & Profiling
+# ------------------------------------------------------------------------------
+*.gcno
+*.gcda
+*.gcov
+*.info
+coverage/
+coverage_html/
+htmlcov/
+.coverage
+.coverage.*
+
+# ------------------------------------------------------------------------------
+# Python & Testing Caches
+# ------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.tox/
+.nox/
+venv/
+.venv/
+ENV/
+env/
+
+# ------------------------------------------------------------------------------
+# CopperPilot Internal Metadata & AI Tooling
+# ------------------------------------------------------------------------------
+.copperpilot/
+.copperpilot
+.copperpilot*
+
+# ------------------------------------------------------------------------------
+# Operating System, Media & Editor Files
+# ------------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+video/
+pcb/.history/

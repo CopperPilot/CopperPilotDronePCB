@@ -1,0 +1,17 @@
+======================================================================
+CopperPilot Drone PCB: Automated Acceptance Verification Suite
+======================================================================
+[PASS] T1 ERC: 0 errors, 0 warnings
+[FAIL] T2 DRC: 304 violations, 0 unconnected, 0 parity issues
+[FAIL] T3 Rules >= JLC: copper edge 0.25 < 0.30mm without DECISIONS.md waiver
+[PASS] T4 Rules not loosened: No design rules loosened vs review-baseline
+[PASS] T5 Severities not downgraded: No rule severities downgraded vs baseline
+[FAIL] T6 BOM completeness: 60 of 69 assembled parts incomplete: ['SW3 missing MPN', 'C14 missing MPN', 'C10 missing MPN']
+[FAIL] T7 Outputs: Missing gerbers or drill files (found 2 gbr, 2 drl)
+[FAIL] T8 Issues closed: issues.json not found
+[FAIL] T9 Evidence complete: issues.json not found
+[FAIL] T10 No unexplained changes: changes.json missing (run visual_diff.py)
+[PASS] T11 Repo hygiene: Repo hygiene clean: all paths relative, no tracked caches/locks
+----------------------------------------------------------------------
+OVERALL VERIFICATION RESULT: FAIL
+======================================================================

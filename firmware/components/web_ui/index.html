@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>CopperPilot Drone Controller</title>
+<style>
+/* CopperPilot Design System - Industrial Functionalism */
+/* Based on branding_guidelines.md - Version 1.1 */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
+
+:root,
+html[data-theme='dark'] {
+    --cp-bg-paper: #1a1a1a;
+    --cp-bg-surface: #1a1a1a;
+    --cp-bg-card: #292524;
+    --cp-bg-surface-muted: #292524;
+    --cp-bg-elevated: #292524;
+    --cp-bg-keycap: #222226;
+    --cp-text-ink: #f4f4f0;
+    --cp-text-mark: #fafaf9;
+    --cp-text-muted: #a8a29e;
+    --cp-accent-copper: #ea580c;
+    --cp-accent-copper-strong: #c2410c;
+    --cp-accent-label: #f97316;
+    --cp-border-paper: #44403c;
+    --cp-border-subtle: #44403c;
+    --cp-border-strong: #a8a29e;
+    --cp-border-keycap: #45454c;
+    --cp-header-border: #a8a29e;
+    --cp-grid-line: #44403c;
+    --cp-btn-secondary-bg: #f4f4f0;
+    --cp-btn-secondary-fg: #1a1a1a;
+    --cp-btn-secondary-hover-bg: #fafaf9;
+    --cp-segment-track: #44403c;
+    --cp-segment-active-bg: #f4f4f0;
+    --cp-segment-active-fg: #1a1a1a;
+    --cp-notice-bg: #292524;
+    --cp-notice-fg: #f4f4f0;
+    --cp-keycap-glow: 0 0 3.75rem 0.375rem rgba(234, 88, 12, 0.45);
+    --cp-shadow-raised: 6px 6px 12px rgba(0, 0, 0, 0.45), -6px -6px 12px rgba(255, 255, 255, 0.03);
+    --cp-shadow-inset: inset 3px 3px 6px rgba(0, 0, 0, 0.55), inset -3px -3px 6px rgba(255, 255, 255, 0.04);
+    --cp-card-hover-shadow: 0 16px 34px rgba(0, 0, 0, 0.45);
+    --cp-dot: #f4f4f0;
+    --cp-dot-grid: #6b6764;
+    color-scheme: dark;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    background-color: var(--cp-bg-paper);
+    color: var(--cp-text-ink);
+    font-family: 'JetBrains Mono', monospace;
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E"),
+        radial-gradient(var(--cp-dot-grid, #6b6764) 0.75px, transparent 0.75px);
+    background-size: 200px 200px, 16px 16px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Metal Header */
+header {
+    background: linear-gradient(135deg, #322e2c 0%, #292524 50%, #1e1b1a 100%);
+    box-shadow: inset 1px 1px 0px rgba(255,255,255,0.08), inset -1px -1px 0px rgba(0,0,0,0.5), 0 4px 6px rgba(0,0,0,0.4);
+    border-bottom: 1px solid var(--cp-border-paper);
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 5;
+}
+
+.title-group h1 {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--cp-accent-copper);
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+}
+
+.title-group p {
+    font-size: 10px;
+    color: var(--cp-text-muted);
+}
+
+.status-badges {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.chip-success {
+    background: linear-gradient(145deg, #86efac, #4ade80);
+    color: #000;
+    border: 1px solid #22c55e;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.chip-warning {
+    background: linear-gradient(145deg, #fcd34d, #fbbf24);
+    color: #000;
+    border: 1px solid #f59e0b;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.chip-error {
+    background: linear-gradient(145deg, #fca5a5, #f87171);
+    color: #000;
+    border: 1px solid #ef4444;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.chip-orange {
+    background: linear-gradient(180deg, #fb923c 0%, #ea580c 50%, #c2410c 50%, #ea580c 100%);
+    color: #000;
+    border: 1px solid #9a3412;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto 1fr;
+    gap: 10px;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.skeuo-card {
+    background: linear-gradient(145deg, #2a2725, #22201e);
+    border: 1px solid #44403c;
+    border-bottom: 2px solid #141414;
+    border-right: 2px solid #141414;
+    box-shadow: var(--cp-shadow-raised);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--cp-accent-copper);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid var(--cp-border-paper);
+    padding-bottom: 4px;
+}
+
+/* Telemetry Grid */
+.telemetry-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+.telem-val {
+    text-align: center;
+}
+
+.telem-num {
+    font-size: 18px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    color: #fafaf9;
+}
+
+.telem-label {
+    font-size: 9px;
+    color: var(--cp-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Artificial Horizon */
+#horizonCanvas {
+    width: 100%;
+    height: 80px;
+    border-radius: 6px;
+    background: #0d0d0f;
+    border: 1px solid var(--cp-border-paper);
+    box-shadow: var(--cp-shadow-inset);
+}
+
+/* Motor Bars */
+.motor-bars {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 64px;
+    gap: 8px;
+    padding: 0 10px;
+}
+
+.motor-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.motor-track {
+    width: 16px;
+    height: 48px;
+    background: #171514;
+    border: 1px solid var(--cp-border-paper);
+    box-shadow: var(--cp-shadow-inset);
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.motor-fill {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(180deg, #fb923c 0%, #ea580c 50%, #c2410c 100%);
+    box-shadow: 0 0 8px rgba(234, 88, 12, 0.4);
+    transition: height 0.05s ease;
+}
+
+.motor-label {
+    font-size: 9px;
+    color: var(--cp-text-muted);
+    margin-top: 4px;
+    font-weight: 700;
+}
+
+/* Joysticks Area */
+.joystick-zone {
+    grid-column: span 2;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    padding: 8px 0;
+}
+
+.joystick-container {
+    width: 140px;
+    height: 140px;
+    background: #171514;
+    border: 2px dashed var(--cp-border-paper);
+    box-shadow: var(--cp-shadow-inset);
+    border-radius: 50%;
+    position: relative;
+    touch-action: none;
+}
+
+.joystick-thumb {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(180deg, #fb923c 0%, #ea580c 50%, #c2410c 50%, #ea580c 100%);
+    border: 1px solid #9a3412;
+    border-top: 1px solid #fdba74;
+    border-radius: 50%;
+    position: absolute;
+    top: 46px;
+    left: 46px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    cursor: grab;
+}
+
+/* Actions Footer Toolbar */
+footer {
+    background: linear-gradient(135deg, #322e2c 0%, #292524 50%, #1e1b1a 100%);
+    box-shadow: inset 1px 1px 0px rgba(255,255,255,0.08), inset -1px -1px 0px rgba(0,0,0,0.5), 0 -4px 6px rgba(0,0,0,0.4);
+    border-top: 1px solid var(--cp-border-paper);
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.btn-skeuo-primary {
+    background: linear-gradient(180deg, #fb923c 0%, #ea580c 50%, #c2410c 50%, #ea580c 100%) !important;
+    color: #000000 !important;
+    border: 1px solid #9a3412 !important;
+    border-top: 1px solid #fdba74 !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.4);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    padding: 12px;
+    cursor: pointer;
+    flex: 1;
+    font-size: 13px;
+    transition: all 0.1s;
+}
+
+.btn-skeuo-primary:active {
+    background: #c2410c !important;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.4);
+    transform: translateY(1px);
+}
+
+.btn-skeuo-kill {
+    background: linear-gradient(180deg, #f87171 0%, #ef4444 50%, #b91c1c 50%, #ef4444 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid #7f1d1d !important;
+    border-top: 1px solid #fca5a5 !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    padding: 12px;
+    cursor: pointer;
+    flex: 1;
+    font-size: 13px;
+    transition: all 0.1s;
+}
+
+.btn-skeuo-kill:active {
+    background: #991b1b !important;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+    transform: translateY(1px);
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="title-group">
+    <h1>CopperPilot Drone</h1>
+    <p>ESP32-S3 SoftAP 500Hz Avionics</p>
+  </div>
+  <div class="status-badges">
+    <div id="badgeConn" class="chip-error">Disconnected</div>
+    <div id="badgeArm" class="chip-warning">Disarmed</div>
+  </div>
+</header>
+
+<div class="dashboard">
+  <!-- Attitude Indicator -->
+  <div class="skeuo-card">
+    <div class="card-title">Artificial Horizon (AHRS)</div>
+    <canvas id="horizonCanvas" width="200" height="80"></canvas>
+  </div>
+
+  <!-- Battery & Power -->
+  <div class="skeuo-card">
+    <div class="card-title">1S LiPo Battery</div>
+    <div class="telemetry-row">
+      <div class="telem-val">
+        <div id="txtVolts" class="telem-num" style="color: #22c55e;">4.18V</div>
+        <div class="telem-label">Voltage</div>
+      </div>
+      <div class="telem-val">
+        <div id="txtPct" class="telem-num">95%</div>
+        <div class="telem-label">Remaining</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Motor PWM Duties -->
+  <div class="skeuo-card" style="grid-column: span 2;">
+    <div class="card-title">Quad-X 20kHz Ultrasonic PWM Actuation</div>
+    <div class="motor-bars">
+      <div class="motor-col">
+        <div class="motor-track"><div id="barM1" class="motor-fill" style="height: 0%;"></div></div>
+        <div class="motor-label">M1 (RL)</div>
+      </div>
+      <div class="motor-col">
+        <div class="motor-track"><div id="barM2" class="motor-fill" style="height: 0%;"></div></div>
+        <div class="motor-label">M2 (FL)</div>
+      </div>
+      <div class="motor-col">
+        <div class="motor-track"><div id="barM3" class="motor-fill" style="height: 0%;"></div></div>
+        <div class="motor-label">M3 (FR)</div>
+      </div>
+      <div class="motor-col">
+        <div class="motor-track"><div id="barM4" class="motor-fill" style="height: 0%;"></div></div>
+        <div class="motor-label">M4 (RR)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dual Virtual Joysticks -->
+  <div class="joystick-zone">
+    <!-- Left Joystick: Throttle & Yaw -->
+    <div id="joyLeft" class="joystick-container">
+      <div id="thumbLeft" class="joystick-thumb"></div>
+    </div>
+    <!-- Right Joystick: Pitch & Roll -->
+    <div id="joyRight" class="joystick-container">
+      <div id="thumbRight" class="joystick-thumb"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <button id="btnArm" class="btn-skeuo-primary">Arm Drone</button>
+  <button id="btnKill" class="btn-skeuo-kill">Emergency Stop</button>
+</footer>
+
+<script>
+  let ws = null;
+  let isArmed = false;
+  let throttle = 0.0;
+  let yaw = 0.0;
+  let pitch = 0.0;
+  let roll = 0.0;
+
+  const badgeConn = document.getElementById('badgeConn');
+  const badgeArm = document.getElementById('badgeArm');
+  const btnArm = document.getElementById('btnArm');
+  const btnKill = document.getElementById('btnKill');
+  const txtVolts = document.getElementById('txtVolts');
+  const txtPct = document.getElementById('txtPct');
+  const barM1 = document.getElementById('barM1');
+  const barM2 = document.getElementById('barM2');
+  const barM3 = document.getElementById('barM3');
+  const barM4 = document.getElementById('barM4');
+  const canvas = document.getElementById('horizonCanvas');
+  const ctx = canvas.getContext('2d');
+
+  function initWebSocket() {
+    const wsUri = "ws://" + (window.location.hostname || "192.168.4.1") + "/ws";
+    ws = new WebSocket(wsUri);
+    ws.onopen = () => {
+      badgeConn.textContent = "Connected";
+      badgeConn.className = "chip-success";
+    };
+    ws.onclose = () => {
+      badgeConn.textContent = "Disconnected";
+      badgeConn.className = "chip-error";
+      setTimeout(initWebSocket, 1000);
+    };
+    ws.onmessage = (evt) => {
+      try {
+        const d = JSON.parse(evt.data);
+        if (d.vbatt) {
+          const v = (d.vbatt / 1000.0).toFixed(2);
+          txtVolts.textContent = v + "V";
+          txtVolts.style.color = d.vbatt > 3700 ? "#22c55e" : (d.vbatt > 3400 ? "#f59e0b" : "#ef4444");
+          const pct = Math.max(0, Math.min(100, Math.round((d.vbatt - 3300) / 9.0)));
+          txtPct.textContent = pct + "%";
+        }
+        if (d.m1 !== undefined) barM1.style.height = (d.m1 / 10.0) + "%";
+        if (d.m2 !== undefined) barM2.style.height = (d.m2 / 10.0) + "%";
+        if (d.m3 !== undefined) barM3.style.height = (d.m3 / 10.0) + "%";
+        if (d.m4 !== undefined) barM4.style.height = (d.m4 / 10.0) + "%";
+        if (d.armed !== undefined) {
+          isArmed = d.armed;
+          badgeArm.textContent = isArmed ? "Armed" : "Disarmed";
+          badgeArm.className = isArmed ? "chip-orange" : "chip-warning";
+          btnArm.textContent = isArmed ? "Disarm" : "Arm Drone";
+        }
+        drawHorizon(d.roll || 0, d.pitch || 0);
+      } catch (e) {}
+    };
+  }
+
+  function drawHorizon(rollDeg, pitchDeg) {
+    const w = canvas.width;
+    const h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+    ctx.save();
+    ctx.translate(w / 2, h / 2);
+    ctx.rotate(rollDeg * Math.PI / 180.0);
+    const pitchOffset = Math.max(-35, Math.min(35, pitchDeg * 1.5));
+    // Sky
+    ctx.fillStyle = "#1e293b";
+    ctx.fillRect(-w, -h - pitchOffset, w * 2, h + pitchOffset);
+    // Ground
+    ctx.fillStyle = "#451a03";
+    ctx.fillRect(-w, -pitchOffset, w * 2, h);
+    // Horizon line
+    ctx.strokeStyle = "#ea580c";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(-w, -pitchOffset);
+    ctx.lineTo(w, -pitchOffset);
+    ctx.stroke();
+    ctx.restore();
+    // Center reticle
+    ctx.strokeStyle = "#fb923c";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(w/2 - 20, h/2); ctx.lineTo(w/2 - 6, h/2);
+    ctx.moveTo(w/2 + 6, h/2); ctx.lineTo(w/2 + 20, h/2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(w/2, h/2, 3, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  /* Virtual Joystick Handlers */
+  function setupJoystick(containerId, thumbId, isSpringlessY, onMove) {
+    const container = document.getElementById(containerId);
+    const thumb = document.getElementById(thumbId);
+    const radius = 45;
+    let active = false;
+
+    function handleStart(e) {
+      active = true;
+      handleMove(e);
+    }
+    function handleMove(e) {
+      if (!active) return;
+      const rect = container.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      let dx = clientX - (rect.left + rect.width / 2);
+      let dy = clientY - (rect.top + rect.height / 2);
+      const dist = Math.hypot(dx, dy);
+      if (dist > radius) {
+        dx = (dx / dist) * radius;
+        dy = (dy / dist) * radius;
+      }
+      thumb.style.transform = `translate(${dx}px, ${dy}px)`;
+      const normX = dx / radius;
+      const normY = -dy / radius;
+      onMove(normX, normY);
+    }
+    function handleEnd() {
+      if (!active) return;
+      active = false;
+      if (!isSpringlessY) {
+        thumb.style.transform = `translate(0px, 0px)`;
+        onMove(0, 0);
+      } else {
+        // Left stick auto-centers yaw (X), but preserves throttle (Y)
+        const currentTransform = thumb.style.transform;
+        const match = currentTransform.match(/translate\(([^p]+)px,\s*([^p]+)px\)/);
+        const curY = match ? parseFloat(match[2]) : 0;
+        thumb.style.transform = `translate(0px, ${curY}px)`;
+        onMove(0, -curY / radius);
+      }
+    }
+
+    container.addEventListener('pointerdown', handleStart);
+    window.addEventListener('pointermove', handleMove);
+    window.addEventListener('pointerup', handleEnd);
+  }
+
+  setupJoystick('joyLeft', 'thumbLeft', true, (x, y) => {
+    yaw = x * 180.0; /* Yaw rate: -180 to +180 deg/s */
+    throttle = Math.max(0.0, Math.min(1.0, (y + 1.0) / 2.0)); /* Throttle: 0.0 to 1.0 */
+  });
+
+  setupJoystick('joyRight', 'thumbRight', false, (x, y) => {
+    roll = x * 30.0;  /* Roll: -30 to +30 deg */
+    pitch = y * 30.0; /* Pitch: -30 to +30 deg */
+  });
+
+  /* Button Actions */
+  btnArm.addEventListener('click', () => {
+    if (!ws || ws.readyState !== WebSocket.OPEN) return;
+    isArmed = !isArmed;
+    sendCommand();
+  });
+
+  btnKill.addEventListener('click', () => {
+    isArmed = false;
+    throttle = 0.0;
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify({ emergency: true, arm: false }));
+    }
+  });
+
+  function sendCommand() {
+    if (!ws || ws.readyState !== WebSocket.OPEN) return;
+    ws.send(JSON.stringify({
+      t: throttle,
+      r: roll,
+      p: pitch,
+      y: yaw,
+      arm: isArmed
+    }));
+  }
+
+  // 50 Hz control loop
+  setInterval(sendCommand, 20);
+  initWebSocket();
+  drawHorizon(0, 0);
+</script>
+</body>
+</html>

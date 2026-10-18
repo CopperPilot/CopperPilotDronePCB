@@ -1,0 +1,343 @@
+(footprint "SOIC127P600X175-9N"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "8ESOP")
+	(tags "Integrated Circuit")
+	(property "Reference" "IC1"
+		(at 0 0 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "cfccc535-e99d-4e2d-aeca-292ac48d8d4e")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(property "Value" "TP4056"
+		(at 0 0 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "b51dbd16-541e-408e-9df8-979e06017f2b")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "7b35d221-4321-44a0-9c09-d5a5226b3853")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" "PMIC - Battery Management ESOP-8 RoHS"
+		(at 140.3617 71.3753 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "f7717d27-cfd1-4ef0-b1d3-a67d947af19e")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Arrow Part Number" ""
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "dc097f99-3ab4-4fd7-8bda-58e321b2df79")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Arrow Price/Stock" ""
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c5895bd7-3a40-4fb1-b6db-ed8d28565a13")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Height" "1.75"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "50c90afb-24cb-46c1-b1e4-05439e1a5181")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer_Name" "Nanjing Extension Microelectronics"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "ca1a59c2-f01c-480d-8843-427469a263cc")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer_Part_Number" "TP4056-42-ESOP8"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "2df0301a-e007-45fd-b1dd-6a37172656be")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Mouser Part Number" ""
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "16aec056-14b0-4458-909b-58a1a5775810")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Mouser Price/Stock" ""
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "2cb67a18-5802-40c7-ae68-2564c341b930")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Mouser Testing Part Number" ""
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "b75c42ec-1ca1-4a55-8ae6-65b8e66f1e31")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Mouser Testing Price/Stock" ""
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c7227d3c-c7ce-4a2a-af7e-9b15d953819e")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(sheetfile "ESP32 drone.kicad_sch")
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -3.475 -2.605)
+		(end -1.95 -2.605)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "f392ca53-e83a-4901-ae8d-fd8e4f272687")
+	)
+	(fp_line
+		(start -3.725 -2.8)
+		(end 3.725 -2.8)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "52cb2c5a-cf26-42ec-a768-f9e6d2e4eb06")
+	)
+	(fp_line
+		(start -3.725 2.8)
+		(end -3.725 -2.8)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "58f0d533-bace-4fb7-82bf-3a24fbf89a1b")
+	)
+	(fp_line
+		(start 3.725 -2.8)
+		(end 3.725 2.8)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "a4861a79-b7c8-41b0-8338-e46cf3526d20")
+	)
+	(fp_line
+		(start 3.725 2.8)
+		(end -3.725 2.8)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "8ce96806-2045-4ca1-b578-c5e95905d49d")
+	)
+	(fp_line
+		(start -1.95 -2.45)
+		(end 1.95 -2.45)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "c630334a-6302-4989-8c4a-c81eba1626e2")
+	)
+	(fp_line
+		(start -1.95 -1.18)
+		(end -0.68 -2.45)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "5c7d9c8c-4484-4479-b884-4c3c84a97ef1")
+	)
+	(fp_line
+		(start -1.95 2.45)
+		(end -1.95 -2.45)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "869ab60c-596a-4886-bf72-7ba034f36a55")
+	)
+	(fp_line
+		(start 1.95 -2.45)
+		(end 1.95 2.45)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "cf49213f-c3fe-4c34-98dd-5daaffc521c4")
+	)
+	(fp_line
+		(start 1.95 2.45)
+		(end -1.95 2.45)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "47a53252-6294-40bb-b2fa-00efbe0b9464")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "e8379f80-caee-46fa-b1b7-b254aa6601d2")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at -2.712 -1.905 90)
+		(size 0.7 1.525)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "3b5a942a-f137-4bfd-b5a7-32a7e4718b32")
+	)
+	(pad "2" smd rect
+		(at -2.712 -0.635 90)
+		(size 0.7 1.525)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "0dd880e3-424a-438a-8190-c52e017938d7")
+	)
+	(pad "3" smd rect
+		(at -2.712 0.635 90)
+		(size 0.7 1.525)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "6227af39-e4d0-4b46-983f-32e6a1131843")
+	)
+	(pad "4" smd rect
+		(at -2.712 1.905 90)
+		(size 0.7 1.525)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "a5186a45-ca04-42e6-bdad-5332348eeb70")
+	)
+	(pad "5" smd rect
+		(at 2.712 1.905 90)
+		(size 0.7 1.525)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "b5c60c31-d678-4dd4-90c0-8f9a5e01da97")
+	)
+	(pad "6" smd rect
+		(at 2.712 0.635 90)
+		(size 0.7 1.525)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "ba386748-b777-49c7-b6cc-940d9c457b4d")
+	)
+	(pad "7" smd rect
+		(at 2.712 -0.635 90)
+		(size 0.7 1.525)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "2a1ef3d1-d6ba-40c5-83b2-8382f6fc4dd4")
+	)
+	(pad "8" smd rect
+		(at 2.712 -1.905 90)
+		(size 0.7 1.525)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "bebd8fbb-0886-48c4-939d-e02aa5ab61c0")
+	)
+	(pad "9" smd rect
+		(at 0 0)
+		(size 2.513 3.402)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "cf2f936c-106a-4d5c-bc1b-5eaf3e8609ea")
+	)
+	(embedded_fonts no)
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/HSOP-8-1EP_3.9x4.9mm_P1.27mm_EP2.41x3.1mm.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

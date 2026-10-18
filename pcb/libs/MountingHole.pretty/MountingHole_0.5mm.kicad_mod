@@ -1,0 +1,14 @@
+(footprint "MountingHole_0.5mm"
+	(version 20240108)
+	(generator "kicad-footprint-generator")
+	(layer "F.Cu")
+	(descr "Mounting Hole 0.5mm, no annular, NPTH")
+	(tags "mounting hole 0.5mm npth")
+	(attr board_only exclude_from_pos_files exclude_from_bom)
+	(pad "" np_thru_hole circle
+		(at 0 0)
+		(size 0.5 0.5)
+		(drill 0.5)
+		(layers "*.Mask")
+	)
+)

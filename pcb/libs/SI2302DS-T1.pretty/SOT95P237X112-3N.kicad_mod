@@ -1,0 +1,348 @@
+(footprint "SOT95P237X112-3N"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "SOT-23 (TO-236)")
+	(tags "MOSFET (N-Channel)")
+	(property "Reference" "T1"
+		(at 0 0 180)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "843d91d7-836c-4373-b913-6558e927e4c8")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(property "Value" "SI2302DS-T1"
+		(at 0 0 180)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "7fe1ce08-9dd0-4b26-b16b-53df606b76a8")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e3d284c9-8c5c-4db1-a743-37e1ab73869d")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" "ER -  Transistor, MOSFET, N Ch"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a8e9414b-51ff-40bf-8651-efe94739c86e")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Datasheet_1" "https://4donline.ihs.com/images/VipMasterIC/IC/SILX/SILXS08192/SILXS08192-1.pdf?hkey=EF798316E3902B6ED9A73243A3159BB0"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "5d50e4e4-c337-488a-8423-d3c9f3112012")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint_1" "SOT95P237X112-3N"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e9ef0787-a9b2-4fcb-9385-f529a9bb0c01")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Height" "1.12"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "895c9a64-c129-4a5b-86e2-dc061da4e6db")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer_Name" "Vishay"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "be408bc4-e4a0-4545-a3d3-d43837017580")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer_Part_Number" "SI2302DS-T1"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "08b8d284-49ef-4c34-aa67-b4de17188e30")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Mouser Part Number" "781-SI2302DS"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "48a57449-6376-4bcd-82c6-47f5fb5eb221")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Vishay-Siliconix/SI2302DS-T1?qs=Vtbibb3IBkf5ybaLingfiw%3D%3D"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "79bdc9e8-9447-4715-8867-76f72c83b45e")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Reference_1" "Q"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a65d4481-b254-4909-aa6f-6f08a1210f24")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value_1" "SI2302DS-T1"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "9b852267-9fb2-4bb1-86c3-3ff366b86ae2")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(sheetfile "ESP32 drone.kicad_sch")
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -1.7 -1.5)
+		(end -0.4 -1.5)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "7d316cff-41aa-4530-9580-24480cbb1ce2")
+	)
+	(fp_line
+		(start -0.05 -1.46)
+		(end 0.05 -1.46)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "debb0344-29b5-4dd5-b766-c880a721d791")
+	)
+	(fp_line
+		(start -0.05 1.46)
+		(end -0.05 -1.46)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "2ecb9679-5029-4f8d-a8bd-32a0c5d7b3ac")
+	)
+	(fp_line
+		(start 0.05 -1.46)
+		(end 0.05 1.46)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "54adc097-88fc-4b7f-9c93-323f2277401f")
+	)
+	(fp_line
+		(start 0.05 1.46)
+		(end -0.05 1.46)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "b480cdb8-ee5c-42ac-9757-c8d4aa09ab9b")
+	)
+	(fp_line
+		(start -1.95 -1.77)
+		(end 1.95 -1.77)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "9409ab17-6d7f-4487-95c2-8a09d94fe8c5")
+	)
+	(fp_line
+		(start -1.95 1.77)
+		(end -1.95 -1.77)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "db803a89-69a8-44ad-aeb4-9532a4d8be4a")
+	)
+	(fp_line
+		(start 1.95 -1.77)
+		(end 1.95 1.77)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "d7a9b5be-dffa-4897-a1da-37367acc1347")
+	)
+	(fp_line
+		(start 1.95 1.77)
+		(end -1.95 1.77)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "888d5531-19ed-4d47-aceb-5132493fecd4")
+	)
+	(fp_line
+		(start -0.65 -1.46)
+		(end 0.65 -1.46)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "8bcb3b1c-5e8e-4337-9572-dd1294a281d3")
+	)
+	(fp_line
+		(start -0.65 -0.51)
+		(end 0.3 -1.46)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "08f3924d-c07e-4dbb-b93c-b8980c885c11")
+	)
+	(fp_line
+		(start -0.65 1.46)
+		(end -0.65 -1.46)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "293a46de-632f-46c4-a1b2-81d2249c7f3c")
+	)
+	(fp_line
+		(start 0.65 -1.46)
+		(end 0.65 1.46)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "69a7bf8d-5f64-4bd7-adc3-356741a72e66")
+	)
+	(fp_line
+		(start 0.65 1.46)
+		(end -0.65 1.46)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "ec66367e-8d60-456d-8a5b-83b3315e8a42")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 180)
+		(layer "F.Fab")
+		(uuid "dc655787-843e-452b-9b13-71935e34ca2b")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at -1.05 -0.95 90)
+		(size 0.6 1.3)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "2d4c9b0e-bd50-4ab5-97b8-5c5ef6704add")
+	)
+	(pad "2" smd rect
+		(at -1.05 0.95 90)
+		(size 0.6 1.3)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "774bb3d6-1bd6-455a-8a66-b3b9621bcf22")
+	)
+	(pad "3" smd rect
+		(at 1.05 0 90)
+		(size 0.6 1.3)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "df64f523-2385-4cc4-9e19-2beae250644d")
+	)
+	(embedded_fonts no)
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/SOT-23.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

@@ -356,6 +356,370 @@ def export_bom():
     write_bom_xlsx_workbook(bom_grouped_rows, bom_xlsx_path)
 
     print(f"BOM exported to {bom_path} and {bom_xlsx_path} ({len(individual_items)} parts in {len(bom_grouped_rows)} groups)")
+    export_lioncircuits_boms(individual_items)
+
+
+LIONCIRCUITS_HEADERS = [
+    "Item Number",
+    "Designator",
+    "Unit Quantity",
+    "Description",
+    "Manufacturer Part Number",
+    "Footprint",
+    "Value",
+    "Assembly Instructions",
+]
+
+# Surgical LionCircuits MPN & metadata mapping keyed by (Value, clean_footprint, LCSC)
+LIONCIRCUITS_BOM_MAP = {
+    ("10uF", "C_0603_1608Metric", "C85713"): {
+        "orig_mpn": "CL10A106MP8NNNC",
+        "lc_mpn": "CL10A106MP8NNNC",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "MLCC Capacitor 10uF 10V X5R +/-20% 0603 (1608 Metric)",
+        "notes": "Top SMD; Bulk rail decoupling; Samsung CL10A106MP8NNNC (LCSC: C85713)",
+    },
+    ("0.1uf", "C_0603_1608Metric", "C14663"): {
+        "orig_mpn": "CL10B104KB8NNNC",
+        "lc_mpn": "CC0603KRX7R9BB104",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "MLCC Capacitor 0.1uF (100nF) 50V X7R +/-10% 0603 (1608 Metric)",
+        "notes": "Top SMD; High-frequency IC bypass; Yageo CC0603KRX7R9BB104; Alt MPN: GRM188R71H104KA93D / CL10B104KB8NNNC (LCSC: C14663)",
+    },
+    ("1uf", "C_0603_1608Metric", "C15849"): {
+        "orig_mpn": "CL10B105KO8NNNC",
+        "lc_mpn": "CC0603KRX7R7BB105",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "MLCC Capacitor 1uF 16V X7R +/-10% 0603 (1608 Metric)",
+        "notes": "Top SMD; MCU EN RC delay & VDD bypass; Yageo CC0603KRX7R7BB105; Alt MPN: GRM188R71C105KA12D / CC0603KRX7R8BB105 / CL10B105KO8NNNC (LCSC: C15849)",
+    },
+    ("2.2nF", "C_0603_1608Metric", "C1604"): {
+        "orig_mpn": "CC0603KRX7R9BB222",
+        "lc_mpn": "CC0603KRX7R9BB222",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "MLCC Capacitor 2.2nF (2200pF) 50V X7R +/-10% 0603 (1608 Metric)",
+        "notes": "Top SMD; MPU-6050 CPOUT charge pump capacitor; Yageo CC0603KRX7R9BB222 (LCSC: C1604)",
+    },
+    ("22nF", "C_0603_1608Metric", "C302021"): {
+        "orig_mpn": "CC0603KRX7R9BB223",
+        "lc_mpn": "CC0603KRX7R9BB223",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "MLCC Capacitor 22nF (0.022uF) 50V X7R +/-10% 0603 (1608 Metric)",
+        "notes": "Top SMD; Motor PWM RC snubber capacitor; Yageo CC0603KRX7R9BB223 (LCSC: C302021)",
+    },
+    ("SS34", "D_SMA", "C8678"): {
+        "orig_mpn": "SS34",
+        "lc_mpn": "SS34",
+        "lc_fp": "DO-214AC (SMA)",
+        "desc": "Schottky Barrier Rectifier Diode 40V 3A DO-214AC (SMA)",
+        "notes": "Top SMD; Observe cathode bar polarity; Onsemi/Vishay SS34 (LCSC: C8678)",
+    },
+    ("1N5819WS", "D_SOD-323", "C191023"): {
+        "orig_mpn": "1N5819WS",
+        "lc_mpn": "1N5819HW-7-F",
+        "lc_fp": "SOD-323",
+        "desc": "Schottky Barrier Diode 40V 1A SOD-323",
+        "notes": "Top SMD; Observe cathode band; Motor flyback clamp; Alt MPN: 1N5819WS (LCSC: C191023)",
+    },
+    ("USBLC6-2SC6", "SOT-23-6", "C7519"): {
+        "orig_mpn": "USBLC6-2SC6",
+        "lc_mpn": "USBLC6-2SC6",
+        "lc_fp": "SOT-23-6",
+        "desc": "TVS Diode Array USB 2.0 ESD Protection Dual Channel SOT-23-6",
+        "notes": "Bottom SMD; Observe Pin 1 dot; STMicroelectronics USBLC6-2SC6 (LCSC: C7519)",
+    },
+    ("TP4056", "SOIC127P600X175-9N", "C16581"): {
+        "orig_mpn": "TP4056-42-ESOP8",
+        "lc_mpn": "MAX1811ESA+",
+        "lc_fp": "ESOP-8 (SOIC-8-EP)",
+        "desc": "1S Li-Ion/Li-Po Linear Battery Charger IC 4.2V SOIC-8 / ESOP-8",
+        "notes": "Top SMD; Element14 In-Stock SOIC-8 Charger MPN: MAX1811ESA+ / MAX1811ESA+T; CAUTION: PCB footprint/pinout is wired for TP4056-42-ESOP8 / TP4056 (LCSC: C16581) / DIO5158 (Pad 9 EP=GND)—populate TP4056 via assisted/consigned sourcing or DNP (do not solder MAX1811ESA+ onto unedited TP4056 pads)",
+    },
+    ("USB_C_Receptacle_USB2.0", "USB_C_Receptacle_HRO_TYPE-C-31-M-12", "C165948"): {
+        "orig_mpn": "TYPE-C-31-M-12",
+        "lc_mpn": "USB4105-GF-A",
+        "lc_fp": "USB-C-16P-SMD",
+        "desc": "USB Type-C 2.0 Receptacle Connector 16-Pin Horizontal Top-Mount SMD",
+        "notes": "Top SMD; GCT USB4105-GF-A 16-pin USB-C 2.0 receptacle; Alt MPN: UJ20-C-H-G-SMT-4-P16-TR / TYPE-C-31-M-12 (LCSC: C165948)",
+    },
+    ("Conn_01x02_Female", "JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal", "C189893"): {
+        "orig_mpn": "SM02B-GHS-TB(LF)(SN)",
+        "lc_mpn": "SM02B-GHS-TB(LF)(SN)",
+        "lc_fp": "JST-GH-2P-SMD",
+        "desc": "Connector Header JST-GH 2-Position 1.25mm Pitch Horizontal SMD",
+        "notes": "Top SMD; 4x Motor output connectors; JST SM02B-GHS-TB(LF)(SN) (LCSC: C189893)",
+    },
+    ("B2B-PH-SM4-TB(LF)(SN)", "CONN-SMD_B2B-PH-SM4-TB-LF-SN", "C160352"): {
+        "orig_mpn": "B2B-PH-SM4-TB(LF)(SN)",
+        "lc_mpn": "B2B-PH-SM4-TB(LF)(SN)",
+        "lc_fp": "JST-PH-2P-SMD",
+        "desc": "Connector Header JST-PH 2-Position 2.00mm Pitch Vertical Top-Entry SMD",
+        "notes": "Top SMD; 1S Li-Po battery input connector; JST B2B-PH-SM4-TB(LF)(SN) (LCSC: C160352)",
+    },
+    ("POW_LED", "LED_0603_1608Metric", "C2288"): {
+        "orig_mpn": "KT-0603B",
+        "lc_mpn": "LTST-C190TBKT",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "LED Blue 470nm Indication 0603 (1608 Metric) SMD",
+        "notes": "Top SMD; 3.3V power indicator LED; Observe cathode mark; Alt MPN: KT-0603B (LCSC: C2288)",
+    },
+    ("CHG", "LED_0603_1608Metric", "C2286"): {
+        "orig_mpn": "19-217/GHC-YR1S2/3T",
+        "lc_mpn": "KPT-1608CGCK",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "LED Green 570nm Indication 0603 (1608 Metric) SMD",
+        "notes": "Top SMD; Charger CHG indicator LED; Observe cathode mark; Kingbright KPT-1608CGCK; Alt MPN: LTST-C190KGKT / LTST-C190GKT / 19-217/GHC-YR1S2/3T (LCSC: C2286)",
+    },
+    ("STDBY", "LED_0603_1608Metric", "C2289"): {
+        "orig_mpn": "KT-0603YG",
+        "lc_mpn": "LTST-C190KGKT",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "LED Yellow-Green 571nm Indication 0603 (1608 Metric) SMD",
+        "notes": "Top SMD; Charger STDBY indicator LED; Observe cathode mark; Alt MPN: KT-0603YG (LCSC: C2289)",
+    },
+    ("470R", "R_0603_1608Metric", "C23179"): {
+        "orig_mpn": "0603WAF4700T5E",
+        "lc_mpn": "RC0603FR-07470RL",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "Thick Film Chip Resistor 470 Ohm 1% 0.1W (1/10W) 0603 (1608 Metric)",
+        "notes": "Top SMD; LED1 current limiting resistor; Alt MPN: 0603WAF4700T5E (LCSC: C23179)",
+    },
+    ("100k", "R_0603_1608Metric", "C25803"): {
+        "orig_mpn": "0603WAF1003T5E",
+        "lc_mpn": "RC0603FR-07100KL",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "Thick Film Chip Resistor 100 kOhm 1% 0.1W (1/10W) 0603 (1608 Metric)",
+        "notes": "Top SMD; Power path & VBAT ADC divider; Alt MPN: 0603WAF1003T5E (LCSC: C25803)",
+    },
+    ("1.2k", "R_0603_1608Metric", "C22765"): {
+        "orig_mpn": "0603WAF1201T5E",
+        "lc_mpn": "RC0603FR-071K2L",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "Thick Film Chip Resistor 1.2 kOhm 1% 0.1W (1/10W) 0603 (1608 Metric)",
+        "notes": "Top SMD; Charger status LED resistors; Alt MPN: 0603WAF1201T5E (LCSC: C22765)",
+    },
+    ("10k", "R_0603_1608Metric", "C25804"): {
+        "orig_mpn": "0603WAF1002T5E",
+        "lc_mpn": "RC0603FR-0710KL",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "Thick Film Chip Resistor 10 kOhm 1% 0.1W (1/10W) 0603 (1608 Metric)",
+        "notes": "Top SMD; EN/IO0 pull-ups & MOSFET gate pulldowns; Alt MPN: 0603WAF1002T5E (LCSC: C25804)",
+    },
+    ("4.7k", "R_0603_1608Metric", "C23162"): {
+        "orig_mpn": "0603WAF4701T5E",
+        "lc_mpn": "RC0603FR-074K7L",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "Thick Film Chip Resistor 4.7 kOhm 1% 0.1W (1/10W) 0603 (1608 Metric)",
+        "notes": "Top SMD; I2C pull-ups & MPU-6050 AD0 pulldown; Alt MPN: 0603WAF4701T5E (LCSC: C23162)",
+    },
+    ("22R", "R_0603_1608Metric", "C23345"): {
+        "orig_mpn": "0603WAF220JT5E",
+        "lc_mpn": "RC0603FR-0722RL",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "Thick Film Chip Resistor 22 Ohm 1% 0.1W (1/10W) 0603 (1608 Metric)",
+        "notes": "Top & Bottom SMD (R29 on Bottom); USB D+/D- series & RC snubber damping; Alt MPN: 0603WAF220JT5E (LCSC: C23345)",
+    },
+    ("5.1k", "R_0603_1608Metric", "C23186"): {
+        "orig_mpn": "0603WAF5101T5E",
+        "lc_mpn": "RC0603FR-075K1L",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "Thick Film Chip Resistor 5.1 kOhm 1% 0.1W (1/10W) 0603 (1608 Metric)",
+        "notes": "Top SMD; USB-C CC1/CC2 Rd 5.1k pulldowns; Alt MPN: 0603WAF5101T5E (LCSC: C23186)",
+    },
+    ("3.3k", "R_0603_1608Metric", "C22978"): {
+        "orig_mpn": "0603WAF3301T5E",
+        "lc_mpn": "RC0603FR-073K3L",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "Thick Film Chip Resistor 3.3 kOhm 1% 0.1W (1/10W) 0603 (1608 Metric)",
+        "notes": "Top SMD; TP4056 PROG current setting resistor (364mA); Alt MPN: 0603WAF3301T5E (LCSC: C22978)",
+    },
+    ("PCM12SMTR", "slide switch spdt", "C221841"): {
+        "orig_mpn": "PCM12SMTR",
+        "lc_mpn": "PCM12SMTR",
+        "lc_fp": "SMD-SW-PCM12SMTR",
+        "desc": "Slide Switch SPDT Right-Angle Ultraminiature Surface Mount",
+        "notes": "Top SMD; System power slide switch; C&K PCM12SMTR (LCSC: C221841)",
+    },
+    ("TS-1187A", "SW_Push_1P1T_XKB_TS-1187A", "C318889"): {
+        "orig_mpn": "TS-1187A-C-C-B",
+        "lc_mpn": "PTS526SM15SMTR2LFS",
+        "lc_fp": "SMD-SW-5.1x5.1mm",
+        "desc": "Tactile Switch SPST-NO Top Actuated 5.2x5.2x1.5mm 4-SMD Gull Wing",
+        "notes": "Top SMD; Reset (EN) & Boot (IO0) buttons; C&K PTS526SM15SMTR2LFS; Alt MPN: 434121025816 / EVQ-P0E07K / SKQGAFE010 / TS-1187A-C-C-B (LCSC: C318889)",
+    },
+    ("SI2302DS-T1", "SOT95P237X112-3N", "C351401"): {
+        "orig_mpn": "SI2302DS-T1",
+        "lc_mpn": "SI2302CDS-T1-GE3",
+        "lc_fp": "SOT-23-3",
+        "desc": "MOSFET N-Channel 20V 2.8A Logic-Level Low-Side Motor Switch SOT-23-3",
+        "notes": "Top SMD; 4x Motor PWM low-side switches; Vishay SI2302CDS-T1-GE3 / SI2302DS-T1-GE3 (LCSC: C351401)",
+    },
+    ("AO3401", "SOT-23", "C15127"): {
+        "orig_mpn": "AO3401A",
+        "lc_mpn": "AO3401A",
+        "lc_fp": "SOT-23-3",
+        "desc": "MOSFET P-Channel -30V -4A Low RDS(on) Power-Path Switch SOT-23-3",
+        "notes": "Top SMD; Automatic battery/USB power-path ideal diode; Alpha & Omega AO3401A (LCSC: C15127)",
+    },
+    ("AP2112K-3.3TRG1", "SOT-23-5", "C51118"): {
+        "orig_mpn": "AP2112K-3.3TRG1",
+        "lc_mpn": "AP2112K-3.3TRG1",
+        "lc_fp": "SOT-23-5",
+        "desc": "LDO Linear Voltage Regulator 3.3V Fixed 600mA Low Noise SOT-23-5",
+        "notes": "Top SMD; System 3.3V regulator; Diodes Inc AP2112K-3.3TRG1 (LCSC: C51118)",
+    },
+    ("ESP32-S3-WROOM-1-N8R8", "ESP32-S3-WROOM-1", "C2913201"): {
+        "orig_mpn": "ESP32-S3-WROOM-1-N8R8",
+        "lc_mpn": "ESP32-S3-WROOM-1-N8R8",
+        "lc_fp": "SMD-41 (18x25.5mm)",
+        "desc": "RF Wi-Fi 802.11b/g/n + Bluetooth LE 5.0 MCU Module ESP32-S3 8MB Flash 8MB PSRAM SMD-41",
+        "notes": "Top SMD; Keep antenna cantilevered over board cutout; Espressif ESP32-S3-WROOM-1-N8R8 (LCSC: C2913201)",
+    },
+    ("MPU-6050", "MPU6050", "C24112"): {
+        "orig_mpn": "MPU-6050",
+        "lc_mpn": "ICM-20789",
+        "lc_fp": "QFN-24 (4x4mm)",
+        "desc": "MEMS IMU 6-Axis Gyroscope + Accelerometer I2C/SPI 24-Pin 4x4mm (TDK InvenSense)",
+        "notes": "Top SMD; Element14 In-Stock 24-Pin 4x4mm TDK IMU MPN: ICM-20789 (alt ICM-42670-P); Note: PCB ties Pin 8 (VLOGIC/VDDIO) to +3V3 (ICM-20789 pressure sensor VDDIO max 1.98V)—populate 3.3V-rated MPU-6050 / MPU-6000 (LCSC: C24112) / ICM-20689 via assisted/consigned sourcing or DNP",
+    },
+}
+
+
+def write_lioncircuits_xlsx(rows, out_path):
+    if openpyxl:
+        wb = openpyxl.Workbook()
+        ws = wb.active
+        ws.title = "BOM"
+        ws.append(LIONCIRCUITS_HEADERS)
+        for r in rows:
+            ws.append(r)
+        wb.save(out_path)
+        return
+
+    # Pure-Python OpenXML (.xlsx) writer fallback when openpyxl is not installed
+    from xml.sax.saxutils import escape
+
+    all_rows = [LIONCIRCUITS_HEADERS] + [list(r) for r in rows]
+    sheet_rows_xml = []
+    for r_idx, row in enumerate(all_rows, start=1):
+        cells_xml = []
+        for c_idx, val in enumerate(row):
+            col_letter = chr(ord("A") + c_idx)
+            cell_ref = f"{col_letter}{r_idx}"
+            if r_idx > 1 and isinstance(val, int):
+                cells_xml.append(f'<c r="{cell_ref}" t="n"><v>{val}</v></c>')
+            else:
+                text = escape(str(val))
+                cells_xml.append(
+                    f'<c r="{cell_ref}" t="inlineStr"><is><t>{text}</t></is></c>'
+                )
+        sheet_rows_xml.append(f'<row r="{r_idx}">{"".join(cells_xml)}</row>')
+
+    sheet_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
+        f'<sheetData>{"".join(sheet_rows_xml)}</sheetData>'
+        "</worksheet>"
+    )
+    content_types_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+        '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+        '<Default Extension="xml" ContentType="application/xml"/>'
+        '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'
+        '<Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
+        "</Types>"
+    )
+    rels_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+        '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>'
+        "</Relationships>"
+    )
+    wb_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" '
+        'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+        '<sheets><sheet name="BOM" sheetId="1" r:id="rId1"/></sheets>'
+        "</workbook>"
+    )
+    wb_rels_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+        '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>'
+        "</Relationships>"
+    )
+    with zipfile.ZipFile(out_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        zf.writestr("[Content_Types].xml", content_types_xml)
+        zf.writestr("_rels/.rels", rels_xml)
+        zf.writestr("xl/workbook.xml", wb_xml)
+        zf.writestr("xl/_rels/workbook.xml.rels", wb_rels_xml)
+        zf.writestr("xl/worksheets/sheet1.xml", sheet_xml)
+
+
+def export_lioncircuits_boms(individual_items):
+    """Export both Original-MPN and LionCircuits-resolved 8-column BOMs (.csv and .xlsx)."""
+    def natural_sort_key(ref):
+        prefix = re.match(r"^[A-Za-z]+", ref)
+        prefix_str = prefix.group(0) if prefix else ref
+        num_part = re.search(r"\d+", ref)
+        num_int = int(num_part.group(0)) if num_part else 0
+        return (prefix_str, num_int, ref)
+
+    groups = {}
+    for item in individual_items:
+        key = (item["comment"], item["footprint"], item["lcsc"])
+        if key not in groups:
+            groups[key] = []
+        groups[key].append(item["ref"])
+
+    sorted_keys = sorted(
+        groups.keys(),
+        key=lambda k: natural_sort_key(sorted(groups[k], key=natural_sort_key)[0]),
+    )
+
+    orig_rows = []
+    lc_rows = []
+    for idx, key in enumerate(sorted_keys, start=1):
+        val, clean_fp, lcsc = key
+        refs = sorted(groups[key], key=natural_sort_key)
+        des_str = ",".join(refs)
+        qty = len(refs)
+        meta = LIONCIRCUITS_BOM_MAP.get(key, {})
+        orig_mpn = meta.get("orig_mpn", lcsc)
+        lc_mpn = meta.get("lc_mpn", orig_mpn)
+        lc_fp = meta.get("lc_fp", clean_fp)
+        desc = meta.get("desc", f"{val} {clean_fp}")
+        notes = meta.get("notes", f"Top SMD; LCSC: {lcsc}")
+
+        orig_rows.append([idx, des_str, qty, desc, orig_mpn, clean_fp, val, notes])
+        lc_rows.append([idx, des_str, qty, desc, lc_mpn, lc_fp, val, notes])
+
+    cp_dir = PCB_DIR.parent / ".copperpilot"
+    cp_dir.mkdir(parents=True, exist_ok=True)
+
+    for stem, rows in [
+        (f"{PROJECT_NAME}-bom-original", orig_rows),
+        (f"{PROJECT_NAME}-bom-lioncircuits", lc_rows),
+    ]:
+        csv_path = BUILD_DIR / f"{stem}.csv"
+        xlsx_path = BUILD_DIR / f"{stem}.xlsx"
+        with open(csv_path, "w", newline="", encoding="utf-8") as wf:
+            writer = csv.writer(wf)
+            writer.writerow(LIONCIRCUITS_HEADERS)
+            writer.writerows(rows)
+        write_lioncircuits_xlsx(rows, xlsx_path)
+
+        short_stem = "bom-original" if "original" in stem else "bom-lioncircuits"
+        shutil.copyfile(csv_path, cp_dir / f"{short_stem}.csv")
+        if xlsx_path.exists():
+            shutil.copyfile(xlsx_path, cp_dir / f"{short_stem}.xlsx")
+
+    shutil.copyfile(BUILD_DIR / f"{PROJECT_NAME}-bom.csv", cp_dir / "bom.csv")
+    print(
+        f"LionCircuits BOMs exported to {BUILD_DIR}/{PROJECT_NAME}-bom-lioncircuits.[csv|xlsx] "
+        f"and {BUILD_DIR}/{PROJECT_NAME}-bom-original.[csv|xlsx]"
+    )
 
 
 def export_d356():

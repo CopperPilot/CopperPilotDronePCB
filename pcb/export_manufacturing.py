@@ -33,6 +33,7 @@ PRO_FILE = PCB_DIR / f"{PROJECT_NAME}.kicad_pro"
 
 GERBERS_ZIP = BUILD_DIR / "gerbers.zip"
 RELEASE_ZIP = BUILD_DIR / f"{PROJECT_NAME}_JLCPCB_Release.zip"
+LC_RELEASE_ZIP = BUILD_DIR / f"{PROJECT_NAME}_LionCircuits_Release.zip"
 
 
 def ensure_dirs():
@@ -76,7 +77,7 @@ def export_gerbers():
             "export",
             "gerbers",
             "--layers",
-            "F.Cu,B.Cu,F.SilkS,B.SilkS,F.Mask,B.Mask,Edge.Cuts",
+            "F.Cu,B.Cu,F.Paste,B.Paste,F.SilkS,B.SilkS,F.Mask,B.Mask,Edge.Cuts",
             "--subtract-soldermask",
             "--use-drill-file-origin",
             "-o",
@@ -127,6 +128,67 @@ def zip_gerbers():
     print(f"Gerber archive created at {GERBERS_ZIP}")
 
 
+def _write_simple_xlsx(headers, rows, out_path, sheet_name="Sheet1"):
+    from xml.sax.saxutils import escape
+
+    all_rows = [headers] + [list(r) for r in rows]
+    sheet_rows_xml = []
+    for r_idx, row in enumerate(all_rows, start=1):
+        cells_xml = []
+        for c_idx, val in enumerate(row):
+            col_letter = chr(ord("A") + c_idx)
+            cell_ref = f"{col_letter}{r_idx}"
+            if r_idx > 1 and isinstance(val, (int, float)) and not isinstance(val, bool):
+                cells_xml.append(f'<c r="{cell_ref}" t="n"><v>{val}</v></c>')
+            else:
+                text = escape(str(val))
+                cells_xml.append(
+                    f'<c r="{cell_ref}" t="inlineStr"><is><t>{text}</t></is></c>'
+                )
+        sheet_rows_xml.append(f'<row r="{r_idx}">{"".join(cells_xml)}</row>')
+
+    sheet_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
+        f'<sheetData>{"".join(sheet_rows_xml)}</sheetData>'
+        "</worksheet>"
+    )
+    content_types_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+        '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+        '<Default Extension="xml" ContentType="application/xml"/>'
+        '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'
+        '<Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
+        "</Types>"
+    )
+    rels_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+        '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>'
+        "</Relationships>"
+    )
+    wb_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" '
+        'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+        f'<sheets><sheet name="{sheet_name}" sheetId="1" r:id="rId1"/></sheets>'
+        "</workbook>"
+    )
+    wb_rels_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+        '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>'
+        "</Relationships>"
+    )
+    with zipfile.ZipFile(out_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        zf.writestr("[Content_Types].xml", content_types_xml)
+        zf.writestr("_rels/.rels", rels_xml)
+        zf.writestr("xl/workbook.xml", wb_xml)
+        zf.writestr("xl/_rels/workbook.xml.rels", wb_rels_xml)
+        zf.writestr("xl/worksheets/sheet1.xml", sheet_xml)
+
+
 def write_cpl_xlsx_workbook(rows, out_path):
     """Generate exact JLCPCB CPL workbook matching JLCSMT_Sample_CPL1.xlsx."""
     if openpyxl:
@@ -140,8 +202,16 @@ def write_cpl_xlsx_workbook(rows, out_path):
             ws.append([str(des), f"{px:.4f}mm", f"{py:.4f}mm", str(layer), int(round(rot))])
         wb.save(out_path)
     else:
-        # Fallback raw XML generation if openpyxl unavailable
-        pass
+        fmt_rows = [
+            [str(r[0]), f"{r[1]:.4f}mm", f"{r[2]:.4f}mm", str(r[3]), int(round(r[4]))]
+            for r in rows
+        ]
+        _write_simple_xlsx(
+            ["Designator", "Mid X", "Mid Y", "Layer", "Rotation"],
+            fmt_rows,
+            out_path,
+            sheet_name="Sheet1",
+        )
 
 
 def write_bom_xlsx_workbook(bom_rows, out_path):
@@ -155,6 +225,13 @@ def write_bom_xlsx_workbook(bom_rows, out_path):
             comment, des, fp, lcsc = r
             ws.append([str(comment), str(des), str(fp), str(lcsc)])
         wb.save(out_path)
+    else:
+        _write_simple_xlsx(
+            ["Comment", "Designator", "Footprint", "JLCPCB Part #（optional）"],
+            bom_rows,
+            out_path,
+            sheet_name="Sheet1",
+        )
 
 
 def export_cpl():
@@ -284,6 +361,16 @@ def export_cpl():
 
     # Export uncompensated native IPC-7351 CPL for LionCircuits PCBA
     cpl_lc_csv_path = BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits.csv"
+    cpl_lc_xlsx_path = BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits.xlsx"
+    cpl_lc_dnp_csv_path = BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits-dnp.csv"
+    cpl_lc_dnp_xlsx_path = BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits-dnp.xlsx"
+
+    rows_lc_dnp_csv = [r for r in rows_lc_csv if r[0] not in ("IC1", "U9")]
+    rows_lc_xlsx = [[r[0], float(r[1]), float(r[2]), r[3], float(r[4])] for r in rows_lc_csv]
+    rows_lc_dnp_xlsx = [
+        [r[0], float(r[1]), float(r[2]), r[3], float(r[4])] for r in rows_lc_dnp_csv
+    ]
+
     with open(cpl_lc_csv_path, "w", newline="", encoding="utf-8") as wf:
         writer = csv.writer(wf)
         writer.writerow(
@@ -291,12 +378,22 @@ def export_cpl():
         )
         writer.writerows(rows_lc_csv)
 
+    with open(cpl_lc_dnp_csv_path, "w", newline="", encoding="utf-8") as wf:
+        writer = csv.writer(wf)
+        writer.writerow(
+            ["Designator", "Mid X", "Mid Y", "Layer", "Rotation", "Package", "Value"]
+        )
+        writer.writerows(rows_lc_dnp_csv)
+
+    write_cpl_xlsx_workbook(rows_lc_xlsx, cpl_lc_xlsx_path)
+    write_cpl_xlsx_workbook(rows_lc_dnp_xlsx, cpl_lc_dnp_xlsx_path)
+
     # Export XLSX CPL matching JLCSMT_Sample_CPL1.xlsx
     write_cpl_xlsx_workbook(rows_xlsx, cpl_xlsx_path)
 
     if raw_pos.exists():
         raw_pos.unlink()
-    print(f"Formatted CPL exported to {cpl_csv_path}, {cpl_xlsx_path}, and {cpl_lc_csv_path} ({len(rows_csv)} parts)")
+    print(f"Formatted CPL exported to {cpl_csv_path}, {cpl_xlsx_path}, {cpl_lc_csv_path}, and {cpl_lc_dnp_csv_path} ({len(rows_csv)} parts)")
 
 
 def export_bom():
@@ -703,6 +800,8 @@ def export_lioncircuits_boms(individual_items):
 
     orig_rows = []
     lc_rows = []
+    lc_dnp_rows = []
+    dnp_idx = 0
     for idx, key in enumerate(sorted_keys, start=1):
         val, clean_fp, lcsc = key
         refs = sorted(groups[key], key=natural_sort_key)
@@ -717,13 +816,17 @@ def export_lioncircuits_boms(individual_items):
 
         orig_rows.append([idx, des_str, qty, desc, orig_mpn, clean_fp, val, notes])
         lc_rows.append([idx, des_str, qty, desc, lc_mpn, lc_fp, val, notes])
+        if des_str not in ("IC1", "U9"):
+            dnp_idx += 1
+            lc_dnp_rows.append([dnp_idx, des_str, qty, desc, lc_mpn, lc_fp, val, notes])
 
     cp_dir = PCB_DIR.parent / ".copperpilot"
     cp_dir.mkdir(parents=True, exist_ok=True)
 
-    for stem, rows in [
-        (f"{PROJECT_NAME}-bom-original", orig_rows),
-        (f"{PROJECT_NAME}-bom-lioncircuits", lc_rows),
+    for stem, short_stem, rows in [
+        (f"{PROJECT_NAME}-bom-original", "bom-original", orig_rows),
+        (f"{PROJECT_NAME}-bom-lioncircuits", "bom-lioncircuits", lc_rows),
+        (f"{PROJECT_NAME}-bom-lioncircuits-dnp", "bom-lioncircuits-dnp", lc_dnp_rows),
     ]:
         csv_path = BUILD_DIR / f"{stem}.csv"
         xlsx_path = BUILD_DIR / f"{stem}.xlsx"
@@ -733,14 +836,14 @@ def export_lioncircuits_boms(individual_items):
             writer.writerows(rows)
         write_lioncircuits_xlsx(rows, xlsx_path)
 
-        short_stem = "bom-original" if "original" in stem else "bom-lioncircuits"
         shutil.copyfile(csv_path, cp_dir / f"{short_stem}.csv")
         if xlsx_path.exists():
             shutil.copyfile(xlsx_path, cp_dir / f"{short_stem}.xlsx")
 
     shutil.copyfile(BUILD_DIR / f"{PROJECT_NAME}-bom.csv", cp_dir / "bom.csv")
     print(
-        f"LionCircuits BOMs exported to {BUILD_DIR}/{PROJECT_NAME}-bom-lioncircuits.[csv|xlsx] "
+        f"LionCircuits BOMs exported to {BUILD_DIR}/{PROJECT_NAME}-bom-lioncircuits.[csv|xlsx], "
+        f"{BUILD_DIR}/{PROJECT_NAME}-bom-lioncircuits-dnp.[csv|xlsx], "
         f"and {BUILD_DIR}/{PROJECT_NAME}-bom-original.[csv|xlsx]"
     )
 
@@ -829,7 +932,7 @@ def export_spec():
 | **Via Process** | Tented (Front Yes, Back Yes) | Vias covered by solder mask; no open vias in SMD pads |
 | **Impedance Control** | No (Standard 90 Ω diff pair geometry) | USB D+/D- 0.20 mm width, 0.15 mm space on 1.6 mm FR4 |
 | **Min Track / Spacing** | 0.20 mm / 0.15 mm | Exceeds JLCPCB 0.10/0.10 mm standard threshold |
-| **Min Hole Diameter** | 0.30 mm drill / 0.60 mm pad | Exceeds JLCPCB 0.30/0.45 mm no-surcharge threshold |
+| **Min Hole Diameter** | 0.35 mm drill / 0.65 mm pad | Exceeds JLCPCB 0.30/0.45 mm and LionCircuits 0.35 mm standard thresholds |
 | **Castellated Holes** | No | None |
 | **Edge Connector / Gold Fingers** | No | None |
 | **Flying Probe Test** | Fully Tested | 100% netlist electrical test |
@@ -883,6 +986,42 @@ def export_spec():
     spec_path.write_text(order_spec, encoding="utf-8")
     print(f"ORDER_SPEC.md created at {spec_path}")
 
+    lc_spec_path = BUILD_DIR / "LIONCIRCUITS_ORDER_SPEC.md"
+    lc_order_spec = """# LionCircuits Manufacturing & Turnkey Assembly Order Specification
+
+**Project Name:** ESP32-S3 FPV Drone Flight Controller  
+**Design Revision:** 1.0  
+**Target Fabricator & Assembler:** LionCircuits
+
+---
+
+## 1. Bare-Board PCB Fabrication Parameters (Standard Tier Compliant)
+
+| Portal Field | Specification Value | Engineering Verification |
+|---|---|---|
+| **Layers** | `2` (`F.Cu`, `B.Cu`) | 2-layer stackup verified |
+| **Board Dimension** | `100.00 mm × 100.00 mm` | Integrated breakaway frame with 56 × `0.50 mm` NPTH mousebites |
+| **Discrete Design / Board Type** | `1` / `Single PCB` (or `Panel By Customer`) | Single flight controller inside breakaway rails |
+| **PCB Thickness** | `1.6 mm` | Required for 8520 motor C-clamp cutouts and enclosure fit |
+| **Copper Thickness** | `1 oz (35 um)` | Meets `6/6 mil` (`0.1524 mm`) trace/space rules (`0.20 mm` min trace, `0.1524 mm` min clearance) |
+| **PCB Finish** | **`ENIG`** | Flat coplanar pads required for `0.50 mm` pitch `QFN-24` (`U9`), `USB-C` (`J1`), and `ESP32-S3` (`U8`) |
+| **Mask / Silkscreen Color** | `Red` / `White` | Verified solder mask web and silkscreen-to-pad clearance |
+| **Minimum Plated Drill** | **`0.35 mm` drill / `0.65 mm` pad** | `T1C0.350`, `T2C0.350`, `T3C0.400`, `T4C0.600` — 100% compliant with LionCircuits `0.35 mm` Standard Tier |
+| **Minimum Non-Plated Drill** | **`0.50 mm`** | `T1C0.500`, `T2C0.650`, `T3C0.950`, `T4C1.000` |
+| **U9 (`MPU-6050`) Pad 25 Paste** | **No Paste on Center Pad 25** | `F.Paste` removed per TDK InvenSense `MPU-6050` Product Spec Rev 3.4 Section 11.2 |
+
+---
+
+## 2. PCBA Turnkey & Consigned Assembly Options
+
+| Option | BOM File to Upload | CPL File to Upload | Populated Scope |
+|---|---|---|---|
+| **Option A: Safe 66-Part Turnkey (DNP `IC1` & `U9`)** | `CopperPilotDrone-bom-lioncircuits-dnp.xlsx` (or `.csv`) | `CopperPilotDrone-cpl-lioncircuits-dnp.csv` (or `.xlsx`) | Populates all 28 verified Tier-1 BOM lines (`66` SMT parts); leaves `IC1` (`TP4056-42-ESOP8`) and `U9` (`MPU-6050`) unpopulated for consigned/post-delivery reflow |
+| **Option B: Full 68-Part Consigned / Assisted Turnkey** | `CopperPilotDrone-bom-lioncircuits.xlsx` (portal check) + `CopperPilotDrone-bom-original.xlsx` (actual MPNs) | `CopperPilotDrone-cpl-lioncircuits.csv` (or `.xlsx`) | Populates all 30 lines (`68` SMT parts) using `TP4056-42-ESOP8` (`LCSC: C16581`) on `IC1` and `MPU-6050` (`LCSC: C24112`) on `U9` |
+"""
+    lc_spec_path.write_text(lc_order_spec, encoding="utf-8")
+    print(f"LIONCIRCUITS_ORDER_SPEC.md created at {lc_spec_path}")
+
 
 def export_kikit():
     ensure_dirs()
@@ -927,6 +1066,30 @@ def package_release():
                 zf.write(item, item.name)
 
     print(f"Complete release bundle created at {RELEASE_ZIP} ({os.path.getsize(RELEASE_ZIP)} bytes)")
+
+    lc_items = [
+        GERBERS_ZIP,
+        BUILD_DIR / f"{PROJECT_NAME}-bom-lioncircuits.xlsx",
+        BUILD_DIR / f"{PROJECT_NAME}-bom-lioncircuits.csv",
+        BUILD_DIR / f"{PROJECT_NAME}-bom-lioncircuits-dnp.xlsx",
+        BUILD_DIR / f"{PROJECT_NAME}-bom-lioncircuits-dnp.csv",
+        BUILD_DIR / f"{PROJECT_NAME}-bom-original.xlsx",
+        BUILD_DIR / f"{PROJECT_NAME}-bom-original.csv",
+        BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits.csv",
+        BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits.xlsx",
+        BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits-dnp.csv",
+        BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits-dnp.xlsx",
+        BUILD_DIR / f"{PROJECT_NAME}.d356",
+        BUILD_DIR / f"{PROJECT_NAME}_Schematic.pdf",
+        BUILD_DIR / f"{PROJECT_NAME}_PCB_Layers.pdf",
+        BUILD_DIR / "LIONCIRCUITS_ORDER_SPEC.md",
+    ]
+    with zipfile.ZipFile(LC_RELEASE_ZIP, "w", zipfile.ZIP_DEFLATED) as zf:
+        for item in lc_items:
+            if item.exists():
+                zf.write(item, item.name)
+
+    print(f"Complete LionCircuits release bundle created at {LC_RELEASE_ZIP} ({os.path.getsize(LC_RELEASE_ZIP)} bytes)")
 
 
 def main():

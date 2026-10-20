@@ -229,6 +229,7 @@ def export_cpl():
 
     rows_csv = []
     rows_xlsx = []
+    rows_lc_csv = []
     for row in raw_rows:
         ref, val, pkg, px_str, py_str, rot_str, side = (
             row[0],
@@ -239,9 +240,24 @@ def export_cpl():
             row[5],
             row[6],
         )
-        px = float(px_str)
-        py = float(py_str)
-        raw_rot = float(rot_str)
+        raw_px = float(px_str)
+        raw_py = float(py_str)
+        raw_rot_orig = float(rot_str)
+
+        layer = "Top" if "top" in side.lower() else "Bottom"
+
+        norm_raw_rot = raw_rot_orig % 360.0
+        if abs(norm_raw_rot - round(norm_raw_rot)) < 1e-3:
+            lc_rot_csv = str(int(round(norm_raw_rot)))
+        else:
+            lc_rot_csv = f"{norm_raw_rot:.2f}"
+        rows_lc_csv.append(
+            [ref, f"{raw_px:.4f}", f"{raw_py:.4f}", layer, lc_rot_csv, pkg, val]
+        )
+
+        px = raw_px
+        py = raw_py
+        raw_rot = raw_rot_orig
 
         d_rot, dx, dy = JLCPCB_CORRECTIONS.get(ref, (0.0, 0.0, 0.0))
         px += dx
@@ -257,8 +273,6 @@ def export_cpl():
             rot_val = round(norm_rot, 2)
             rot_csv = f"{norm_rot:.2f}"
 
-        layer = "Top" if "top" in side.lower() else "Bottom"
-
         rows_csv.append([ref, f"{px:.4f}", f"{py:.4f}", layer, rot_csv])
         rows_xlsx.append([ref, px, py, layer, rot_val])
 
@@ -268,12 +282,21 @@ def export_cpl():
         writer.writerow(["Designator", "Mid X", "Mid Y", "Layer", "Rotation"])
         writer.writerows(rows_csv)
 
+    # Export uncompensated native IPC-7351 CPL for LionCircuits PCBA
+    cpl_lc_csv_path = BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits.csv"
+    with open(cpl_lc_csv_path, "w", newline="", encoding="utf-8") as wf:
+        writer = csv.writer(wf)
+        writer.writerow(
+            ["Designator", "Mid X", "Mid Y", "Layer", "Rotation", "Package", "Value"]
+        )
+        writer.writerows(rows_lc_csv)
+
     # Export XLSX CPL matching JLCSMT_Sample_CPL1.xlsx
     write_cpl_xlsx_workbook(rows_xlsx, cpl_xlsx_path)
 
     if raw_pos.exists():
         raw_pos.unlink()
-    print(f"Formatted CPL exported to {cpl_csv_path} and {cpl_xlsx_path} ({len(rows_csv)} parts)")
+    print(f"Formatted CPL exported to {cpl_csv_path}, {cpl_xlsx_path}, and {cpl_lc_csv_path} ({len(rows_csv)} parts)")
 
 
 def export_bom():
@@ -416,10 +439,10 @@ LIONCIRCUITS_BOM_MAP = {
     },
     ("1N5819WS", "D_SOD-323", "C191023"): {
         "orig_mpn": "1N5819WS",
-        "lc_mpn": "1N5819HW-7-F",
+        "lc_mpn": "PMEG4010EJ,115",
         "lc_fp": "SOD-323",
-        "desc": "Schottky Barrier Diode 40V 1A SOD-323",
-        "notes": "Top SMD; Observe cathode band; Motor flyback clamp; Alt MPN: 1N5819WS (LCSC: C191023)",
+        "desc": "Schottky Barrier Diode 40V 1A SOD-323 / SOD-323F",
+        "notes": "Top SMD; Observe cathode band; Motor flyback clamp; Nexperia PMEG4010EJ,115 (SOD-323F); Alt MPN: B5819WS-TP / PMEG4010CEJ,115 / XBS104S13R-G / B5819WS-7-F / 1N5819WS (LCSC: C191023) — Do NOT use SOD-123 (1N5819HW-7-F)",
     },
     ("USBLC6-2SC6", "SOT-23-6", "C7519"): {
         "orig_mpn": "USBLC6-2SC6",
@@ -433,7 +456,7 @@ LIONCIRCUITS_BOM_MAP = {
         "lc_mpn": "MAX1811ESA+",
         "lc_fp": "ESOP-8 (SOIC-8-EP)",
         "desc": "1S Li-Ion/Li-Po Linear Battery Charger IC 4.2V SOIC-8 / ESOP-8",
-        "notes": "Top SMD; Element14 In-Stock SOIC-8 Charger MPN: MAX1811ESA+ / MAX1811ESA+T; CAUTION: PCB footprint/pinout is wired for TP4056-42-ESOP8 / TP4056 (LCSC: C16581) / DIO5158 (Pad 9 EP=GND)—populate TP4056 via assisted/consigned sourcing or DNP (do not solder MAX1811ESA+ onto unedited TP4056 pads)",
+        "notes": "Top SMD; DO NOT SOLDER MAX1811ESA+ (catalog-pass MPN only — incompatible pinout & no EP); PCB footprint/pinout is wired for TP4056-42-ESOP8 / TP4056 (LCSC: C16581) / TC4056A / ME4057 / DIO5158 (Pad 9 EP=GND)—populate TP4056 via assisted/consigned sourcing or mark IC1 DNP",
     },
     ("USB_C_Receptacle_USB2.0", "USB_C_Receptacle_HRO_TYPE-C-31-M-12", "C165948"): {
         "orig_mpn": "TYPE-C-31-M-12",
@@ -545,7 +568,7 @@ LIONCIRCUITS_BOM_MAP = {
         "lc_mpn": "PTS526SM15SMTR2LFS",
         "lc_fp": "SMD-SW-5.1x5.1mm",
         "desc": "Tactile Switch SPST-NO Top Actuated 5.2x5.2x1.5mm 4-SMD Gull Wing",
-        "notes": "Top SMD; Reset (EN) & Boot (IO0) buttons; C&K PTS526SM15SMTR2LFS; Alt MPN: 434121025816 / EVQ-P0E07K / SKQGAFE010 / TS-1187A-C-C-B (LCSC: C318889)",
+        "notes": "Top SMD; Reset (EN) & Boot (IO0) buttons; C&K PTS526SM15SMTR2LFS (5.2x5.2x1.5mm); Alt MPN: SKQGAFE010 / TS-1187A-C-C-B (LCSC: C318889) — Do NOT substitute 6x6mm or >1.5mm height switches",
     },
     ("SI2302DS-T1", "SOT95P237X112-3N", "C351401"): {
         "orig_mpn": "SI2302DS-T1",
@@ -580,7 +603,7 @@ LIONCIRCUITS_BOM_MAP = {
         "lc_mpn": "ICM-20789",
         "lc_fp": "QFN-24 (4x4mm)",
         "desc": "MEMS IMU 6-Axis Gyroscope + Accelerometer I2C/SPI 24-Pin 4x4mm (TDK InvenSense)",
-        "notes": "Top SMD; Element14 In-Stock 24-Pin 4x4mm TDK IMU MPN: ICM-20789 (alt ICM-42670-P); Note: PCB ties Pin 8 (VLOGIC/VDDIO) to +3V3 (ICM-20789 pressure sensor VDDIO max 1.98V)—populate 3.3V-rated MPU-6050 / MPU-6000 (LCSC: C24112) / ICM-20689 via assisted/consigned sourcing or DNP",
+        "notes": "Top SMD; DO NOT SOLDER ICM-20789 (catalog-pass MPN only — Pin 8 VDDIO max 1.98V will be damaged by PCB +3V3 rail & LGA-24 lacks central EP over pasted Pad 25); Populate 3.3V-rated MPU-6050 / MPU-6000 (LCSC: C24112) / ICM-20689 via assisted/consigned sourcing or mark U9 DNP",
     },
 }
 

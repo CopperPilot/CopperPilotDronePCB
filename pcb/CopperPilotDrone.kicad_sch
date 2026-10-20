@@ -10166,7 +10166,7 @@
 			)
 		)
 	
-		(property "MPN" "TS-1187A-C-C-B"
+		(property "MPN" "PTS526SM15SMTR2LFS"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10469,7 +10469,7 @@
 			)
 		)
 	
-		(property "MPN" "CL10B105KO8NNNC"
+		(property "MPN" "CC0603KRX7R7BB105"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10727,7 +10727,7 @@
 				(justify left top)
 			)
 		)
-		(property "Manufacturer_Part_Number" "SI2302DS-T1"
+		(property "Manufacturer_Part_Number" "SI2302CDS-T1-GE3"
 			(at 180.34 1060.35 0)
 			(hide yes)
 			(show_name no)
@@ -11020,7 +11020,7 @@
 				(justify left top)
 			)
 		)
-		(property "Manufacturer_Part_Number" "SI2302DS-T1"
+		(property "Manufacturer_Part_Number" "SI2302CDS-T1-GE3"
 			(at 90.17 1059.08 0)
 			(hide yes)
 			(show_name no)
@@ -11165,7 +11165,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF1002T5E"
+		(property "MPN" "RC0603FR-0710KL"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11273,7 +11273,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF4700T5E"
+		(property "MPN" "RC0603FR-07470RL"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11379,7 +11379,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF220JT5E"
+		(property "MPN" "RC0603FR-0722RL"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11959,7 +11959,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF1003T5E"
+		(property "MPN" "RC0603FR-07100KL"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12217,7 +12217,7 @@
 				(justify left top)
 			)
 		)
-		(property "Manufacturer_Part_Number" "SI2302DS-T1"
+		(property "Manufacturer_Part_Number" "SI2302CDS-T1-GE3"
 			(at 135.89 1060.35 0)
 			(hide yes)
 			(show_name no)
@@ -12934,7 +12934,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF220JT5E"
+		(property "MPN" "RC0603FR-0722RL"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13043,7 +13043,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF1002T5E"
+		(property "MPN" "RC0603FR-0710KL"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13218,7 +13218,7 @@
 				(justify left top)
 			)
 		)
-		(property "Manufacturer_Part_Number" "SI2302DS-T1"
+		(property "Manufacturer_Part_Number" "SI2302CDS-T1-GE3"
 			(at 223.52 1060.35 0)
 			(hide yes)
 			(show_name no)
@@ -13407,7 +13407,7 @@
 			)
 		)
 	
-		(property "MPN" "TYPE-C-31-M-12"
+		(property "MPN" "USB4105-GF-A"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13590,7 +13590,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF1002T5E"
+		(property "MPN" "RC0603FR-0710KL"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14211,7 +14211,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF5101T5E"
+		(property "MPN" "RC0603FR-075K1L"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14311,7 +14311,7 @@
 			)
 		)
 	
-		(property "MPN" "TS-1187A-C-C-B"
+		(property "MPN" "PTS526SM15SMTR2LFS"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14421,7 +14421,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF1003T5E"
+		(property "MPN" "RC0603FR-07100KL"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15218,7 +15218,7 @@
 			)
 		)
 	
-		(property "MPN" "CL10B104KB8NNNC"
+		(property "MPN" "CC0603KRX7R9BB104"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15439,7 +15439,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF1002T5E"
+		(property "MPN" "RC0603FR-0710KL"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15706,7 +15706,7 @@
 			)
 		)
 	
-		(property "MPN" "1N5819WS"
+		(property "MPN" "PMEG4010EJ,115"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15817,7 +15817,7 @@
 			)
 		)
 	
-		(property "MPN" "CL10B104KB8NNNC"
+		(property "MPN" "CC0603KRX7R9BB104"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15927,7 +15927,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF3301T5E"
+		(property "MPN" "RC0603FR-073K3L"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16470,7 +16470,7 @@
 			)
 		)
 	
-		(property "MPN" "1N5819WS"
+		(property "MPN" "PMEG4010EJ,115"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16772,7 +16772,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF1201T5E"
+		(property "MPN" "RC0603FR-071K2L"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17262,7 +17262,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF1201T5E"
+		(property "MPN" "RC0603FR-071K2L"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17669,7 +17669,7 @@
 			)
 		)
 	
-		(property "MPN" "1N5819WS"
+		(property "MPN" "PMEG4010EJ,115"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17970,7 +17970,7 @@
 			)
 		)
 	
-		(property "MPN" "KT-0603YG"
+		(property "MPN" "LTST-C190KGKT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -18079,7 +18079,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF1002T5E"
+		(property "MPN" "RC0603FR-0710KL"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -18273,7 +18273,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF4701T5E"
+		(property "MPN" "RC0603FR-074K7L"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19563,7 +19563,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF1002T5E"
+		(property "MPN" "RC0603FR-0710KL"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20321,7 +20321,7 @@
 			)
 		)
 	
-		(property "MPN" "1N5819WS"
+		(property "MPN" "PMEG4010EJ,115"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20513,7 +20513,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF4701T5E"
+		(property "MPN" "RC0603FR-074K7L"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21427,7 +21427,7 @@
 			)
 		)
 	
-		(property "MPN" "CL10B105KO8NNNC"
+		(property "MPN" "CC0603KRX7R7BB105"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21619,7 +21619,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF4701T5E"
+		(property "MPN" "RC0603FR-074K7L"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21976,7 +21976,7 @@
 			)
 		)
 	
-		(property "MPN" "KT-0603B"
+		(property "MPN" "LTST-C190TBKT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22076,7 +22076,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF5101T5E"
+		(property "MPN" "RC0603FR-075K1L"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22353,7 +22353,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF1003T5E"
+		(property "MPN" "RC0603FR-07100KL"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22743,7 +22743,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF1003T5E"
+		(property "MPN" "RC0603FR-07100KL"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22962,7 +22962,7 @@
 			)
 		)
 	
-		(property "MPN" "19-217/GHC-YR1S2/3T"
+		(property "MPN" "KPT-1608CGCK"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23203,7 +23203,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF220JT5E"
+		(property "MPN" "RC0603FR-0722RL"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23305,7 +23305,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF220JT5E"
+		(property "MPN" "RC0603FR-0722RL"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23407,7 +23407,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF220JT5E"
+		(property "MPN" "RC0603FR-0722RL"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23509,7 +23509,7 @@
 			)
 		)
 	
-		(property "MPN" "0603WAF220JT5E"
+		(property "MPN" "RC0603FR-0722RL"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)

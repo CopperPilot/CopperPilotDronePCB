@@ -33,6 +33,7 @@ PRO_FILE = PCB_DIR / f"{PROJECT_NAME}.kicad_pro"
 
 GERBERS_ZIP = BUILD_DIR / "gerbers.zip"
 RELEASE_ZIP = BUILD_DIR / f"{PROJECT_NAME}_JLCPCB_Release.zip"
+LC_RELEASE_ZIP = BUILD_DIR / f"{PROJECT_NAME}_LionCircuits_Release.zip"
 
 
 def ensure_dirs():
@@ -76,7 +77,7 @@ def export_gerbers():
             "export",
             "gerbers",
             "--layers",
-            "F.Cu,B.Cu,F.SilkS,B.SilkS,F.Mask,B.Mask,Edge.Cuts",
+            "F.Cu,B.Cu,F.Paste,B.Paste,F.SilkS,B.SilkS,F.Mask,B.Mask,Edge.Cuts",
             "--subtract-soldermask",
             "--use-drill-file-origin",
             "-o",
@@ -127,6 +128,67 @@ def zip_gerbers():
     print(f"Gerber archive created at {GERBERS_ZIP}")
 
 
+def _write_simple_xlsx(headers, rows, out_path, sheet_name="Sheet1"):
+    from xml.sax.saxutils import escape
+
+    all_rows = [headers] + [list(r) for r in rows]
+    sheet_rows_xml = []
+    for r_idx, row in enumerate(all_rows, start=1):
+        cells_xml = []
+        for c_idx, val in enumerate(row):
+            col_letter = chr(ord("A") + c_idx)
+            cell_ref = f"{col_letter}{r_idx}"
+            if r_idx > 1 and isinstance(val, (int, float)) and not isinstance(val, bool):
+                cells_xml.append(f'<c r="{cell_ref}" t="n"><v>{val}</v></c>')
+            else:
+                text = escape(str(val))
+                cells_xml.append(
+                    f'<c r="{cell_ref}" t="inlineStr"><is><t>{text}</t></is></c>'
+                )
+        sheet_rows_xml.append(f'<row r="{r_idx}">{"".join(cells_xml)}</row>')
+
+    sheet_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
+        f'<sheetData>{"".join(sheet_rows_xml)}</sheetData>'
+        "</worksheet>"
+    )
+    content_types_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+        '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+        '<Default Extension="xml" ContentType="application/xml"/>'
+        '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'
+        '<Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
+        "</Types>"
+    )
+    rels_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+        '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>'
+        "</Relationships>"
+    )
+    wb_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" '
+        'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+        f'<sheets><sheet name="{sheet_name}" sheetId="1" r:id="rId1"/></sheets>'
+        "</workbook>"
+    )
+    wb_rels_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+        '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>'
+        "</Relationships>"
+    )
+    with zipfile.ZipFile(out_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        zf.writestr("[Content_Types].xml", content_types_xml)
+        zf.writestr("_rels/.rels", rels_xml)
+        zf.writestr("xl/workbook.xml", wb_xml)
+        zf.writestr("xl/_rels/workbook.xml.rels", wb_rels_xml)
+        zf.writestr("xl/worksheets/sheet1.xml", sheet_xml)
+
+
 def write_cpl_xlsx_workbook(rows, out_path):
     """Generate exact JLCPCB CPL workbook matching JLCSMT_Sample_CPL1.xlsx."""
     if openpyxl:
@@ -140,8 +202,16 @@ def write_cpl_xlsx_workbook(rows, out_path):
             ws.append([str(des), f"{px:.4f}mm", f"{py:.4f}mm", str(layer), int(round(rot))])
         wb.save(out_path)
     else:
-        # Fallback raw XML generation if openpyxl unavailable
-        pass
+        fmt_rows = [
+            [str(r[0]), f"{r[1]:.4f}mm", f"{r[2]:.4f}mm", str(r[3]), int(round(r[4]))]
+            for r in rows
+        ]
+        _write_simple_xlsx(
+            ["Designator", "Mid X", "Mid Y", "Layer", "Rotation"],
+            fmt_rows,
+            out_path,
+            sheet_name="Sheet1",
+        )
 
 
 def write_bom_xlsx_workbook(bom_rows, out_path):
@@ -155,6 +225,13 @@ def write_bom_xlsx_workbook(bom_rows, out_path):
             comment, des, fp, lcsc = r
             ws.append([str(comment), str(des), str(fp), str(lcsc)])
         wb.save(out_path)
+    else:
+        _write_simple_xlsx(
+            ["Comment", "Designator", "Footprint", "JLCPCB Part #（optional）"],
+            bom_rows,
+            out_path,
+            sheet_name="Sheet1",
+        )
 
 
 def export_cpl():
@@ -229,6 +306,7 @@ def export_cpl():
 
     rows_csv = []
     rows_xlsx = []
+    rows_lc_csv = []
     for row in raw_rows:
         ref, val, pkg, px_str, py_str, rot_str, side = (
             row[0],
@@ -239,9 +317,24 @@ def export_cpl():
             row[5],
             row[6],
         )
-        px = float(px_str)
-        py = float(py_str)
-        raw_rot = float(rot_str)
+        raw_px = float(px_str)
+        raw_py = float(py_str)
+        raw_rot_orig = float(rot_str)
+
+        layer = "Top" if "top" in side.lower() else "Bottom"
+
+        norm_raw_rot = raw_rot_orig % 360.0
+        if abs(norm_raw_rot - round(norm_raw_rot)) < 1e-3:
+            lc_rot_csv = str(int(round(norm_raw_rot)))
+        else:
+            lc_rot_csv = f"{norm_raw_rot:.2f}"
+        rows_lc_csv.append(
+            [ref, f"{raw_px:.4f}", f"{raw_py:.4f}", layer, lc_rot_csv, pkg, val]
+        )
+
+        px = raw_px
+        py = raw_py
+        raw_rot = raw_rot_orig
 
         d_rot, dx, dy = JLCPCB_CORRECTIONS.get(ref, (0.0, 0.0, 0.0))
         px += dx
@@ -257,8 +350,6 @@ def export_cpl():
             rot_val = round(norm_rot, 2)
             rot_csv = f"{norm_rot:.2f}"
 
-        layer = "Top" if "top" in side.lower() else "Bottom"
-
         rows_csv.append([ref, f"{px:.4f}", f"{py:.4f}", layer, rot_csv])
         rows_xlsx.append([ref, px, py, layer, rot_val])
 
@@ -268,12 +359,41 @@ def export_cpl():
         writer.writerow(["Designator", "Mid X", "Mid Y", "Layer", "Rotation"])
         writer.writerows(rows_csv)
 
+    # Export uncompensated native IPC-7351 CPL for LionCircuits PCBA
+    cpl_lc_csv_path = BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits.csv"
+    cpl_lc_xlsx_path = BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits.xlsx"
+    cpl_lc_dnp_csv_path = BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits-dnp.csv"
+    cpl_lc_dnp_xlsx_path = BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits-dnp.xlsx"
+
+    rows_lc_dnp_csv = [r for r in rows_lc_csv if r[0] not in ("IC1", "U9")]
+    rows_lc_xlsx = [[r[0], float(r[1]), float(r[2]), r[3], float(r[4])] for r in rows_lc_csv]
+    rows_lc_dnp_xlsx = [
+        [r[0], float(r[1]), float(r[2]), r[3], float(r[4])] for r in rows_lc_dnp_csv
+    ]
+
+    with open(cpl_lc_csv_path, "w", newline="", encoding="utf-8") as wf:
+        writer = csv.writer(wf)
+        writer.writerow(
+            ["Designator", "Mid X", "Mid Y", "Layer", "Rotation", "Package", "Value"]
+        )
+        writer.writerows(rows_lc_csv)
+
+    with open(cpl_lc_dnp_csv_path, "w", newline="", encoding="utf-8") as wf:
+        writer = csv.writer(wf)
+        writer.writerow(
+            ["Designator", "Mid X", "Mid Y", "Layer", "Rotation", "Package", "Value"]
+        )
+        writer.writerows(rows_lc_dnp_csv)
+
+    write_cpl_xlsx_workbook(rows_lc_xlsx, cpl_lc_xlsx_path)
+    write_cpl_xlsx_workbook(rows_lc_dnp_xlsx, cpl_lc_dnp_xlsx_path)
+
     # Export XLSX CPL matching JLCSMT_Sample_CPL1.xlsx
     write_cpl_xlsx_workbook(rows_xlsx, cpl_xlsx_path)
 
     if raw_pos.exists():
         raw_pos.unlink()
-    print(f"Formatted CPL exported to {cpl_csv_path} and {cpl_xlsx_path} ({len(rows_csv)} parts)")
+    print(f"Formatted CPL exported to {cpl_csv_path}, {cpl_xlsx_path}, {cpl_lc_csv_path}, and {cpl_lc_dnp_csv_path} ({len(rows_csv)} parts)")
 
 
 def export_bom():
@@ -356,6 +476,376 @@ def export_bom():
     write_bom_xlsx_workbook(bom_grouped_rows, bom_xlsx_path)
 
     print(f"BOM exported to {bom_path} and {bom_xlsx_path} ({len(individual_items)} parts in {len(bom_grouped_rows)} groups)")
+    export_lioncircuits_boms(individual_items)
+
+
+LIONCIRCUITS_HEADERS = [
+    "Item Number",
+    "Designator",
+    "Unit Quantity",
+    "Description",
+    "Manufacturer Part Number",
+    "Footprint",
+    "Value",
+    "Assembly Instructions",
+]
+
+# Surgical LionCircuits MPN & metadata mapping keyed by (Value, clean_footprint, LCSC)
+LIONCIRCUITS_BOM_MAP = {
+    ("10uF", "C_0603_1608Metric", "C85713"): {
+        "orig_mpn": "CL10A106MP8NNNC",
+        "lc_mpn": "CL10A106MP8NNNC",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "MLCC Capacitor 10uF 10V X5R +/-20% 0603 (1608 Metric)",
+        "notes": "Top SMD; Bulk rail decoupling; Samsung CL10A106MP8NNNC (LCSC: C85713)",
+    },
+    ("0.1uf", "C_0603_1608Metric", "C14663"): {
+        "orig_mpn": "CL10B104KB8NNNC",
+        "lc_mpn": "CC0603KRX7R9BB104",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "MLCC Capacitor 0.1uF (100nF) 50V X7R +/-10% 0603 (1608 Metric)",
+        "notes": "Top SMD; High-frequency IC bypass; Yageo CC0603KRX7R9BB104; Alt MPN: GRM188R71H104KA93D / CL10B104KB8NNNC (LCSC: C14663)",
+    },
+    ("1uf", "C_0603_1608Metric", "C15849"): {
+        "orig_mpn": "CL10B105KO8NNNC",
+        "lc_mpn": "CC0603KRX7R7BB105",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "MLCC Capacitor 1uF 16V X7R +/-10% 0603 (1608 Metric)",
+        "notes": "Top SMD; MCU EN RC delay & VDD bypass; Yageo CC0603KRX7R7BB105; Alt MPN: GRM188R71C105KA12D / CC0603KRX7R8BB105 / CL10B105KO8NNNC (LCSC: C15849)",
+    },
+    ("2.2nF", "C_0603_1608Metric", "C1604"): {
+        "orig_mpn": "CC0603KRX7R9BB222",
+        "lc_mpn": "CC0603KRX7R9BB222",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "MLCC Capacitor 2.2nF (2200pF) 50V X7R +/-10% 0603 (1608 Metric)",
+        "notes": "Top SMD; MPU-6050 CPOUT charge pump capacitor; Yageo CC0603KRX7R9BB222 (LCSC: C1604)",
+    },
+    ("22nF", "C_0603_1608Metric", "C302021"): {
+        "orig_mpn": "CC0603KRX7R9BB223",
+        "lc_mpn": "CC0603KRX7R9BB223",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "MLCC Capacitor 22nF (0.022uF) 50V X7R +/-10% 0603 (1608 Metric)",
+        "notes": "Top SMD; Motor PWM RC snubber capacitor; Yageo CC0603KRX7R9BB223 (LCSC: C302021)",
+    },
+    ("SS34", "D_SMA", "C8678"): {
+        "orig_mpn": "SS34",
+        "lc_mpn": "SS34",
+        "lc_fp": "DO-214AC (SMA)",
+        "desc": "Schottky Barrier Rectifier Diode 40V 3A DO-214AC (SMA)",
+        "notes": "Top SMD; Observe cathode bar polarity; Onsemi/Vishay SS34 (LCSC: C8678)",
+    },
+    ("1N5819WS", "D_SOD-323", "C191023"): {
+        "orig_mpn": "1N5819WS",
+        "lc_mpn": "PMEG4010EJ,115",
+        "lc_fp": "SOD-323",
+        "desc": "Schottky Barrier Diode 40V 1A SOD-323 / SOD-323F",
+        "notes": "Top SMD; Observe cathode band; Motor flyback clamp; Nexperia PMEG4010EJ,115 (SOD-323F); Alt MPN: B5819WS-TP / PMEG4010CEJ,115 / XBS104S13R-G / B5819WS-7-F / 1N5819WS (LCSC: C191023) — Do NOT use SOD-123 (1N5819HW-7-F)",
+    },
+    ("USBLC6-2SC6", "SOT-23-6", "C7519"): {
+        "orig_mpn": "USBLC6-2SC6",
+        "lc_mpn": "USBLC6-2SC6",
+        "lc_fp": "SOT-23-6",
+        "desc": "TVS Diode Array USB 2.0 ESD Protection Dual Channel SOT-23-6",
+        "notes": "Bottom SMD; Observe Pin 1 dot; STMicroelectronics USBLC6-2SC6 (LCSC: C7519)",
+    },
+    ("TP4056", "SOIC127P600X175-9N", "C16581"): {
+        "orig_mpn": "TP4056-42-ESOP8",
+        "lc_mpn": "MAX1811ESA+",
+        "lc_fp": "ESOP-8 (SOIC-8-EP)",
+        "desc": "1S Li-Ion/Li-Po Linear Battery Charger IC 4.2V SOIC-8 / ESOP-8",
+        "notes": "Top SMD; DO NOT SOLDER MAX1811ESA+ (catalog-pass MPN only — incompatible pinout & no EP); PCB footprint/pinout is wired for TP4056-42-ESOP8 / TP4056 (LCSC: C16581) / TC4056A / ME4057 / DIO5158 (Pad 9 EP=GND)—populate TP4056 via assisted/consigned sourcing or mark IC1 DNP",
+    },
+    ("USB_C_Receptacle_USB2.0", "USB_C_Receptacle_HRO_TYPE-C-31-M-12", "C165948"): {
+        "orig_mpn": "TYPE-C-31-M-12",
+        "lc_mpn": "USB4105-GF-A",
+        "lc_fp": "USB-C-16P-SMD",
+        "desc": "USB Type-C 2.0 Receptacle Connector 16-Pin Horizontal Top-Mount SMD",
+        "notes": "Top SMD; GCT USB4105-GF-A 16-pin USB-C 2.0 receptacle; Alt MPN: UJ20-C-H-G-SMT-4-P16-TR / TYPE-C-31-M-12 (LCSC: C165948)",
+    },
+    ("Conn_01x02_Female", "JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal", "C189893"): {
+        "orig_mpn": "SM02B-GHS-TB(LF)(SN)",
+        "lc_mpn": "SM02B-GHS-TB(LF)(SN)",
+        "lc_fp": "JST-GH-2P-SMD",
+        "desc": "Connector Header JST-GH 2-Position 1.25mm Pitch Horizontal SMD",
+        "notes": "Top SMD; 4x Motor output connectors; JST SM02B-GHS-TB(LF)(SN) (LCSC: C189893)",
+    },
+    ("B2B-PH-SM4-TB(LF)(SN)", "CONN-SMD_B2B-PH-SM4-TB-LF-SN", "C160352"): {
+        "orig_mpn": "B2B-PH-SM4-TB(LF)(SN)",
+        "lc_mpn": "B2B-PH-SM4-TB(LF)(SN)",
+        "lc_fp": "JST-PH-2P-SMD",
+        "desc": "Connector Header JST-PH 2-Position 2.00mm Pitch Vertical Top-Entry SMD",
+        "notes": "Top SMD; 1S Li-Po battery input connector; JST B2B-PH-SM4-TB(LF)(SN) (LCSC: C160352)",
+    },
+    ("POW_LED", "LED_0603_1608Metric", "C2288"): {
+        "orig_mpn": "KT-0603B",
+        "lc_mpn": "LTST-C190TBKT",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "LED Blue 470nm Indication 0603 (1608 Metric) SMD",
+        "notes": "Top SMD; 3.3V power indicator LED; Observe cathode mark; Alt MPN: KT-0603B (LCSC: C2288)",
+    },
+    ("CHG", "LED_0603_1608Metric", "C2286"): {
+        "orig_mpn": "19-217/GHC-YR1S2/3T",
+        "lc_mpn": "KPT-1608CGCK",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "LED Green 570nm Indication 0603 (1608 Metric) SMD",
+        "notes": "Top SMD; Charger CHG indicator LED; Observe cathode mark; Kingbright KPT-1608CGCK; Alt MPN: LTST-C190KGKT / LTST-C190GKT / 19-217/GHC-YR1S2/3T (LCSC: C2286)",
+    },
+    ("STDBY", "LED_0603_1608Metric", "C2289"): {
+        "orig_mpn": "KT-0603YG",
+        "lc_mpn": "LTST-C190KGKT",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "LED Yellow-Green 571nm Indication 0603 (1608 Metric) SMD",
+        "notes": "Top SMD; Charger STDBY indicator LED; Observe cathode mark; Alt MPN: KT-0603YG (LCSC: C2289)",
+    },
+    ("470R", "R_0603_1608Metric", "C23179"): {
+        "orig_mpn": "0603WAF4700T5E",
+        "lc_mpn": "RC0603FR-07470RL",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "Thick Film Chip Resistor 470 Ohm 1% 0.1W (1/10W) 0603 (1608 Metric)",
+        "notes": "Top SMD; LED1 current limiting resistor; Alt MPN: 0603WAF4700T5E (LCSC: C23179)",
+    },
+    ("100k", "R_0603_1608Metric", "C25803"): {
+        "orig_mpn": "0603WAF1003T5E",
+        "lc_mpn": "RC0603FR-07100KL",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "Thick Film Chip Resistor 100 kOhm 1% 0.1W (1/10W) 0603 (1608 Metric)",
+        "notes": "Top SMD; Power path & VBAT ADC divider; Alt MPN: 0603WAF1003T5E (LCSC: C25803)",
+    },
+    ("1.2k", "R_0603_1608Metric", "C22765"): {
+        "orig_mpn": "0603WAF1201T5E",
+        "lc_mpn": "RC0603FR-071K2L",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "Thick Film Chip Resistor 1.2 kOhm 1% 0.1W (1/10W) 0603 (1608 Metric)",
+        "notes": "Top SMD; Charger status LED resistors; Alt MPN: 0603WAF1201T5E (LCSC: C22765)",
+    },
+    ("10k", "R_0603_1608Metric", "C25804"): {
+        "orig_mpn": "0603WAF1002T5E",
+        "lc_mpn": "RC0603FR-0710KL",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "Thick Film Chip Resistor 10 kOhm 1% 0.1W (1/10W) 0603 (1608 Metric)",
+        "notes": "Top SMD; EN/IO0 pull-ups & MOSFET gate pulldowns; Alt MPN: 0603WAF1002T5E (LCSC: C25804)",
+    },
+    ("4.7k", "R_0603_1608Metric", "C23162"): {
+        "orig_mpn": "0603WAF4701T5E",
+        "lc_mpn": "RC0603FR-074K7L",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "Thick Film Chip Resistor 4.7 kOhm 1% 0.1W (1/10W) 0603 (1608 Metric)",
+        "notes": "Top SMD; I2C pull-ups & MPU-6050 AD0 pulldown; Alt MPN: 0603WAF4701T5E (LCSC: C23162)",
+    },
+    ("22R", "R_0603_1608Metric", "C23345"): {
+        "orig_mpn": "0603WAF220JT5E",
+        "lc_mpn": "RC0603FR-0722RL",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "Thick Film Chip Resistor 22 Ohm 1% 0.1W (1/10W) 0603 (1608 Metric)",
+        "notes": "Top & Bottom SMD (R29 on Bottom); USB D+/D- series & RC snubber damping; Alt MPN: 0603WAF220JT5E (LCSC: C23345)",
+    },
+    ("5.1k", "R_0603_1608Metric", "C23186"): {
+        "orig_mpn": "0603WAF5101T5E",
+        "lc_mpn": "RC0603FR-075K1L",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "Thick Film Chip Resistor 5.1 kOhm 1% 0.1W (1/10W) 0603 (1608 Metric)",
+        "notes": "Top SMD; USB-C CC1/CC2 Rd 5.1k pulldowns; Alt MPN: 0603WAF5101T5E (LCSC: C23186)",
+    },
+    ("3.3k", "R_0603_1608Metric", "C22978"): {
+        "orig_mpn": "0603WAF3301T5E",
+        "lc_mpn": "RC0603FR-073K3L",
+        "lc_fp": "0603 (1608 Metric)",
+        "desc": "Thick Film Chip Resistor 3.3 kOhm 1% 0.1W (1/10W) 0603 (1608 Metric)",
+        "notes": "Top SMD; TP4056 PROG current setting resistor (364mA); Alt MPN: 0603WAF3301T5E (LCSC: C22978)",
+    },
+    ("PCM12SMTR", "slide switch spdt", "C221841"): {
+        "orig_mpn": "PCM12SMTR",
+        "lc_mpn": "PCM12SMTR",
+        "lc_fp": "SMD-SW-PCM12SMTR",
+        "desc": "Slide Switch SPDT Right-Angle Ultraminiature Surface Mount",
+        "notes": "Top SMD; System power slide switch; C&K PCM12SMTR (LCSC: C221841)",
+    },
+    ("TS-1187A", "SW_Push_1P1T_XKB_TS-1187A", "C318889"): {
+        "orig_mpn": "TS-1187A-C-C-B",
+        "lc_mpn": "PTS526SM15SMTR2LFS",
+        "lc_fp": "SMD-SW-5.1x5.1mm",
+        "desc": "Tactile Switch SPST-NO Top Actuated 5.2x5.2x1.5mm 4-SMD Gull Wing",
+        "notes": "Top SMD; Reset (EN) & Boot (IO0) buttons; C&K PTS526SM15SMTR2LFS (5.2x5.2x1.5mm); Alt MPN: SKQGAFE010 / TS-1187A-C-C-B (LCSC: C318889) — Do NOT substitute 6x6mm or >1.5mm height switches",
+    },
+    ("SI2302DS-T1", "SOT95P237X112-3N", "C351401"): {
+        "orig_mpn": "SI2302DS-T1",
+        "lc_mpn": "SI2302CDS-T1-GE3",
+        "lc_fp": "SOT-23-3",
+        "desc": "MOSFET N-Channel 20V 2.8A Logic-Level Low-Side Motor Switch SOT-23-3",
+        "notes": "Top SMD; 4x Motor PWM low-side switches; Vishay SI2302CDS-T1-GE3 / SI2302DS-T1-GE3 (LCSC: C351401)",
+    },
+    ("AO3401", "SOT-23", "C15127"): {
+        "orig_mpn": "AO3401A",
+        "lc_mpn": "AO3401A",
+        "lc_fp": "SOT-23-3",
+        "desc": "MOSFET P-Channel -30V -4A Low RDS(on) Power-Path Switch SOT-23-3",
+        "notes": "Top SMD; Automatic battery/USB power-path ideal diode; Alpha & Omega AO3401A (LCSC: C15127)",
+    },
+    ("AP2112K-3.3TRG1", "SOT-23-5", "C51118"): {
+        "orig_mpn": "AP2112K-3.3TRG1",
+        "lc_mpn": "AP2112K-3.3TRG1",
+        "lc_fp": "SOT-23-5",
+        "desc": "LDO Linear Voltage Regulator 3.3V Fixed 600mA Low Noise SOT-23-5",
+        "notes": "Top SMD; System 3.3V regulator; Diodes Inc AP2112K-3.3TRG1 (LCSC: C51118)",
+    },
+    ("ESP32-S3-WROOM-1-N8R8", "ESP32-S3-WROOM-1", "C2913201"): {
+        "orig_mpn": "ESP32-S3-WROOM-1-N8R8",
+        "lc_mpn": "ESP32-S3-WROOM-1-N8R8",
+        "lc_fp": "SMD-41 (18x25.5mm)",
+        "desc": "RF Wi-Fi 802.11b/g/n + Bluetooth LE 5.0 MCU Module ESP32-S3 8MB Flash 8MB PSRAM SMD-41",
+        "notes": "Top SMD; Keep antenna cantilevered over board cutout; Espressif ESP32-S3-WROOM-1-N8R8 (LCSC: C2913201)",
+    },
+    ("MPU-6050", "MPU6050", "C24112"): {
+        "orig_mpn": "MPU-6050",
+        "lc_mpn": "ICM-20789",
+        "lc_fp": "QFN-24 (4x4mm)",
+        "desc": "MEMS IMU 6-Axis Gyroscope + Accelerometer I2C/SPI 24-Pin 4x4mm (TDK InvenSense)",
+        "notes": "Top SMD; DO NOT SOLDER ICM-20789 (catalog-pass MPN only — Pin 8 VDDIO max 1.98V will be damaged by PCB +3V3 rail & LGA-24 lacks central EP over pasted Pad 25); Populate 3.3V-rated MPU-6050 / MPU-6000 (LCSC: C24112) / ICM-20689 via assisted/consigned sourcing or mark U9 DNP",
+    },
+}
+
+
+def write_lioncircuits_xlsx(rows, out_path):
+    if openpyxl:
+        wb = openpyxl.Workbook()
+        ws = wb.active
+        ws.title = "BOM"
+        ws.append(LIONCIRCUITS_HEADERS)
+        for r in rows:
+            ws.append(r)
+        wb.save(out_path)
+        return
+
+    # Pure-Python OpenXML (.xlsx) writer fallback when openpyxl is not installed
+    from xml.sax.saxutils import escape
+
+    all_rows = [LIONCIRCUITS_HEADERS] + [list(r) for r in rows]
+    sheet_rows_xml = []
+    for r_idx, row in enumerate(all_rows, start=1):
+        cells_xml = []
+        for c_idx, val in enumerate(row):
+            col_letter = chr(ord("A") + c_idx)
+            cell_ref = f"{col_letter}{r_idx}"
+            if r_idx > 1 and isinstance(val, int):
+                cells_xml.append(f'<c r="{cell_ref}" t="n"><v>{val}</v></c>')
+            else:
+                text = escape(str(val))
+                cells_xml.append(
+                    f'<c r="{cell_ref}" t="inlineStr"><is><t>{text}</t></is></c>'
+                )
+        sheet_rows_xml.append(f'<row r="{r_idx}">{"".join(cells_xml)}</row>')
+
+    sheet_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
+        f'<sheetData>{"".join(sheet_rows_xml)}</sheetData>'
+        "</worksheet>"
+    )
+    content_types_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+        '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+        '<Default Extension="xml" ContentType="application/xml"/>'
+        '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'
+        '<Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
+        "</Types>"
+    )
+    rels_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+        '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>'
+        "</Relationships>"
+    )
+    wb_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" '
+        'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+        '<sheets><sheet name="BOM" sheetId="1" r:id="rId1"/></sheets>'
+        "</workbook>"
+    )
+    wb_rels_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+        '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>'
+        "</Relationships>"
+    )
+    with zipfile.ZipFile(out_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        zf.writestr("[Content_Types].xml", content_types_xml)
+        zf.writestr("_rels/.rels", rels_xml)
+        zf.writestr("xl/workbook.xml", wb_xml)
+        zf.writestr("xl/_rels/workbook.xml.rels", wb_rels_xml)
+        zf.writestr("xl/worksheets/sheet1.xml", sheet_xml)
+
+
+def export_lioncircuits_boms(individual_items):
+    """Export both Original-MPN and LionCircuits-resolved 8-column BOMs (.csv and .xlsx)."""
+    def natural_sort_key(ref):
+        prefix = re.match(r"^[A-Za-z]+", ref)
+        prefix_str = prefix.group(0) if prefix else ref
+        num_part = re.search(r"\d+", ref)
+        num_int = int(num_part.group(0)) if num_part else 0
+        return (prefix_str, num_int, ref)
+
+    groups = {}
+    for item in individual_items:
+        key = (item["comment"], item["footprint"], item["lcsc"])
+        if key not in groups:
+            groups[key] = []
+        groups[key].append(item["ref"])
+
+    sorted_keys = sorted(
+        groups.keys(),
+        key=lambda k: natural_sort_key(sorted(groups[k], key=natural_sort_key)[0]),
+    )
+
+    orig_rows = []
+    lc_rows = []
+    lc_dnp_rows = []
+    dnp_idx = 0
+    for idx, key in enumerate(sorted_keys, start=1):
+        val, clean_fp, lcsc = key
+        refs = sorted(groups[key], key=natural_sort_key)
+        des_str = ",".join(refs)
+        qty = len(refs)
+        meta = LIONCIRCUITS_BOM_MAP.get(key, {})
+        orig_mpn = meta.get("orig_mpn", lcsc)
+        lc_mpn = meta.get("lc_mpn", orig_mpn)
+        lc_fp = meta.get("lc_fp", clean_fp)
+        desc = meta.get("desc", f"{val} {clean_fp}")
+        notes = meta.get("notes", f"Top SMD; LCSC: {lcsc}")
+
+        orig_rows.append([idx, des_str, qty, desc, orig_mpn, clean_fp, val, notes])
+        lc_rows.append([idx, des_str, qty, desc, lc_mpn, lc_fp, val, notes])
+        if des_str not in ("IC1", "U9"):
+            dnp_idx += 1
+            lc_dnp_rows.append([dnp_idx, des_str, qty, desc, lc_mpn, lc_fp, val, notes])
+
+    cp_dir = PCB_DIR.parent / ".copperpilot"
+    cp_dir.mkdir(parents=True, exist_ok=True)
+
+    for stem, short_stem, rows in [
+        (f"{PROJECT_NAME}-bom-original", "bom-original", orig_rows),
+        (f"{PROJECT_NAME}-bom-lioncircuits", "bom-lioncircuits", lc_rows),
+        (f"{PROJECT_NAME}-bom-lioncircuits-dnp", "bom-lioncircuits-dnp", lc_dnp_rows),
+    ]:
+        csv_path = BUILD_DIR / f"{stem}.csv"
+        xlsx_path = BUILD_DIR / f"{stem}.xlsx"
+        with open(csv_path, "w", newline="", encoding="utf-8") as wf:
+            writer = csv.writer(wf)
+            writer.writerow(LIONCIRCUITS_HEADERS)
+            writer.writerows(rows)
+        write_lioncircuits_xlsx(rows, xlsx_path)
+
+        shutil.copyfile(csv_path, cp_dir / f"{short_stem}.csv")
+        if xlsx_path.exists():
+            shutil.copyfile(xlsx_path, cp_dir / f"{short_stem}.xlsx")
+
+    shutil.copyfile(BUILD_DIR / f"{PROJECT_NAME}-bom.csv", cp_dir / "bom.csv")
+    print(
+        f"LionCircuits BOMs exported to {BUILD_DIR}/{PROJECT_NAME}-bom-lioncircuits.[csv|xlsx], "
+        f"{BUILD_DIR}/{PROJECT_NAME}-bom-lioncircuits-dnp.[csv|xlsx], "
+        f"and {BUILD_DIR}/{PROJECT_NAME}-bom-original.[csv|xlsx]"
+    )
 
 
 def export_d356():
@@ -442,7 +932,7 @@ def export_spec():
 | **Via Process** | Tented (Front Yes, Back Yes) | Vias covered by solder mask; no open vias in SMD pads |
 | **Impedance Control** | No (Standard 90 Ω diff pair geometry) | USB D+/D- 0.20 mm width, 0.15 mm space on 1.6 mm FR4 |
 | **Min Track / Spacing** | 0.20 mm / 0.15 mm | Exceeds JLCPCB 0.10/0.10 mm standard threshold |
-| **Min Hole Diameter** | 0.30 mm drill / 0.60 mm pad | Exceeds JLCPCB 0.30/0.45 mm no-surcharge threshold |
+| **Min Hole Diameter** | 0.35 mm drill / 0.65 mm pad | Exceeds JLCPCB 0.30/0.45 mm and LionCircuits 0.35 mm standard thresholds |
 | **Castellated Holes** | No | None |
 | **Edge Connector / Gold Fingers** | No | None |
 | **Flying Probe Test** | Fully Tested | 100% netlist electrical test |
@@ -496,6 +986,42 @@ def export_spec():
     spec_path.write_text(order_spec, encoding="utf-8")
     print(f"ORDER_SPEC.md created at {spec_path}")
 
+    lc_spec_path = BUILD_DIR / "LIONCIRCUITS_ORDER_SPEC.md"
+    lc_order_spec = """# LionCircuits Manufacturing & Turnkey Assembly Order Specification
+
+**Project Name:** ESP32-S3 FPV Drone Flight Controller  
+**Design Revision:** 1.0  
+**Target Fabricator & Assembler:** LionCircuits
+
+---
+
+## 1. Bare-Board PCB Fabrication Parameters (Standard Tier Compliant)
+
+| Portal Field | Specification Value | Engineering Verification |
+|---|---|---|
+| **Layers** | `2` (`F.Cu`, `B.Cu`) | 2-layer stackup verified |
+| **Board Dimension** | `100.00 mm × 100.00 mm` | Integrated breakaway frame with 56 × `0.50 mm` NPTH mousebites |
+| **Discrete Design / Board Type** | `1` / `Single PCB` (or `Panel By Customer`) | Single flight controller inside breakaway rails |
+| **PCB Thickness** | `1.6 mm` | Required for 8520 motor C-clamp cutouts and enclosure fit |
+| **Copper Thickness** | `1 oz (35 um)` | Meets `6/6 mil` (`0.1524 mm`) trace/space rules (`0.20 mm` min trace, `0.1524 mm` min clearance) |
+| **PCB Finish** | **`ENIG`** | Flat coplanar pads required for `0.50 mm` pitch `QFN-24` (`U9`), `USB-C` (`J1`), and `ESP32-S3` (`U8`) |
+| **Mask / Silkscreen Color** | `Red` / `White` | Verified solder mask web and silkscreen-to-pad clearance |
+| **Minimum Plated Drill** | **`0.35 mm` drill / `0.65 mm` pad** | `T1C0.350`, `T2C0.350`, `T3C0.400`, `T4C0.600` — 100% compliant with LionCircuits `0.35 mm` Standard Tier |
+| **Minimum Non-Plated Drill** | **`0.50 mm`** | `T1C0.500`, `T2C0.650`, `T3C0.950`, `T4C1.000` |
+| **U9 (`MPU-6050`) Pad 25 Paste** | **No Paste on Center Pad 25** | `F.Paste` removed per TDK InvenSense `MPU-6050` Product Spec Rev 3.4 Section 11.2 |
+
+---
+
+## 2. PCBA Turnkey & Consigned Assembly Options
+
+| Option | BOM File to Upload | CPL File to Upload | Populated Scope |
+|---|---|---|---|
+| **Option A: Safe 66-Part Turnkey (DNP `IC1` & `U9`)** | `CopperPilotDrone-bom-lioncircuits-dnp.xlsx` (or `.csv`) | `CopperPilotDrone-cpl-lioncircuits-dnp.csv` (or `.xlsx`) | Populates all 28 verified Tier-1 BOM lines (`66` SMT parts); leaves `IC1` (`TP4056-42-ESOP8`) and `U9` (`MPU-6050`) unpopulated for consigned/post-delivery reflow |
+| **Option B: Full 68-Part Consigned / Assisted Turnkey** | `CopperPilotDrone-bom-lioncircuits.xlsx` (portal check) + `CopperPilotDrone-bom-original.xlsx` (actual MPNs) | `CopperPilotDrone-cpl-lioncircuits.csv` (or `.xlsx`) | Populates all 30 lines (`68` SMT parts) using `TP4056-42-ESOP8` (`LCSC: C16581`) on `IC1` and `MPU-6050` (`LCSC: C24112`) on `U9` |
+"""
+    lc_spec_path.write_text(lc_order_spec, encoding="utf-8")
+    print(f"LIONCIRCUITS_ORDER_SPEC.md created at {lc_spec_path}")
+
 
 def export_kikit():
     ensure_dirs()
@@ -540,6 +1066,30 @@ def package_release():
                 zf.write(item, item.name)
 
     print(f"Complete release bundle created at {RELEASE_ZIP} ({os.path.getsize(RELEASE_ZIP)} bytes)")
+
+    lc_items = [
+        GERBERS_ZIP,
+        BUILD_DIR / f"{PROJECT_NAME}-bom-lioncircuits.xlsx",
+        BUILD_DIR / f"{PROJECT_NAME}-bom-lioncircuits.csv",
+        BUILD_DIR / f"{PROJECT_NAME}-bom-lioncircuits-dnp.xlsx",
+        BUILD_DIR / f"{PROJECT_NAME}-bom-lioncircuits-dnp.csv",
+        BUILD_DIR / f"{PROJECT_NAME}-bom-original.xlsx",
+        BUILD_DIR / f"{PROJECT_NAME}-bom-original.csv",
+        BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits.csv",
+        BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits.xlsx",
+        BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits-dnp.csv",
+        BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits-dnp.xlsx",
+        BUILD_DIR / f"{PROJECT_NAME}.d356",
+        BUILD_DIR / f"{PROJECT_NAME}_Schematic.pdf",
+        BUILD_DIR / f"{PROJECT_NAME}_PCB_Layers.pdf",
+        BUILD_DIR / "LIONCIRCUITS_ORDER_SPEC.md",
+    ]
+    with zipfile.ZipFile(LC_RELEASE_ZIP, "w", zipfile.ZIP_DEFLATED) as zf:
+        for item in lc_items:
+            if item.exists():
+                zf.write(item, item.name)
+
+    print(f"Complete LionCircuits release bundle created at {LC_RELEASE_ZIP} ({os.path.getsize(LC_RELEASE_ZIP)} bytes)")
 
 
 def main():

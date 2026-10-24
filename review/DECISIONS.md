@@ -10,7 +10,7 @@ This document records all design trade-offs, formal waivers, and constraint just
 |---|---|---|---|---|---|---|
 | `DEC-001` | DFM / PCB | Copper to Routed Edge.Cuts Clearance | ≥ 0.30 mm | 0.20 mm | 0.265 mm (min 0.25 mm rule) | Approved |
 | `DEC-002` | DFM / Rule | Breakaway Mousebite Perforation Pitch | ≥ 0.50 mm (global) | 0.20 mm (specialized) | 0.25 mm via custom DRU rule | Approved |
-| `DEC-003` | Thermal / DFM | ESP32-S3 U8 Thermal Via Spacing | ≥ 0.50 mm target | 0.20 mm JLC limit | 0.55 mm hole-to-hole (9 vias) | Approved |
+| `DEC-003` | Thermal / DFM | ESP32-S3 U8 Thermal Via Spacing & Drill | ≥ 0.50 mm target | 0.20 mm JLC / 0.35 mm LC | 0.35 mm drill / 0.65 mm pad | Approved |
 | `DEC-004` | SI / EMI | Dangling Trace Stubs Elimination | 0 stubs (IPC-2152) | N/A | 0 stubs, 100% routed netlist | Approved |
 | `DEC-005` | DFM / Library | Footprint Silkscreen Optimization vs Library Parity (`lib_footprint_mismatch`) | Library copy match | N/A | Local footprint optimization (severity: ignore) | Approved |
 | `DEC-006` | SMT / BOM | Extended Procurement Properties Parity (`footprint_symbol_field_mismatch`) | Full symbol-footprint field match | N/A | Allow schematic MPN field (severity: ignore) | Approved |
@@ -48,7 +48,7 @@ This document records all design trade-offs, formal waivers, and constraint just
 - **Conflict:** Baseline layout featured 48 thermal vias under U8 with drill-to-drill spacing < 0.20 mm, violating JLCPCB's 0.20 mm hole-to-hole manufacturing limit and causing 48 DRC violations.
 - **Options Considered:**
   1. *Option A:* Remove all thermal vias under U8. This causes severe thermal throttling on the ESP32-S3 during high-throughput 2.4 GHz FPV video streaming (module dissipates up to 1.1 W).
-  2. *Option B:* Re-layout the thermal array into a balanced 3×3 matrix of 9 vias (0.3 mm drill / 0.6 mm pad) spaced at 0.8 mm pitch (0.5 mm edge-to-edge hole clearance), fully meeting JLCPCB targets while providing low thermal impedance (R_th < 8 °C/W).
+  2. *Option B:* Re-layout the thermal array and upsize all 12 U8 pad 41 thermal holes and 83 signal vias to 0.35 mm drill / 0.65 mm pad diameter (0.15 mm annular ring) with ≥ 0.48 mm edge-to-edge hole clearance, fully meeting both JLCPCB and LionCircuits Standard Tier (≥ 0.35 mm drill) targets while providing low thermal impedance (R_th < 8 °C/W).
 - **Decision:** Adopt Option B.
 - **Priority Rule Applied:** Safety & Thermal Reliability > Unconstrained Array.
 - **Residual Risk:** Zero. Full ground return and thermal dissipation confirmed.

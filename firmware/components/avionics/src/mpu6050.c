@@ -22,14 +22,40 @@
 static mpu6050_calib_t s_calib = {
     .bias_gx = 0.0f, .bias_gy = 0.0f, .bias_gz = 0.0f, .is_calibrated = false};
 
+static bool s_is_icm42670 = false;
+
 bool mpu6050_init(void) {
     uint8_t who_am_i = 0;
     if (!hal_i2c_read(MPU6050_I2C_ADDR, REG_WHO_AM_I, &who_am_i, 1)) {
         return false;
     }
+
+    /* Support both legacy MPU-6050 (0x68/0x70/0x72) and next-gen ICM-42670-P (0x67) */
+    if (who_am_i == 0x67) {
+        s_is_icm42670 = true;
+        /* 1. Wake up device: PWR_MGMT0 (reg 0x1F) -> 0x0F (Low-Noise Gyro + Accel) */
+        uint8_t pwr = 0x0F;
+        if (!hal_i2c_write(MPU6050_I2C_ADDR, 0x1F, &pwr, 1))
+            return false;
+        hal_delay_ms(10);
+
+        /* 2. Gyro Config0 (reg 0x20): +/-2000 dps, 1 kHz ODR -> 0x06 */
+        uint8_t gyro_cfg = 0x06;
+        if (!hal_i2c_write(MPU6050_I2C_ADDR, 0x20, &gyro_cfg, 1))
+            return false;
+
+        /* 3. Accel Config0 (reg 0x21): +/-8g, 1 kHz ODR -> 0x06 */
+        uint8_t accel_cfg = 0x06;
+        if (!hal_i2c_write(MPU6050_I2C_ADDR, 0x21, &accel_cfg, 1))
+            return false;
+
+        return true;
+    }
+
     if (who_am_i != 0x68 && who_am_i != 0x70 && who_am_i != 0x72) {
         return false;
     }
+    s_is_icm42670 = false;
 
     /* 1. Wake up device and select internal PLL with X-axis gyro reference */
     uint8_t pwr = 0x01;
@@ -99,6 +125,43 @@ bool mpu6050_calibrate_gyro(uint16_t sample_count) {
 bool mpu6050_read_data(mpu6050_data_t *out_data) {
     if (!out_data)
         return false;
+
+    if (s_is_icm42670) {
+        /* ICM-42670-P consecutive register burst from 0x0B (TEMP_DATA1 to GYRO_DATA_Z0) */
+        uint8_t buf[14];
+        if (!hal_i2c_read(MPU6050_I2C_ADDR, 0x0B, buf, 14)) {
+            return false;
+        }
+
+        int16_t raw_temp = (int16_t)((buf[0] << 8) | buf[1]);
+        int16_t raw_ax = (int16_t)((buf[2] << 8) | buf[3]);
+        int16_t raw_ay = (int16_t)((buf[4] << 8) | buf[5]);
+        int16_t raw_az = (int16_t)((buf[6] << 8) | buf[7]);
+        int16_t raw_gx = (int16_t)((buf[8] << 8) | buf[9]);
+        int16_t raw_gy = (int16_t)((buf[10] << 8) | buf[11]);
+        int16_t raw_gz = (int16_t)((buf[12] << 8) | buf[13]);
+
+        /* Raw engineering units (+/-8g -> 4096 LSB/g, +/-2000 dps -> 16.4 LSB/dps) */
+        float ax_g = (float)raw_ax / MPU6050_ACCEL_SCALE_8G;
+        float ay_g = (float)raw_ay / MPU6050_ACCEL_SCALE_8G;
+        float az_g = (float)raw_az / MPU6050_ACCEL_SCALE_8G;
+
+        float gx_dps = (float)raw_gx / MPU6050_GYRO_SCALE_2000;
+        float gy_dps = (float)raw_gy / MPU6050_GYRO_SCALE_2000;
+        float gz_dps = (float)raw_gz / MPU6050_GYRO_SCALE_2000;
+
+        /* Remapping identical to MPU-6050 180-deg orientation */
+        out_data->ax = -ay_g;
+        out_data->ay = -ax_g;
+        out_data->az = az_g;
+
+        out_data->gx = (-gx_dps) - s_calib.bias_gx;
+        out_data->gy = (-gy_dps) - s_calib.bias_gy;
+        out_data->gz = gz_dps - s_calib.bias_gz;
+
+        out_data->temperature_c = ((float)raw_temp / 128.0f) + 25.0f;
+        return true;
+    }
 
     uint8_t buf[14];
     if (!hal_i2c_read(MPU6050_I2C_ADDR, REG_ACCEL_XOUT_H, buf, 14)) {

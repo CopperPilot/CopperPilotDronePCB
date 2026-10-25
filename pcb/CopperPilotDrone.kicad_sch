@@ -1566,636 +1566,214 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "MPU-6050:MPU-6050"
+		(symbol "MPU-6050:ICM-42670-P"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" ""
+			(property "Reference" "U"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "MPU-6050"
+						(size 1.27 1.27))))
+			(property "Value" "ICM-42670-P"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
+						(size 1.27 1.27))))
+			(property "Footprint" "Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
 				(effects
 					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
+						(size 1.27 1.27))))
+			(property "Datasheet" "https://invensense.tdk.com/wp-content/uploads/2021/07/DS-000451-ICM-42670-P-v1.0.pdf"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
 				(effects
 					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "IMUs - Inertial Measurement Units 6-Axis MEMS MotionTracking  Device with DMP"
+						(size 1.27 1.27))))
+			(property "Description" "High-Performance 6-Axis MEMS MotionTracking IMU, 3.3V I2C/SPI, LGA-14"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
 				(effects
 					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Reference_1" "IC"
-				(at 26.67 17.78 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-				)
-			)
-			(property "Value_1" "MPU-6050"
-				(at 26.67 15.24 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-				)
-			)
-			(property "Footprint_1" "MPU6050"
-				(at 26.67 -84.76 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-				)
-			)
-			(property "Datasheet_1" "https://product.tdk.com/system/files/dam/doc/product/sensor/mortion-inertial/imu/data_sheet/mpu-6000-datasheet1.pdf"
-				(at 26.67 -184.76 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-				)
-			)
-			(property "Height" "0.95"
-				(at 26.67 -384.76 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-				)
-			)
-			(property "Mouser Part Number" "410-MPU-6050"
-				(at 26.67 -484.76 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-				)
-			)
-			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TDK-InvenSense/MPU-6050?qs=u4fy%2FsgLU9O14B5JgyQFvg%3D%3D"
-				(at 26.67 -584.76 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-				)
-			)
-			(property "Manufacturer_Name" "TDK"
-				(at 26.67 -684.76 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-				)
-			)
-			(property "Manufacturer_Part_Number" "MPU-6050"
-				(at 26.67 -784.76 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-				)
-			)
-			(symbol "MPU-6050_1_1"
+						(size 1.27 1.27))))
+			(symbol "ICM-42670-P_1_1"
 				(rectangle
 					(start 5.08 12.7)
 					(end 25.4 -25.4)
 					(stroke
 						(width 0.254)
-						(type default)
-					)
+						(type default))
 					(fill
-						(type background)
-					)
-				)
-				(pin passive line
-					(at 0 0 0)
-					(length 5.08)
-					(name "CLKIN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -2.54 0)
-					(length 5.08)
-					(name "NC_1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -5.08 0)
-					(length 5.08)
-					(name "NC_2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -7.62 0)
-					(length 5.08)
-					(name "NC_3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -10.16 0)
-					(length 5.08)
-					(name "NC_4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -12.7 0)
-					(length 5.08)
-					(name "AUX_DA"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 7.62 -30.48 90)
-					(length 5.08)
-					(name "AUX_CL"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 10.16 -30.48 90)
-					(length 5.08)
-					(name "VLOGIC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
+						(type background)))
 				(pin passive line
 					(at 12.7 -30.48 90)
 					(length 5.08)
-					(name "AD0"
+					(name "AP_AD0"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
+								(size 1.27 1.27))))
+					(number "1"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
+								(size 1.27 1.27)))))
 				(pin passive line
-					(at 15.24 -30.48 90)
+					(at 0 -2.54 0)
 					(length 5.08)
-					(name "REGOUT"
+					(name "RESV_1"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
+								(size 1.27 1.27))))
+					(number "2"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
+								(size 1.27 1.27)))))
 				(pin passive line
-					(at 17.78 -30.48 90)
+					(at 0 -5.08 0)
 					(length 5.08)
-					(name "FSYNC"
+					(name "RESV_2"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
+								(size 1.27 1.27))))
+					(number "3"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
+								(size 1.27 1.27)))))
 				(pin passive line
 					(at 20.32 -30.48 90)
 					(length 5.08)
-					(name "INT"
+					(name "INT1"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
+								(size 1.27 1.27))))
+					(number "4"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
+								(size 1.27 1.27)))))
 				(pin passive line
-					(at 30.48 -12.7 180)
+					(at 10.16 -30.48 90)
 					(length 5.08)
-					(name "VDD"
+					(name "VDDIO"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "13"
+								(size 1.27 1.27))))
+					(number "5"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 30.48 -10.16 180)
-					(length 5.08)
-					(name "NC_5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 30.48 -7.62 180)
-					(length 5.08)
-					(name "NC_6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "15"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 30.48 -5.08 180)
-					(length 5.08)
-					(name "NC_7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "16"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 30.48 -2.54 180)
-					(length 5.08)
-					(name "NC_8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "17"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
+								(size 1.27 1.27)))))
 				(pin passive line
 					(at 30.48 0 180)
 					(length 5.08)
 					(name "GND"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "18"
+								(size 1.27 1.27))))
+					(number "6"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
+								(size 1.27 1.27)))))
 				(pin passive line
-					(at 22.86 17.78 270)
+					(at 17.78 -30.48 90)
 					(length 5.08)
-					(name "RESV_1"
+					(name "FSYNC"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "19"
+								(size 1.27 1.27))))
+					(number "7"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
+								(size 1.27 1.27)))))
+				(pin passive line
+					(at 30.48 -12.7 180)
+					(length 5.08)
+					(name "VDD"
+						(effects
+							(font
+								(size 1.27 1.27))))
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)))))
+				(pin passive line
+					(at 0 -7.62 0)
+					(length 5.08)
+					(name "INT2"
+						(effects
+							(font
+								(size 1.27 1.27))))
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)))))
+				(pin passive line
+					(at 0 -10.16 0)
+					(length 5.08)
+					(name "NC_1"
+						(effects
+							(font
+								(size 1.27 1.27))))
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)))))
+				(pin passive line
+					(at 0 -12.7 0)
+					(length 5.08)
+					(name "NC_2"
+						(effects
+							(font
+								(size 1.27 1.27))))
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)))))
 				(pin passive line
 					(at 20.32 17.78 270)
 					(length 5.08)
-					(name "CPOUT"
+					(name "AP_CS"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "20"
+								(size 1.27 1.27))))
+					(number "12"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 17.78 17.78 270)
-					(length 5.08)
-					(name "RESV_2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "21"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 15.24 17.78 270)
-					(length 5.08)
-					(name "RESV_3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "22"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
+								(size 1.27 1.27)))))
 				(pin passive line
 					(at 12.7 17.78 270)
 					(length 5.08)
-					(name "SCL"
+					(name "AP_SCL"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "23"
+								(size 1.27 1.27))))
+					(number "13"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
+								(size 1.27 1.27)))))
 				(pin passive line
 					(at 10.16 17.78 270)
 					(length 5.08)
-					(name "SDA"
+					(name "AP_SDA"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "24"
+								(size 1.27 1.27))))
+					(number "14"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 7.62 17.78 270)
-					(length 5.08)
-					(name "EP"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "25"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
+								(size 1.27 1.27))))))
+			(embedded_fonts no))
 		(symbol "Power_Protection:USBLC6-2SC6"
 			(pin_names
 				(hide yes)
@@ -4564,359 +4142,180 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "TP4056-42-ESOP8:TP4056-42-ESOP8"
+		(symbol "TP4056-42-ESOP8:MCP73833-AMI-UN"
 			(pin_names
-				(offset 0.762)
-			)
+				(offset 0.762))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "IC?"
+			(property "Reference" "IC"
 				(at 15.24 7.62 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "TP4056"
+						(size 1.27 1.27))))
+			(property "Value" "MCP73833-AMI/UN"
 				(at 15.24 5.08 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" "SOIC127P600X175-9N"
+						(size 1.27 1.27))))
+			(property "Footprint" "Package_SO:MSOP-10_3x3mm_P0.5mm"
 				(at 26.67 2.54 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
 				(effects
 					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Datasheet" "https://datasheet.lcsc.com/szlcsc/1906261508_Nanjing-Extension-Microelectronics-TP4056-42-ESOP8_C16581.pdf"
+						(size 1.27 1.27))
+					(justify left)))
+			(property "Datasheet" "https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/DataSheets/22005b.pdf"
 				(at 26.67 0 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
 				(effects
 					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Description" "PMIC - Battery Management ESOP-8 RoHS"
+						(size 1.27 1.27))
+					(justify left)))
+			(property "Description" "Stand-Alone Linear Li-Ion / Li-Polymer Charge Management Controller, MSOP-10"
 				(at 26.67 -2.54 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
 				(effects
 					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Height" "1.75"
-				(at 26.67 -5.08 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Manufacturer_Name" "Nanjing Extension Microelectronics"
-				(at 26.67 -7.62 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Manufacturer_Part_Number" "TP4056-42-ESOP8"
-				(at 26.67 -10.16 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Mouser Part Number" ""
-				(at 26.67 -12.7 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Mouser Price/Stock" ""
-				(at 26.67 -15.24 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Arrow Part Number" ""
-				(at 26.67 -17.78 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Arrow Price/Stock" ""
-				(at 26.67 -20.32 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Mouser Testing Part Number" ""
-				(at 26.67 -22.86 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Mouser Testing Price/Stock" ""
-				(at 26.67 -25.4 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(symbol "TP4056-42-ESOP8_0_0"
+						(size 1.27 1.27))
+					(justify left)))
+			(symbol "MCP73833-AMI-UN_0_0"
 				(pin passive line
-					(at 0 0 0)
+					(at 0 -7.62 0)
 					(length 5.08)
-					(name "TEMP"
+					(name "VDD1"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
+								(size 1.27 1.27))))
 					(number "1"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
+								(size 1.27 1.27)))))
+				(pin passive line
+					(at 30.48 0 180)
+					(length 5.08)
+					(name "VDD2"
+						(effects
+							(font
+								(size 1.27 1.27))))
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)))))
+				(pin passive line
+					(at 30.48 -2.54 180)
+					(length 5.08)
+					(name "STAT1"
+						(effects
+							(font
+								(size 1.27 1.27))))
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)))))
+				(pin passive line
+					(at 30.48 -5.08 180)
+					(length 5.08)
+					(name "STAT2"
+						(effects
+							(font
+								(size 1.27 1.27))))
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)))))
+				(pin passive line
+					(at 0 -5.08 0)
+					(length 5.08)
+					(name "VSS"
+						(effects
+							(font
+								(size 1.27 1.27))))
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)))))
 				(pin passive line
 					(at 0 -2.54 0)
 					(length 5.08)
 					(name "PROG"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -5.08 0)
-					(length 5.08)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -7.62 0)
-					(length 5.08)
-					(name "VCC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 30.48 -7.62 180)
-					(length 5.08)
-					(name "BAT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 30.48 -5.08 180)
-					(length 5.08)
-					(name "~{STDBY}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
+								(size 1.27 1.27))))
 					(number "6"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 30.48 -2.54 180)
-					(length 5.08)
-					(name "~{CHRG}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 30.48 0 180)
-					(length 5.08)
-					(name "CE"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
+								(size 1.27 1.27)))))
 				(pin passive line
 					(at 15.24 -20.32 90)
 					(length 5.08)
-					(name "EP"
+					(name "~{PG}"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
+								(size 1.27 1.27))))
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)))))
+				(pin passive line
+					(at 0 0 0)
+					(length 5.08)
+					(name "THERM"
+						(effects
+							(font
+								(size 1.27 1.27))))
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)))))
+				(pin passive line
+					(at 30.48 -7.62 180)
+					(length 5.08)
+					(name "VBAT1"
+						(effects
+							(font
+								(size 1.27 1.27))))
 					(number "9"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "TP4056-42-ESOP8_0_1"
+								(size 1.27 1.27)))))
+				(pin passive line
+					(at 30.48 -10.16 180)
+					(length 5.08)
+					(name "VBAT2"
+						(effects
+							(font
+								(size 1.27 1.27))))
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27))))))
+			(symbol "MCP73833-AMI-UN_0_1"
 				(polyline
 					(pts
-						(xy 5.08 2.54) (xy 25.4 2.54) (xy 25.4 -15.24) (xy 5.08 -15.24) (xy 5.08 2.54)
-					)
+						(xy 5.08 2.54)
+						(xy 25.4 2.54)
+						(xy 25.4 -15.24)
+						(xy 5.08 -15.24)
+						(xy 5.08 2.54))
 					(stroke
 						(width 0.1524)
-						(type default)
-					)
+						(type default))
 					(fill
-						(type background)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
+						(type background))))
+			(embedded_fonts no))
 		(symbol "Transistor_FET:AO3401A"
 			(pin_names
 				(hide yes)
@@ -7217,18 +6616,6 @@
 		(uuid "0008dcfb-4d43-4ab5-9df1-7653e9ae067c")
 	)
 	(no_connect
-		(at 355.6 153.67)
-		(uuid "06c3bd69-6646-4d22-a6c7-8a20faf6cd3e")
-	)
-	(no_connect
-		(at 340.36 128.27)
-		(uuid "0a15b54a-17ac-4e2d-86c1-0d861ee8abe6")
-	)
-	(no_connect
-		(at 355.6 156.21)
-		(uuid "11838376-8ffe-4ab8-87ae-12738b29250f")
-	)
-	(no_connect
 		(at 194.31 137.16)
 		(uuid "15f2ec51-b79e-416e-b131-2c6e96ac14a8")
 	)
@@ -7239,14 +6626,6 @@
 	(no_connect
 		(at 325.12 153.67)
 		(uuid "1fdd1da0-eb8e-40e0-a3e6-1914e9dbff7f")
-	)
-	(no_connect
-		(at 347.98 128.27)
-		(uuid "2407b2a0-bf88-4e2d-b0d5-11f39cbddbd5")
-	)
-	(no_connect
-		(at 332.74 176.53)
-		(uuid "2a87f0a4-0583-42fe-8221-1c808c960e85")
 	)
 	(no_connect
 		(at 163.83 172.72)
@@ -7321,10 +6700,6 @@
 		(uuid "9d0c0a0f-e9d3-4897-8e6d-e3877c775cbc")
 	)
 	(no_connect
-		(at 355.6 148.59)
-		(uuid "9f61ddb6-469e-40ea-ac43-66974dc81d62")
-	)
-	(no_connect
 		(at 194.31 165.1)
 		(uuid "a1fef924-7e34-43b8-9fa0-d518bc581618")
 	)
@@ -7333,20 +6708,12 @@
 		(uuid "b98278b6-d093-4540-b2cc-323e168de450")
 	)
 	(no_connect
-		(at 342.9 128.27)
-		(uuid "bacadd6b-948e-4375-85a2-108a08887ebd")
-	)
-	(no_connect
 		(at 163.83 175.26)
 		(uuid "caca986e-327c-4ed2-861e-8a3719faccdf")
 	)
 	(no_connect
 		(at 163.83 144.78)
 		(uuid "d342498b-6513-4280-99da-50fa52632d98")
-	)
-	(no_connect
-		(at 355.6 151.13)
-		(uuid "d4649cfe-7a96-4f58-9e8f-bc5a16a3c48c")
 	)
 	(no_connect
 		(at 163.83 177.8)
@@ -7421,16 +6788,6 @@
 			(type default)
 		)
 		(uuid "06a82b2f-2702-4048-9f12-2547e08daa2e")
-	)
-	(wire
-		(pts
-			(xy 355.6 119.38) (xy 355.6 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "07448492-6fad-4f55-bf6c-b20c7e9c312a")
 	)
 	(wire
 		(pts
@@ -7724,16 +7081,6 @@
 	)
 	(wire
 		(pts
-			(xy 321.31 146.05) (xy 321.31 147.32)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2cd731fc-3c45-441c-881b-7b95849e93dc")
-	)
-	(wire
-		(pts
 			(xy 132.08 250.19) (xy 132.08 251.46)
 		)
 		(stroke
@@ -7934,16 +7281,6 @@
 	)
 	(wire
 		(pts
-			(xy 325.12 146.05) (xy 321.31 146.05)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "462cc5a5-a5a4-46ec-853b-0c59862b5445")
-	)
-	(wire
-		(pts
 			(xy 251.46 53.34) (xy 251.46 57.15)
 		)
 		(stroke
@@ -8031,16 +7368,6 @@
 			(type default)
 		)
 		(uuid "4d0218f1-c20f-4f45-be06-1046593ac967")
-	)
-	(wire
-		(pts
-			(xy 345.44 119.38) (xy 355.6 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "505e1caf-87dd-4d97-8e93-7ed069f5c5a7")
 	)
 	(wire
 		(pts
@@ -8184,16 +7511,6 @@
 	)
 	(wire
 		(pts
-			(xy 345.44 128.27) (xy 345.44 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "623de0ce-e123-401a-874e-8f1c8f340005")
-	)
-	(wire
-		(pts
 			(xy 265.43 64.77) (xy 265.43 66.04)
 		)
 		(stroke
@@ -8221,16 +7538,6 @@
 			(type default)
 		)
 		(uuid "6605217c-5786-4d94-8903-18b40eb041e3")
-	)
-	(wire
-		(pts
-			(xy 355.6 129.54) (xy 355.6 128.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6938fe3c-e43c-4f7f-8b61-3d624cf2c05e")
 	)
 	(wire
 		(pts
@@ -8894,16 +8201,6 @@
 	)
 	(wire
 		(pts
-			(xy 207.01 76.2) (xy 207.01 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b25ff93e-9f99-483a-b7c9-9688a04ccf4a")
-	)
-	(wire
-		(pts
 			(xy 124.46 240.03) (xy 124.46 241.3)
 		)
 		(stroke
@@ -9061,16 +8358,6 @@
 			(type default)
 		)
 		(uuid "caa89e11-e7d5-4860-9755-5f9bdb996374")
-	)
-	(wire
-		(pts
-			(xy 222.25 62.23) (xy 222.25 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cacc6718-ed3f-427d-9ea7-7f8a1ad15843")
 	)
 	(wire
 		(pts
@@ -9741,16 +9028,6 @@
 			(justify right)
 		)
 		(uuid "f059271b-1b44-4895-b40a-08351d23584b")
-	)
-	(label "MPU_CPOUT"
-		(at 350.52 119.38 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "f17edf58-1cc8-4fc4-9d9b-dfc9482b0b55")
 	)
 	(label "MPU_INT"
 		(at 158.75 162.56 180)
@@ -10774,89 +10051,7 @@
 			)
 		)
 	)
-	(symbol
-		(lib_id "power:GND")
-		(at 321.31 147.32 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "143fc715-32b7-4676-a9a8-792848668dc3")
-		(property "Reference" "#PWR038"
-			(at 321.31 153.67 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 0.8 0.8)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 321.31 151.13 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 0.8 0.8)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 321.31 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 0.8 0.8)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 321.31 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 0.8 0.8)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 321.31 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "98bbf0fa-9e17-472b-bcc2-460d12ce8206")
-		)
-		(instances
-			(project "ESP32 drone"
-				(path "/0cba19ca-1654-4c9a-85b6-b93ff8a5568c"
-					(reference "#PWR038")
-					(unit 1)
-				)
-			)
-			(project "CopperPilotDrone"
-				(path "/9b268491-66b3-4ff0-b49d-fa392eb2b245"
-					(reference "#PWR038")
-					(unit 1)
-				)
-			)
-		)
-	)
+
 	(symbol
 		(lib_id "SI2302DS-T1:SI2302DS-T1")
 		(at 78.74 260.35 0)
@@ -11474,89 +10669,7 @@
 			)
 		)
 	)
-	(symbol
-		(lib_id "power:GND")
-		(at 207.01 76.2 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "26d5297a-c772-4c26-8bfa-41d25e0a3340")
-		(property "Reference" "#PWR020"
-			(at 207.01 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 207.137 80.5942 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 207.01 76.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 207.01 76.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 207.01 76.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "821f0a9e-15df-4eb6-8cd0-1276eb000d12")
-		)
-		(instances
-			(project "ESP32 drone"
-				(path "/0cba19ca-1654-4c9a-85b6-b93ff8a5568c"
-					(reference "#PWR020")
-					(unit 1)
-				)
-			)
-			(project "CopperPilotDrone"
-				(path "/9b268491-66b3-4ff0-b49d-fa392eb2b245"
-					(reference "#PWR020")
-					(unit 1)
-				)
-			)
-		)
-	)
+
 	(symbol
 		(lib_id "power:GND")
 		(at 350.52 71.12 0)
@@ -12345,7 +11458,7 @@
 		)
 	)
 	(symbol
-		(lib_id "TP4056-42-ESOP8:TP4056-42-ESOP8")
+		(lib_id "TP4056-42-ESOP8:MCP73833-AMI-UN")
 		(at 191.77 54.61 0)
 		(unit 1)
 		(body_style 1)
@@ -12366,7 +11479,7 @@
 				)
 			)
 		)
-		(property "Value" "TP4056"
+		(property "Value" "MCP73833-AMI/UN"
 			(at 207.01 49.53 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12376,7 +11489,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tp4056:SOIC127P600X175-9N"
+		(property "Footprint" "Package_SO:MSOP-10_3x3mm_P0.5mm"
 			(at 218.44 52.07 0)
 			(hide yes)
 			(show_name no)
@@ -12388,7 +11501,7 @@
 				(justify left)
 			)
 		)
-		(property "Datasheet" "https://datasheet.lcsc.com/szlcsc/1906261508_Nanjing-Extension-Microelectronics-TP4056-42-ESOP8_C16581.pdf"
+		(property "Datasheet" "https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/DataSheets/22005b.pdf"
 			(at 218.44 54.61 0)
 			(hide yes)
 			(show_name no)
@@ -12400,7 +11513,7 @@
 				(justify left)
 			)
 		)
-		(property "Description" "PMIC - Battery Management ESOP-8 RoHS"
+		(property "Description" "Stand-Alone Linear Li-Ion / Li-Polymer Charge Management Controller, MSOP-10"
 			(at 218.44 57.15 0)
 			(hide yes)
 			(show_name no)
@@ -12424,7 +11537,7 @@
 				(justify left)
 			)
 		)
-		(property "Manufacturer_Name" "Nanjing Extension Microelectronics"
+		(property "Manufacturer_Name" "Microchip"
 			(at 218.44 62.23 0)
 			(hide yes)
 			(show_name no)
@@ -12436,7 +11549,7 @@
 				(justify left)
 			)
 		)
-		(property "Manufacturer_Part_Number" "TP4056-42-ESOP8"
+		(property "Manufacturer_Part_Number" "MCP73833-AMI/UN"
 			(at 218.44 64.77 0)
 			(hide yes)
 			(show_name no)
@@ -12520,7 +11633,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C16581"
+		(property "LCSC" "C47182"
 			(at 71.12 16.002 0)
 			(hide yes)
 			(show_name no)
@@ -12557,6 +11670,9 @@
 		)
 		(pin "9"
 			(uuid "b6233940-5995-41ab-8e36-28606b28a338")
+		)
+		(pin \"10\"
+			(uuid \"2e39e197-6b5c-44f1-9cef-7f380a498abc\")
 		)
 		(instances
 			(project "ESP32 drone"
@@ -13853,7 +12969,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 191.77 54.61 90)
+		(at 179.07 74.93 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -13874,7 +12990,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 191.77 54.61 0)
+			(at 179.07 78.74 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13925,6 +13041,116 @@
 				(path "/9b268491-66b3-4ff0-b49d-fa392eb2b245"
 					(reference "#PWR910")
 					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 179.07 64.77 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "4ee6271a-ccb4-4a12-b6c4-3451bb5f042c")
+		(property "Reference" "R15"
+			(at 175.895 63.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10k"
+			(at 175.895 66.04 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 186.182 64.77 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 179.07 64.77 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 179.07 64.77 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C25804"
+			(at 71.12 16.002 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "360fe04e-18ea-4eb6-bae3-84f09e74a2e2")
+		)
+		(pin "2"
+			(uuid "626ac3be-34ec-439c-995b-9251a12789e8")
+		)
+		(instances
+			(project "ESP32 drone"
+				(path "/0cba19ca-1654-4c9a-85b6-b93ff8a5568c"
+					(reference "R15")
+					(unit 1)
+				)
+			)
+			(project "CopperPilotDrone"
+				(path "/9b268491-66b3-4ff0-b49d-fa392eb2b245"
+					(reference "R15")
+					(unit 1)
+				)
+			)
+		)
+	
+		(property "MPN" "RC0603FR-0710KL"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
@@ -14549,7 +13775,7 @@
 		)
 	)
 	(symbol
-		(lib_id "MPU-6050:MPU-6050")
+		(lib_id "MPU-6050:ICM-42670-P")
 		(at 325.12 146.05 0)
 		(unit 1)
 		(body_style 1)
@@ -14569,7 +13795,7 @@
 				)
 			)
 		)
-		(property "Value" "MPU-6050"
+		(property "Value" "ICM-42670-P"
 			(at 357.124 136.9312 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14579,7 +13805,7 @@
 				)
 			)
 		)
-		(property "Footprint" "MPU6050:MPU6050"
+		(property "Footprint" "Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y"
 			(at 325.12 146.05 0)
 			(hide yes)
 			(show_name no)
@@ -14622,7 +13848,7 @@
 				)
 			)
 		)
-		(property "Value_1" "MPU-6050"
+		(property "Value_1" "ICM-42670-P"
 			(at 357.124 142.0112 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14632,7 +13858,7 @@
 				)
 			)
 		)
-		(property "Footprint_1" "MPU6050"
+		(property "Footprint_1" "LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y"
 			(at 351.79 230.81 0)
 			(hide yes)
 			(show_name no)
@@ -14644,7 +13870,7 @@
 				(justify left top)
 			)
 		)
-		(property "Datasheet_1" "https://product.tdk.com/system/files/dam/doc/product/sensor/mortion-inertial/imu/data_sheet/mpu-6000-datasheet1.pdf"
+		(property "Datasheet_1" "https://invensense.tdk.com/wp-content/uploads/2021/07/DS-000451-ICM-42670-P-v1.0.pdf"
 			(at 351.79 330.81 0)
 			(hide yes)
 			(show_name no)
@@ -14704,7 +13930,7 @@
 				(justify left top)
 			)
 		)
-		(property "Manufacturer_Part_Number" "MPU-6050"
+		(property "Manufacturer_Part_Number" "ICM-42670-P"
 			(at 351.79 930.81 0)
 			(hide yes)
 			(show_name no)
@@ -14716,7 +13942,7 @@
 				(justify left top)
 			)
 		)
-		(property "LCSC" "C24112"
+		(property "LCSC" "C2961992"
 			(at 85.598 19.558 0)
 			(hide yes)
 			(show_name no)
@@ -14745,41 +13971,8 @@
 		(pin "14"
 			(uuid "0e393ffa-7a54-44ad-bfd7-068af421822d")
 		)
-		(pin "15"
-			(uuid "304f94ce-1304-428d-a08a-14ce18c4e87a")
-		)
-		(pin "16"
-			(uuid "d2b7f1c9-ad13-4dbb-bc8c-bc063b1a6a18")
-		)
-		(pin "17"
-			(uuid "518c58d1-be65-4902-bdfb-69722a9f2ae2")
-		)
-		(pin "18"
-			(uuid "70180e10-583b-417f-a00a-a7fa99dab70d")
-		)
-		(pin "19"
-			(uuid "ddbbc79a-b9e1-44bb-8887-d5648027ea4b")
-		)
 		(pin "2"
 			(uuid "aab7477b-9a52-4ae2-ac34-c20d908c2011")
-		)
-		(pin "20"
-			(uuid "ca850e22-8dea-4138-81a1-bdec04bd7bbb")
-		)
-		(pin "21"
-			(uuid "80214285-a9c6-4e60-b6cd-cd220018f0ed")
-		)
-		(pin "22"
-			(uuid "13df9f55-11a1-4811-a5b0-9f806b84a6c7")
-		)
-		(pin "23"
-			(uuid "8310320f-ffa2-43bf-a9c5-24f277959dbb")
-		)
-		(pin "24"
-			(uuid "35c02ab4-fbdd-40b3-ae6f-404de177f944")
-		)
-		(pin "25"
-			(uuid "01a3dac5-aa0a-4e72-87e8-33a3b64e0928")
 		)
 		(pin "3"
 			(uuid "0a32aa4e-1df1-4ec9-af16-5467cf64c22f")
@@ -17274,116 +16467,7 @@
 			)
 		)
 	)
-	(symbol
-		(lib_id "Device:C")
-		(at 355.6 124.46 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "88730f15-1e86-456d-92a7-65659bceb9fb")
-		(property "Reference" "C13"
-			(at 358.521 123.2916 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "2.2nF"
-			(at 358.521 125.603 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 356.5652 128.27 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 355.6 124.46 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 355.6 124.46 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC" "C1604"
-			(at 85.344 18.796 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "c11f9342-2e62-48e7-800c-3c177745e438")
-		)
-		(pin "2"
-			(uuid "9c03ca62-805e-44d2-ba3c-4c10eb74db11")
-		)
-		(instances
-			(project "ESP32 drone"
-				(path "/0cba19ca-1654-4c9a-85b6-b93ff8a5568c"
-					(reference "C13")
-					(unit 1)
-				)
-			)
-			(project "CopperPilotDrone"
-				(path "/9b268491-66b3-4ff0-b49d-fa392eb2b245"
-					(reference "C13")
-					(unit 1)
-				)
-			)
-		)
-	
-		(property "MPN" "CC0603KRX7R9BB222"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
+
 	(symbol
 		(lib_id "Device:C")
 		(at 99.06 53.34 0)
@@ -20058,8 +19142,8 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 355.6 129.54 0)
+		(lib_id "power:+3V3")
+		(at 340.36 176.53 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -20067,9 +19151,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "bf922e54-7b68-45a3-acff-d8bfa34392f1")
+		(uuid "e7186eba-60ef-4059-8f61-613034abefe1")
 		(property "Reference" "#PWR041"
-			(at 355.6 135.89 0)
+			(at 359.41 161.29 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20079,8 +19163,8 @@
 				)
 			)
 		)
-		(property "Value" "GND"
-			(at 355.6 133.35 0)
+		(property "Value" "+3V3"
+			(at 340.36 173.48 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -20090,7 +19174,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 355.6 129.54 0)
+			(at 340.36 176.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20101,7 +19185,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 355.6 129.54 0)
+			(at 340.36 176.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20112,7 +19196,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 355.6 129.54 0)
+			(at 340.36 176.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20123,7 +19207,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "057334df-4875-4f0f-89a4-d14be5aa7dce")
+			(uuid "62650798-d52f-4526-a8b9-c8e8579800d5")
 		)
 		(instances
 			(project "ESP32 drone"
@@ -21830,7 +20914,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 359.41 157.48 0)
+			(at 345.44 128.27 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22975,8 +22059,8 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 332.74 128.27 180)
+		(lib_id "power:+3V3")
+		(at 345.44 128.27 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -22984,9 +22068,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "c693681e-076f-4e03-8a15-1931d4ded324")
+		(uuid "ef6adf12-81fb-495c-8c14-408695a2d9ec")
 		(property "Reference" "#PWR0912"
-			(at 332.74 121.92 0)
+			(at 345.44 132.08 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22996,8 +22080,8 @@
 				)
 			)
 		)
-		(property "Value" "GND"
-			(at 332.74 124.46 0)
+		(property "Value" "+3V3"
+			(at 345.44 124.71 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -23007,7 +22091,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 332.74 128.27 0)
+			(at 345.44 128.27 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23018,7 +22102,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 332.74 128.27 0)
+			(at 345.44 128.27 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23029,7 +22113,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 332.74 128.27 0)
+			(at 345.44 128.27 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23040,9 +22124,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "e89d86d7-fa5b-4a60-bb69-84daaadc8d01")
+			(uuid "e0bd71fc-8ee6-4458-8b0b-5113f21b38f8")
 		)
 		(instances
+			(project "ESP32 drone"
+				(path "/0cba19ca-1654-4c9a-85b6-b93ff8a5568c"
+					(reference "#PWR0912")
+					(unit 1)
+				)
+			)
 			(project "CopperPilotDrone"
 				(path "/9b268491-66b3-4ff0-b49d-fa392eb2b245"
 					(reference "#PWR0912")
@@ -23527,4 +22617,76 @@
 		)
 	)
 	(embedded_fonts no)
+
+	(wire
+		(pts
+			(xy 179.07 54.61) (xy 191.77 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "77825201-51d3-483f-b9c2-c0be08be1ba4")
+	)
+	(wire
+		(pts
+			(xy 179.07 60.96) (xy 179.07 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "07f0a7fa-0a5b-4aa7-a91c-b02e260983ad")
+	)
+	(wire
+		(pts
+			(xy 179.07 68.58) (xy 179.07 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4177cf26-f31d-4bc1-9d38-0142416db70c")
+	)
+	(wire
+		(pts
+			(xy 222.25 62.23) (xy 222.25 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b488629a-1a60-4a8f-8968-716d9dc9e8d6")
+	)
+	(wire
+		(pts
+			(xy 222.25 64.77) (xy 222.25 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1d5cc0a8-5767-4e50-b595-0ab481546828")
+	)
+	(junction
+		(at 222.25 64.77)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0e7c9f40-3eea-482b-b249-38e62d6880b2")
+	)
+	(no_connect
+		(at 207.01 74.93)
+		(uuid "c39625eb-7191-4fdc-aaf7-a7606a6c7fb9")
+	)
+	(label "TP_THERM"
+		(at 179.07 54.61 180)
+		( effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "17287676-2312-43c5-b2d9-f6c2f3ebd998")
+	)
+
 )

@@ -365,7 +365,7 @@ def export_cpl():
     cpl_lc_dnp_csv_path = BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits-dnp.csv"
     cpl_lc_dnp_xlsx_path = BUILD_DIR / f"{PROJECT_NAME}-cpl-lioncircuits-dnp.xlsx"
 
-    rows_lc_dnp_csv = [r for r in rows_lc_csv if r[0] not in ("IC1", "U9")]
+    rows_lc_dnp_csv = list(rows_lc_csv)
     rows_lc_xlsx = [[r[0], float(r[1]), float(r[2]), r[3], float(r[4])] for r in rows_lc_csv]
     rows_lc_dnp_xlsx = [
         [r[0], float(r[1]), float(r[2]), r[3], float(r[4])] for r in rows_lc_dnp_csv
@@ -548,12 +548,19 @@ LIONCIRCUITS_BOM_MAP = {
         "desc": "TVS Diode Array USB 2.0 ESD Protection Dual Channel SOT-23-6",
         "notes": "Bottom SMD; Observe Pin 1 dot; STMicroelectronics USBLC6-2SC6 (LCSC: C7519)",
     },
+    ("MCP73833-AMI/UN", "MSOP-10_3x3mm_P0.5mm", "C47182"): {
+        "orig_mpn": "MCP73833-AMI/UN",
+        "lc_mpn": "MCP73833-AMI/UN",
+        "lc_fp": "MSOP-10 (3x3mm P0.5mm)",
+        "desc": "Stand-Alone Linear Li-Ion / Li-Polymer Charge Management Controller 4.2V Dual Status LED MSOP-10",
+        "notes": "Top SMD; Observe Pin 1 dot; Microchip MCP73833-AMI/UN / MCP73833T-AMI/UN (LCSC: C47182)",
+    },
     ("TP4056", "SOIC127P600X175-9N", "C16581"): {
         "orig_mpn": "TP4056-42-ESOP8",
         "lc_mpn": "MAX1811ESA+",
         "lc_fp": "ESOP-8 (SOIC-8-EP)",
         "desc": "1S Li-Ion/Li-Po Linear Battery Charger IC 4.2V SOIC-8 / ESOP-8",
-        "notes": "Top SMD; DO NOT SOLDER MAX1811ESA+ (catalog-pass MPN only — incompatible pinout & no EP); PCB footprint/pinout is wired for TP4056-42-ESOP8 / TP4056 (LCSC: C16581) / TC4056A / ME4057 / DIO5158 (Pad 9 EP=GND)—populate TP4056 via assisted/consigned sourcing or mark IC1 DNP",
+        "notes": "Top SMD; Legacy TP4056 entry",
     },
     ("USB_C_Receptacle_USB2.0", "USB_C_Receptacle_HRO_TYPE-C-31-M-12", "C165948"): {
         "orig_mpn": "TYPE-C-31-M-12",
@@ -695,12 +702,19 @@ LIONCIRCUITS_BOM_MAP = {
         "desc": "RF Wi-Fi 802.11b/g/n + Bluetooth LE 5.0 MCU Module ESP32-S3 8MB Flash 8MB PSRAM SMD-41",
         "notes": "Top SMD; Keep antenna cantilevered over board cutout; Espressif ESP32-S3-WROOM-1-N8R8 (LCSC: C2913201)",
     },
+    ("ICM-42670-P", "LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y", "C2961992"): {
+        "orig_mpn": "ICM-42670-P",
+        "lc_mpn": "ICM-42670-P",
+        "lc_fp": "LGA-14 (2.5x3.0mm P0.5mm)",
+        "desc": "High-Performance 6-Axis MEMS MotionTracking IMU Gyroscope + Accelerometer 3.3V I2C/SPI LGA-14",
+        "notes": "Top SMD; Observe Pin 1 orientation mark; TDK InvenSense ICM-42670-P (LCSC: C2961992); Alt MPN: LSM6DSOXTR / LSM6DSO32XTR / BMI270",
+    },
     ("MPU-6050", "MPU6050", "C24112"): {
         "orig_mpn": "MPU-6050",
         "lc_mpn": "ICM-20789",
         "lc_fp": "QFN-24 (4x4mm)",
         "desc": "MEMS IMU 6-Axis Gyroscope + Accelerometer I2C/SPI 24-Pin 4x4mm (TDK InvenSense)",
-        "notes": "Top SMD; DO NOT SOLDER ICM-20789 (catalog-pass MPN only — Pin 8 VDDIO max 1.98V will be damaged by PCB +3V3 rail & LGA-24 lacks central EP over pasted Pad 25); Populate 3.3V-rated MPU-6050 / MPU-6000 (LCSC: C24112) / ICM-20689 via assisted/consigned sourcing or mark U9 DNP",
+        "notes": "Top SMD; Legacy MPU-6050 entry",
     },
 }
 
@@ -816,9 +830,8 @@ def export_lioncircuits_boms(individual_items):
 
         orig_rows.append([idx, des_str, qty, desc, orig_mpn, clean_fp, val, notes])
         lc_rows.append([idx, des_str, qty, desc, lc_mpn, lc_fp, val, notes])
-        if des_str not in ("IC1", "U9"):
-            dnp_idx += 1
-            lc_dnp_rows.append([dnp_idx, des_str, qty, desc, lc_mpn, lc_fp, val, notes])
+        dnp_idx += 1
+        lc_dnp_rows.append([dnp_idx, des_str, qty, desc, lc_mpn, lc_fp, val, notes])
 
     cp_dir = PCB_DIR.parent / ".copperpilot"
     cp_dir.mkdir(parents=True, exist_ok=True)

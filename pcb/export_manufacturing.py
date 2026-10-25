@@ -536,10 +536,10 @@ LIONCIRCUITS_BOM_MAP = {
     },
     ("1N5819WS", "D_SOD-323", "C191023"): {
         "orig_mpn": "1N5819WS",
-        "lc_mpn": "PMEG4010EJ,115",
+        "lc_mpn": "1N5819WS",
         "lc_fp": "SOD-323",
-        "desc": "Schottky Barrier Diode 40V 1A SOD-323 / SOD-323F",
-        "notes": "Top SMD; Observe cathode band; Motor flyback clamp; Nexperia PMEG4010EJ,115 (SOD-323F); Alt MPN: B5819WS-TP / PMEG4010CEJ,115 / XBS104S13R-G / B5819WS-7-F / 1N5819WS (LCSC: C191023) — Do NOT use SOD-123 (1N5819HW-7-F)",
+        "desc": "Schottky Barrier Diode 40V 1A SOD-323",
+        "notes": "Top SMD; Observe cathode band; Motor flyback clamp; 1N5819WS (SOD-323, LCSC: C191023); Alt MPN: PMEG4010EJ / B5819WS-7-F",
     },
     ("USBLC6-2SC6", "SOT-23-6", "C7519"): {
         "orig_mpn": "USBLC6-2SC6",

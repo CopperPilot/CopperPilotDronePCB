@@ -14899,7 +14899,7 @@
 			)
 		)
 	
-		(property "MPN" "PMEG4010EJ,115"
+		(property "MPN" "1N5819WS"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15663,7 +15663,7 @@
 			)
 		)
 	
-		(property "MPN" "PMEG4010EJ,115"
+		(property "MPN" "1N5819WS"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16753,7 +16753,7 @@
 			)
 		)
 	
-		(property "MPN" "PMEG4010EJ,115"
+		(property "MPN" "1N5819WS"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19405,7 +19405,7 @@
 			)
 		)
 	
-		(property "MPN" "PMEG4010EJ,115"
+		(property "MPN" "1N5819WS"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)

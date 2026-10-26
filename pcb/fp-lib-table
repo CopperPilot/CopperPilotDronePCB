@@ -15,4 +15,6 @@
   (lib (name "Button_Switch_SMD")(type "KiCad")(uri "${KICAD10_FOOTPRINT_DIR}/Button_Switch_SMD.pretty")(options "")(descr "KiCad 10 standard Button_Switch_SMD library"))
   (lib (name "RF_Module")(type "KiCad")(uri "${KICAD10_FOOTPRINT_DIR}/RF_Module.pretty")(options "")(descr "KiCad 10 standard RF_Module library"))
   (lib (name "Package_TO_SOT_SMD")(type "KiCad")(uri "${KICAD10_FOOTPRINT_DIR}/Package_TO_SOT_SMD.pretty")(options "")(descr "KiCad 10 standard Package_TO_SOT_SMD library"))
+  (lib (name "Package_SO")(type "KiCad")(uri "${KICAD10_FOOTPRINT_DIR}/Package_SO.pretty")(options "")(descr "KiCad 10 standard Package_SO library"))
+  (lib (name "Package_LGA")(type "KiCad")(uri "${KICAD10_FOOTPRINT_DIR}/Package_LGA.pretty")(options "")(descr "KiCad 10 standard Package_LGA library"))
 )

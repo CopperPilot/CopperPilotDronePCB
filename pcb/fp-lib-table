@@ -1,5 +1,7 @@
 (fp_lib_table
   (version 7)
+  (lib (name "Package_DFN_QFN")(type "KiCad")(uri "${KICAD10_FOOTPRINT_DIR}/Package_DFN_QFN.pretty")(options "")(descr "KiCad 10 Package_DFN_QFN footprint library"))
+  (lib (name "Package_SO")(type "KiCad")(uri "${KICAD10_FOOTPRINT_DIR}/Package_SO.pretty")(options "")(descr "KiCad 10 Package_SO footprint library"))
   (lib (name "easyeda2kicad")(type "KiCad")(uri "${KIPRJMOD}/libs/footprints.pretty")(options "")(descr "LCSC EasyEDA footprint library"))
   (lib (name "SI2302DS-T1")(type "KiCad")(uri "${KIPRJMOD}/libs/SI2302DS-T1.pretty")(options "")(descr "SI2302DS MOSFET footprint library"))
   (lib (name "tp4056")(type "KiCad")(uri "${KIPRJMOD}/libs/tp4056.pretty")(options "")(descr "TP4056 charger footprint library"))

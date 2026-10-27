@@ -536,10 +536,10 @@ LIONCIRCUITS_BOM_MAP = {
     },
     ("1N5819WS", "D_SOD-323", "C191023"): {
         "orig_mpn": "1N5819WS",
-        "lc_mpn": "PMEG4010EJ,115",
+        "lc_mpn": "1N5819WS",
         "lc_fp": "SOD-323",
         "desc": "Schottky Barrier Diode 40V 1A SOD-323 / SOD-323F",
-        "notes": "Top SMD; Observe cathode band; Motor flyback clamp; Nexperia PMEG4010EJ,115 (SOD-323F); Alt MPN: B5819WS-TP / PMEG4010CEJ,115 / XBS104S13R-G / B5819WS-7-F / 1N5819WS (LCSC: C191023) — Do NOT use SOD-123 (1N5819HW-7-F)",
+        "notes": "Top SMD; Observe cathode band; Motor flyback clamp; 1N5819WS (SOD-323); Alt MPN: PMEG4010EJ,115 / B5819WS-TP / PMEG4010CEJ,115 / XBS104S13R-G / B5819WS-7-F (LCSC: C191023) — Do NOT use SOD-123 (1N5819HW-7-F)",
     },
     ("USBLC6-2SC6", "SOT-23-6", "C7519"): {
         "orig_mpn": "USBLC6-2SC6",
@@ -683,10 +683,10 @@ LIONCIRCUITS_BOM_MAP = {
     },
     ("AP2112K-3.3TRG1", "SOT-23-5", "C51118"): {
         "orig_mpn": "AP2112K-3.3TRG1",
-        "lc_mpn": "AP2112K-3.3TRG1",
+        "lc_mpn": "AP7365-33WG-7",
         "lc_fp": "SOT-23-5",
         "desc": "LDO Linear Voltage Regulator 3.3V Fixed 600mA Low Noise SOT-23-5",
-        "notes": "Top SMD; System 3.3V regulator; Diodes Inc AP2112K-3.3TRG1 (LCSC: C51118)",
+        "notes": "Top SMD; System 3.3V 600mA regulator; Diodes Inc AP7365-33WG-7 / AP2112K-3.3TRG1 (Pin 1=IN, 2=GND, 3=EN, 4=NC, 5=OUT; LCSC: C51118)",
     },
     ("ESP32-S3-WROOM-1-N8R8", "ESP32-S3-WROOM-1", "C2913201"): {
         "orig_mpn": "ESP32-S3-WROOM-1-N8R8",

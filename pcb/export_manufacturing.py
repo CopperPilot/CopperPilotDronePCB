@@ -404,7 +404,7 @@ def export_bom():
 
     individual_items = []
     # Symbol instances on schematic sheet start with (symbol\n\t\t(lib_id
-    for block in content.split("(symbol\n\t\t(lib_id ")[1:]:
+    for block in re.split(r"\(symbol\s+\(lib_id\s+\"?", content)[1:]:
         ref_m = re.search(r'\(property "Reference" "([^"]+)"', block)
         if not ref_m or ref_m.group(1).startswith("#"):
             continue
@@ -427,6 +427,8 @@ def export_bom():
         fp = fp_m.group(1) if fp_m else ""
         lcsc = lcsc_m.group(1) if lcsc_m else ""
         mpn = mpn_m.group(1) if mpn_m else ""
+        if ref == "C13" and val == "0.1uf":
+            lcsc = "C14663"
 
         # Clean footprint name for standard BOM formatting
         clean_fp = fp.split(":")[-1] if ":" in fp else fp
@@ -492,6 +494,20 @@ LIONCIRCUITS_HEADERS = [
 
 # Surgical LionCircuits MPN & metadata mapping keyed by (Value, clean_footprint, LCSC)
 LIONCIRCUITS_BOM_MAP = {
+    ("MCP73833T-AMI/UN", "MSOP-10_3x3mm_P0.5mm", ""): {
+        "orig_mpn": "MCP73833T-AMI/UN",
+        "lc_mpn": "MCP73833T-AMI/UN",
+        "lc_fp": "MSOP-10 (3x3mm)",
+        "desc": "1S Li-Ion/Li-Polymer Linear Charge Management Controller 4.2V MSOP-10 (Microchip)",
+        "notes": "Top SMD; Microchip MCP73833T-AMI/UN (LionCircuits turnkey in-stock)",
+    },
+    ("MPU-6500", "QFN-24-1EP_3x3mm_P0.4mm_EP1.75x1.6mm", ""): {
+        "orig_mpn": "MPU-6500",
+        "lc_mpn": "MPU-6500",
+        "lc_fp": "QFN-24 (3x3mm)",
+        "desc": "MEMS IMU 6-Axis Gyroscope + Accelerometer I2C/SPI 24-Pin 3x3mm (TDK InvenSense)",
+        "notes": "Top SMD; TDK InvenSense MPU-6500 3.3V-rated (LionCircuits turnkey in-stock)",
+    },
     ("10uF", "C_0603_1608Metric", "C85713"): {
         "orig_mpn": "CL10A106MP8NNNC",
         "lc_mpn": "CL10A106MP8NNNC",
@@ -808,8 +824,11 @@ def export_lioncircuits_boms(individual_items):
         des_str = ",".join(refs)
         qty = len(refs)
         meta = LIONCIRCUITS_BOM_MAP.get(key, {})
-        orig_mpn = meta.get("orig_mpn", lcsc)
-        lc_mpn = meta.get("lc_mpn", orig_mpn)
+        # Fallback to MPN from schematic item if not in map
+        item_sample = [it for it in individual_items if it["ref"] in refs][0]
+        item_mpn = item_sample.get("mpn") or item_sample.get("comment") or lcsc
+        orig_mpn = meta.get("orig_mpn") or item_mpn
+        lc_mpn = meta.get("lc_mpn") or orig_mpn
         lc_fp = meta.get("lc_fp", clean_fp)
         desc = meta.get("desc", f"{val} {clean_fp}")
         notes = meta.get("notes", f"Top SMD; LCSC: {lcsc}")

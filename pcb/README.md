@@ -86,54 +86,52 @@ Standard 8520 brushed coreless DC motors (8.5 mm x 20 mm) operate at:
 - **22 nF 0603 MLCC snubber capacitors** across each motor terminal eliminate high-frequency brush commutation arcing and RF interference without causing the destructive 52 A inrush current pulses exhibited by legacy 1.0 µF snubber values.
 
 ### Linear Regulators & Battery Charging
-- **3.3V LDO (U3)**: MicrOne ME6211C33M5G-N in SOT-23-5 provides 500 mA continuous output with 51 µF of distributed ceramic decoupling (C3, C4, C9, C10, C14) to buffer 500 mA ESP32-S3 Wi-Fi calibration bursts.
-- **Li-Po Charger (IC1)**: TP4056-42-ESOP8 linear charger set to 364 mA constant-current rate via $3.3\text{ k}\Omega$ $R_{prog1}$, ensuring safe $0.7\text{C}$ to $1.2\text{C}$ charging for 300–500 mAh 1S cells without thermal throttling.
-- **Power Mux (U2)**: AO3401 P-channel MOSFET ideal diode circuit automatically disconnects the battery from the charging port when USB-C 5V VBUS is plugged in, preventing reverse charging into the cell.
+- **3.3V LDO (U3)**: `TPS79633DCQR` / `ME6211C33M5G-N` provides 3.3V regulated output with 51 µF of distributed ceramic decoupling (`C3`, `C4`, `C9`, `C10`, `C14`) to buffer 500 mA ESP32-S3 Wi-Fi calibration bursts.
+- **Li-Po Charger (IC1)**: Microchip `MCP73833T-AMI/UN` standalone linear charger in MSOP-10 set to 303 mA constant-current rate via $3.3\text{ k}\Omega$ `Rprog1` and $10\text{ k}\Omega$ `R33` THERM bias resistor, with dedicated `+5V` input decoupling (`C6` 100 nF + `C7` 10 µF), ensuring safe charging for 300–600 mAh 1S cells with minimal thermal dissipation ($\sim 242\text{ mW}$ peak).
+- **Power Mux (U2)**: `AO3401A` P-channel MOSFET ideal diode circuit automatically disconnects the battery from the load rail when USB-C 5V is plugged in, preventing reverse charging into the cell.
 
 ---
 
 ## 4. Complete Bill of Materials (BOM)
 
-All 64 components use surface-mount packages compatible with **JLCPCB SMT Assembly**. Sourcing is optimized to maximize LCSC "Basic Parts" ($0 feeder fee) to minimize assembly setup costs.
+All 69 components (29 unique BOM lines) use surface-mount packages compatible with **LionCircuits Turnkey PCBA** and **JLCPCB SMT Assembly**.
 
-| Item | Reference | Qty | Value | Package | LCSC Part # | Description | Part Type |
-| :---: | :--- | :---: | :--- | :--- | :--- | :--- | :---: |
-| 1 | **U8** | 1 | ESP32-S3-WROOM-1-N8R8 | SMD-41 | `C2913201` | Dual-Core 240MHz MCU, 8MB Flash, 8MB PSRAM, Wi-Fi/BLE | Extended |
-| 2 | **U9** | 1 | MPU-6050 | QFN-24 4x4mm | `C24112` | 6-Axis I2C Gyroscope + Accelerometer IMU Sensor | Extended |
-| 3 | **IC1** | 1 | TP4056-42-ESOP8 | ESOP-8 | `C16581` | 1A Standalone Linear Li-Po Battery Charger (364mA) | Extended |
-| 4 | **U2** | 1 | AO3401 | SOT-23 | `C15127` | -30V -4.2A P-Channel MOSFET Ideal Diode Power Mux | **Basic** |
-| 5 | **U3** | 1 | ME6211C33M5G-N | SOT-23-5 | `C82942` | 3.3V 500mA Ultra-Low-Noise CMOS LDO Regulator | **Basic** |
-| 6 | **T1..T4** | 4 | SI2302DS-T1 | SOT-23 | `C351401` | 20V 2.8A N-Channel Low-Side Motor Drive MOSFETs | **Basic** |
-| 7 | **D1** | 1 | SS34 | SMA DO-214AC | `C8678` | 40V 3A Schottky Rectifier for VBUS Reverse Protection | **Basic** |
-| 8 | **D2..D5** | 4 | 1N5819WS | SOD-323 | `C191023` | 40V 1A Schottky Motor Flyback Inductive Clamps | **Basic** |
-| 9 | **ESD1** | 1 | USBLC6-2SC6 | SOT-23-6 | `C7519` | Low-Capacitance USB Type-C TVS ESD Diode Array | **Basic** |
-| 10 | **J1** | 1 | TYPE-C-31-M-12 | USB-C 16-Pin SMT | `C165948` | USB 2.0 Type-C Receptacle (Power & Native USB D+/D-) | Extended |
-| 11 | **J2,J4,J5,J6**| 4 | SM02B-GHS-TB | JST-GH 1.25mm SMT| `C189893` | 2-Pin Shrouded Motor Connectors | Extended |
-| 12 | **J3** | 1 | B2B-PH-SM4-TB | JST-PH 2.0mm SMT | `C160352` | 2-Pin 1S Battery Input Connector | Extended |
-| 13 | **SW1** | 1 | PCM12SMTR | SPDT SMT Slide | `C221841` | System Main Power Slide Switch (Alt: C92658) | Extended |
-| 14 | **SW2,SW3** | 2 | TS-1187A-B-A-B | 5.1x5.1mm SMT | `C318884` | Momentary Tactile Switches (RESET & BOOT) | **Basic** |
-| 15 | **LED1** | 1 | Blue LED | 0603 SMD | `C72041` | 3.3V System Power Indicator LED | **Basic** |
-| 16 | **LED2** | 1 | Red LED | 0603 SMD | `C2286` | TP4056 Battery Charging Status Indicator | **Basic** |
-| 17 | **LED3** | 1 | Green LED | 0603 SMD | `C72043` | TP4056 Full Charge / Standby Status Indicator | **Basic** |
-| 18 | **R1** | 1 | 470R 1% | 0603 SMD | `C23179` | Blue Power LED Current Limiter | **Basic** |
-| 19 | **R2,R26..R28**| 4 | 100k 1% | 0603 SMD | `C25803` | Power Mux Gate Pulldown & Battery ADC Divider | **Basic** |
-| 20 | **R3,R4** | 2 | 1.2k 1% | 0603 SMD | `C22765` | TP4056 Status LED Current Limiters | **Basic** |
-| 21 | **R10,R11,R18..R21**| 6| 10k 1% | 0603 SMD | `C25804` | EN/IO0 Pull-Ups & Motor Gate Pulldowns | **Basic** |
-| 22 | **R12,R13,R14**| 3 | 4.7k 1% | 0603 SMD | `C23162` | I2C SDA/SCL Pull-Ups & MPU-6050 AD0 Address Select| **Basic** |
-| 23 | **R22,R23** | 2 | 22R 5% | 0603 SMD | `C23345` | USB 2.0 Full-Speed D+/D- Series Damping Resistors | **Basic** |
-| 24 | **R24,R25** | 2 | 5.1k 1% | 0603 SMD | `C23186` | USB-C Configuration Channel CC1/CC2 5.1k Pulldowns| **Basic** |
-| 25 | **Rprog1** | 1 | 3.3k 1% | 0603 SMD | `C22978` | Sets TP4056 Charge Current to 364 mA | **Basic** |
-| 26 | **C1,C3,C4,C5,C7,C9,C14**| 7| 10µF 10V X5R | 0603 SMD | `C19702` | Bulk Decoupling & LDO Reservoirs | **Basic** |
-| 27 | **C6,C12** | 2 | 0.1µF 50V X7R | 0603 SMD | `C14663` | High-Frequency IC Power Decoupling | **Basic** |
-| 28 | **C10,C11** | 2 | 1µF 50V X5R | 0603 SMD | `C15849` | EN Pin Startup RC Filter & ESP32 VDD Bypass | **Basic** |
-| 29 | **C13** | 1 | 2.2nF 50V X7R | 0603 SMD | `C1604` | MPU-6050 Charge Pump Filter Capacitor | **Basic** |
-| 30 | **C15..C18** | 4 | 22nF 50V X7R | 0603 SMD | `C302021` | Motor Brush RF Noise Commutation Snubbers | **Basic** |
+| Item | Reference | Qty | Value | Package | LCSC Part # | MPN | Description |
+| :---: | :--- | :---: | :--- | :--- | :--- | :--- | :--- |
+| 1 | **U8** | 1 | ESP32-S3-WROOM-1-N8R8 | SMD-41 | `C2913201` | `ESP32-S3-WROOM-1-N8R8` | Dual-Core 240MHz MCU, 8MB Flash, 8MB PSRAM, Wi-Fi/BLE |
+| 2 | **U9** | 1 | MPU-6500 | QFN-24 3x3mm | `C112979` | `MPU-6500` | 6-Axis I2C Gyroscope + Accelerometer IMU Sensor |
+| 3 | **IC1** | 1 | MCP73833T-AMI/UN | MSOP-10 3x3mm | `C47182` | `MCP73833T-AMI/UN` | Standalone Linear Li-Po Battery Charger (303mA) |
+| 4 | **U2** | 1 | AO3401A | SOT-23 | `C15127` | `AO3401A` | -30V -4.2A P-Channel MOSFET Ideal Diode Power Mux |
+| 5 | **U3** | 1 | TPS79633DCQR | SOT-23-5 | `C82942` | `TPS79633DCQR` | 3.3V Ultra-Low-Noise LDO Regulator |
+| 6 | **T1..T4** | 4 | SI2302CDS-T1-GE3 | SOT-23 | `C351401` | `SI2302CDS-T1-GE3` | 20V 2.8A N-Channel Low-Side Motor Drive MOSFETs |
+| 7 | **D1** | 1 | SS34 | SMA DO-214AC | `C8678` | `SS34` | 40V 3A Schottky Rectifier for VBUS Reverse Protection |
+| 8 | **D2..D5** | 4 | PMEG4010EJ,115 | SOD-323 | `C191023` | `PMEG4010EJ,115` | 40V 1A Schottky Motor Flyback Inductive Clamps |
+| 9 | **ESD1** | 1 | USBLC6-2SC6 | SOT-23-6 | `C7519` | `USBLC6-2SC6` | Low-Capacitance USB Type-C TVS ESD Diode Array |
+| 10 | **J1** | 1 | USB4105-GF-A | USB-C 16-Pin SMT | `C165948` | `USB4105-GF-A` | USB 2.0 Type-C Receptacle (Power & Native USB D+/D-) |
+| 11 | **J2,J4,J5,J6**| 4 | SM02B-GHS-TB(LF)(SN) | JST-GH 1.25mm SMT| `C189893` | `SM02B-GHS-TB(LF)(SN)` | 2-Pin Shrouded Motor Connectors |
+| 12 | **J3** | 1 | B2B-PH-SM4-TB(LF)(SN)| JST-PH 2.0mm SMT | `C160352` | `B2B-PH-SM4-TB(LF)(SN)` | 2-Pin 1S Battery Input Connector |
+| 13 | **SW1** | 1 | PCM12SMTR | SPDT SMT Slide | `C221841` | `PCM12SMTR` | System Main Power Slide Switch |
+| 14 | **SW2,SW3** | 2 | PTS526SM15SMTR2LFS | 5.1x5.1mm SMT | `C318884` | `PTS526SM15SMTR2LFS` | Momentary Tactile Switches (RESET & BOOT) |
+| 15 | **LED1** | 1 | LTST-C190TBKT | 0603 SMD | `C72041` | `LTST-C190TBKT` | 3.3V System Power Indicator LED |
+| 16 | **LED2** | 1 | LTST-C190KRKT | 0603 SMD | `C2286` | `LTST-C190KRKT` | Battery Charging Status Indicator |
+| 17 | **LED3** | 1 | KPT-1608CGCK | 0603 SMD | `C72043` | `KPT-1608CGCK` | Full Charge / Standby Status Indicator |
+| 18 | **R1** | 1 | 470R 1% | 0603 SMD | `C23179` | `RC0603FR-07470RL` | Blue Power LED Current Limiter |
+| 19 | **R2,R26..R28**| 4 | 100k 1% | 0603 SMD | `C25803` | `RC0603FR-07100KL` | Power Mux Gate Pulldown & Battery ADC Divider |
+| 20 | **R3,R4** | 2 | 1.2k 1% | 0603 SMD | `C22765` | `RC0603FR-071K2L` | Charger Status LED Current Limiters |
+| 21 | **R10,R11,R18..R21,R33**| 7| 10k 1% | 0603 SMD | `C25804` | `RC0603FR-0710KL` | EN/IO0 Pull-Ups, Motor Gate Pulldowns & THERM Bias |
+| 22 | **R12,R13,R14**| 3 | 4.7k 1% | 0603 SMD | `C23162` | `RC0603FR-074K7L` | I2C SDA/SCL Pull-Ups & IMU AD0 Address Select |
+| 23 | **R22,R23** | 2 | 22R 1% | 0603 SMD | `C23345` | `RC0603FR-0722RL` | USB 2.0 Full-Speed D+/D- Series Damping Resistors |
+| 24 | **R24,R25** | 2 | 5.1k 1% | 0603 SMD | `C23186` | `RC0603FR-075K1L` | USB-C Configuration Channel CC1/CC2 5.1k Pulldowns |
+| 25 | **R29..R32** | 4 | 10R 1% | 0603 SMD | `C22859` | `RC0603FR-0710RL` | Motor RC Snubber Series Damping Resistors |
+| 26 | **Rprog1** | 1 | 3.3k 1% | 0603 SMD | `C22978` | `RC0603FR-073K3L` | Sets MCP73833 Charge Current to 303 mA |
+| 27 | **C1,C3,C4,C5,C7,C9,C14**| 7| 10µF 10V X5R | 0603 SMD | `C19702` | `CL10A106MP8NNNC` | Bulk Decoupling & LDO/Charger Reservoirs |
+| 28 | **C6,C12,C13** | 3 | 0.1µF 50V X7R | 0603 SMD | `C14663` | `CC0603KRX7R9BB104` | High-Frequency IC Power & IMU REGOUT Decoupling |
+| 29 | **C10,C11** | 2 | 1µF 50V X5R | 0603 SMD | `C15849` | `CL10A105KB8NNNC` | EN Pin Startup RC Filter & ESP32 VDD Bypass |
+| 30 | **C15..C18** | 4 | 22nF 50V X7R | 0603 SMD | `C302021` | `CC0603KRX7R9BB223` | Motor Brush RF Noise Commutation Snubbers |
 
 **BOM Sourcing Metrics**:
-- **Total Components**: 64
-- **Unique Part Types**: 30
-- **Basic Parts**: 23 lines (57 components, $0 feeder fee)
-- **Extended Parts**: 7 lines (7 components, $21 feeder fee total)
+- **Total Components**: 69 (66 Top SMT + 3 Bottom SMT)
+- **Unique Part Types**: 29 (100% Turnkey Available on LionCircuits)
 - **Through-Hole Soldering**: 0 pins (100% SMT assembly)
 
 ---

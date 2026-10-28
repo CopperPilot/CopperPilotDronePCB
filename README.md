@@ -15,15 +15,15 @@ An ultra-compact, high-performance, single-board Quad-X micro drone flight contr
 ```
                     +----------------------------------------------------+
                     |                    Power System                    |
-                    | USB-C (J1) ---> TP4056 (IC1) Charger (364mA)       |
+                    | USB-C (J1) -> MCP73833T-AMI/UN (IC1) Charger (303mA)
                     |                 |                                  |
                     | 1S LiPo (J3) -> AO3401 (U2) Power Path -> SW1 Switch
                     |                                             |      |
-                    |                               ME6211 3.3V LDO (U3) |
+                    |                             TPS79633 3.3V LDO (U3) |
                     +---------------------------------------------|------+
                                                                   | +3.3V Rail
 +------------------------+      I2C (400 kHz)       +-------------v------+
-|       MPU-6050         |<------------------------>|     ESP32-S3       |
+|        MPU-6500        |<------------------------>|     ESP32-S3       |
 | 6-DOF IMU (Gyro+Accel) |  GPIO8 (SDA), GPIO9 (SCL)|  Dual-Core 240 MHz |
 | GPIO10 (Data Ready INT)|------------------------->|  8MB Flash/PSRAM   |
 +------------------------+                          +--+---+---+---+-----+
@@ -45,16 +45,16 @@ An ultra-compact, high-performance, single-board Quad-X micro drone flight contr
 - **Chassis & Form Factor**: 100.0 mm x 100.0 mm integrated airframe with 45° diagonal arms and a 118.8 mm motor-to-motor wheelbase.
 - **Motor Mounts**: 4 precision C-clamp cutouts directly in `Edge.Cuts` (8.80 mm ID) engineered to friction-fit standard 8520 (8.5 mm x 20 mm) brushed coreless DC motors.
 - **Flight Controller MCU**: Espressif ESP32-S3-WROOM-1-N8R8 (dual-core 32-bit Xtensa LX7 @ 240 MHz, 512 KB SRAM, 8 MB Octal Flash, 8 MB Octal PSRAM).
-- **Inertial Measurement Unit**: InvenSense MPU-6050 6-axis gyroscope and accelerometer with on-chip hardware digital low-pass filtering (DLPF @ 42 Hz) and 500 Hz complementary AHRS attitude estimation.
-- **Brushed Motor Drive**: 4 low-side SI2302DS N-channel MOSFETs (20 V, 2.8 A, $R_{DS(on)} = 55\text{ m}\Omega$) driven by 20 kHz ultrasonic PWM to eliminate audible motor whine and prevent mechanical resonance.
-- **Inductive Clamping & Filtering**: 4x 1N5819WS 40 V 1 A Schottky flyback diodes (SOD-323) paired with 22 nF 0603 ceramic snubber capacitors suppress motor brush commutation arcing and inductive turn-off voltage spikes.
+- **Inertial Measurement Unit**: TDK InvenSense MPU-6500 (3x3 mm QFN-24) 6-axis gyroscope and accelerometer with on-chip hardware digital low-pass filtering (DLPF @ 42 Hz) and 500 Hz complementary AHRS attitude estimation.
+- **Brushed Motor Drive**: 4 low-side SI2302CDS-T1-GE3 N-channel MOSFETs (20 V, 2.8 A, $R_{DS(on)} = 55\text{ m}\Omega$) driven by 20 kHz ultrasonic PWM to eliminate audible motor whine and prevent mechanical resonance.
+- **Inductive Clamping & Filtering**: 4x 1N5819WS (PMEG4010EJ,115) 40 V 1 A Schottky flyback diodes (SOD-323) paired with series RC snubbers (22 nF 0603 ceramic capacitors `C15–C18` + 10 $\Omega$ 0603 damping resistors `R29–R32`) to suppress motor brush commutation arcing and inductive turn-off voltage spikes.
 - **Power Management & Charging**:
-  - Integrated TP4056 linear Li-Po battery charger programmed to 364 mA charge rate via USB-C.
-  - AO3401 P-channel MOSFET ideal diode power-path mux automatically selects between USB VBUS and battery power without dropping voltage or reverse-biasing the battery.
-  - MicrOne ME6211C33M5G-N 3.3 V 500 mA ultra-low-noise LDO regulator with 51 µF distributed ceramic bypass capacitance.
+  - Integrated Microchip MCP73833T-AMI/UN standalone linear Li-Po battery charger (MSOP-10) programmed to 303 mA charge rate via USB-C (`Rprog1 = 3.3 kΩ`, `R33 = 10 kΩ` THERM bias) with dedicated 10.1 µF `+5V` input decoupling (`C6`, `C7`).
+  - AO3401A P-channel MOSFET ideal diode power-path mux automatically selects between USB `+5V` and `+BATT` battery power without dropping voltage or reverse-biasing the battery.
+  - 3.3 V low-noise LDO regulator (`U3`, `TPS79633DCQR` / `ME6211C33M5G-N`) with 51 µF distributed ceramic bypass capacitance.
   - Battery voltage sensing via 100 kΩ / 100 kΩ precision resistor divider on ESP32-S3 `ADC1_CH0` (GPIO1).
-- **RF Antenna Keepout**: Uninterrupted top and bottom copper isolation corridor (22.0 mm x 18.5 mm) beneath the ESP32-S3 inverted-F PCB antenna to maximize SoftAP range and throughput.
-- **Fabrication Standard**: 100% compliant with JLCPCB standard 2-layer FR-4 manufacturing capabilities (0.20 mm min trace width, 0.15 mm min copper clearance, 0.60/0.30 mm signal vias, 0.80/0.40 mm power vias, 100% SMT components).
+- **RF Antenna Keepout**: Uninterrupted top and bottom copper isolation corridor (22.0 mm x 18.5 mm, including dedicated copper-pour keepout behind `U8` Pads 1 and 40) beneath the ESP32-S3 inverted-F PCB antenna to maximize SoftAP range and throughput.
+- **Fabrication Standard**: 100% compliant with LionCircuits and JLCPCB standard 2-layer FR-4 manufacturing capabilities (0.20 mm min trace width, 0.15 mm min copper clearance, 0.68/0.35 mm signal vias, 0.80/0.40 mm power vias, 69 SMT components).
 
 ---
 

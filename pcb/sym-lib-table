@@ -1,5 +1,7 @@
 (sym_lib_table
   (version 7)
+  (lib (name "MPU-6500")(type "KiCad")(uri "${KIPRJMOD}/libs/symbols/MPU-6500.kicad_sym")(options "")(descr "MPU-6500 IMU sensor symbol library"))
+  (lib (name "MCP73833-AMI-UN")(type "KiCad")(uri "${KIPRJMOD}/libs/symbols/MCP73833-AMI-UN.kicad_sym")(options "")(descr "MCP73833 battery charger symbol library"))
   (lib (name "SI2302DS-T1")(type "KiCad")(uri "${KIPRJMOD}/libs/symbols/SI2302DS-T1.kicad_sym")(options "")(descr "SI2302DS MOSFET symbol library"))
   (lib (name "TP4056-42-ESOP8")(type "KiCad")(uri "${KIPRJMOD}/libs/symbols/TP4056-42-ESOP8.kicad_sym")(options "")(descr "TP4056 battery charger symbol library"))
   (lib (name "MPU-6050")(type "KiCad")(uri "${KIPRJMOD}/libs/symbols/MPU-6050.kicad_sym")(options "")(descr "MPU-6050 IMU sensor symbol library"))

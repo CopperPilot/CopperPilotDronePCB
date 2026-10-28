@@ -1374,7 +1374,7 @@
 
 (rectangle (start 25.4 25.4) (end 157.48 96.52) (stroke (width 0.3) (type dash)) (fill (type none)) (uuid "bf703217-e9c5-484a-a8a9-3034461f73ca")) 
 
-(text "5. MPU-6050 6-AXIS IMU SENSOR" (exclude_from_sim no) (at 266.7 111.76 0) (effects (font (size 2 2) (bold yes)) (justify left top)) (uuid "79c9c16b-270e-443c-b426-4e91969c46cc")) 
+(text "5. MPU-6500 6-AXIS IMU SENSOR" (exclude_from_sim no) (at 266.7 111.76 0) (effects (font (size 2 2) (bold yes)) (justify left top)) (uuid "79c9c16b-270e-443c-b426-4e91969c46cc")) 
 
 (text "3. 3.3V LDO REGULATOR & SYSTEM POWER CONTROL" (exclude_from_sim no) (at 311.15 30.48 0) (effects (font (size 2 2) (bold yes)) (justify left top)) (uuid "7a12e90b-0390-4c9c-be50-4a6d3dcc270d")) 
 
@@ -4196,11 +4196,11 @@
 
 (property "MPN" "SM02B-GHS-TB(LF)(SN)" (at 0 0 0) (show_name no) (do_not_autoplace no) (hide yes) (effects (font (size 1.27 1.27))))) 
 
-(symbol (lib_id "power:VBUS") (at 90.17 148.59 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (in_pos_files yes) (dnp no) (uuid "c8db671b-425f-4d86-81d1-db22490f6dff") 
+(symbol (lib_id "power:+5V") (at 90.17 148.59 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (in_pos_files yes) (dnp no) (uuid "c8db671b-425f-4d86-81d1-db22490f6dff") 
 
 (property "Reference" "#PWR028" (at 90.17 152.4 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) 
 
-(property "Value" "VBUS" (at 90.551 144.1958 0) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) 
+(property "Value" "+5V" (at 90.551 144.1958 0) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) 
 
 (property "Footprint" "" (at 90.17 148.59 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) 
 

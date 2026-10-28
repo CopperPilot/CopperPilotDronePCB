@@ -429,6 +429,10 @@ def export_bom():
         mpn = mpn_m.group(1) if mpn_m else ""
         if ref == "C13" and val == "0.1uf":
             lcsc = "C14663"
+        elif ref == "IC1" and not lcsc:
+            lcsc = "C47182"
+        elif ref == "U9" and not lcsc:
+            lcsc = "C112979"
 
         # Clean footprint name for standard BOM formatting
         clean_fp = fp.split(":")[-1] if ":" in fp else fp
@@ -494,19 +498,19 @@ LIONCIRCUITS_HEADERS = [
 
 # Surgical LionCircuits MPN & metadata mapping keyed by (Value, clean_footprint, LCSC)
 LIONCIRCUITS_BOM_MAP = {
-    ("MCP73833T-AMI/UN", "MSOP-10_3x3mm_P0.5mm", ""): {
+    ("MCP73833T-AMI/UN", "MSOP-10_3x3mm_P0.5mm", "C47182"): {
         "orig_mpn": "MCP73833T-AMI/UN",
         "lc_mpn": "MCP73833T-AMI/UN",
         "lc_fp": "MSOP-10 (3x3mm)",
         "desc": "1S Li-Ion/Li-Polymer Linear Charge Management Controller 4.2V MSOP-10 (Microchip)",
-        "notes": "Top SMD; Microchip MCP73833T-AMI/UN (LionCircuits turnkey in-stock)",
+        "notes": "Top SMD; Microchip MCP73833T-AMI/UN (LionCircuits turnkey in-stock; LCSC: C47182)",
     },
-    ("MPU-6500", "QFN-24-1EP_3x3mm_P0.4mm_EP1.75x1.6mm", ""): {
+    ("MPU-6500", "QFN-24-1EP_3x3mm_P0.4mm_EP1.75x1.6mm", "C112979"): {
         "orig_mpn": "MPU-6500",
         "lc_mpn": "MPU-6500",
         "lc_fp": "QFN-24 (3x3mm)",
         "desc": "MEMS IMU 6-Axis Gyroscope + Accelerometer I2C/SPI 24-Pin 3x3mm (TDK InvenSense)",
-        "notes": "Top SMD; TDK InvenSense MPU-6500 3.3V-rated (LionCircuits turnkey in-stock)",
+        "notes": "Top SMD; TDK InvenSense MPU-6500 3.3V-rated (LionCircuits turnkey in-stock; LCSC: C112979)",
     },
     ("10uF", "C_0603_1608Metric", "C85713"): {
         "orig_mpn": "CL10A106MP8NNNC",
